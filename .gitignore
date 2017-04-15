@@ -1,11 +1,2 @@
 # Ignore everything
 *
-
-# But not these files...
-!.gitignore
-!.config/nvim
-!template.latex
-# etc...
-
-# ...even if they are in subdirectories
-#!*/
