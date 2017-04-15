@@ -5,7 +5,7 @@ Nothing super crazy going on here, but some sensible neovim and bash configs
 My Neovim settings for PHP based Fullstack Web Developoers
 
 ## Screenshots
-![alt tag](https://raw.githubusercontent.com/arithran/php-ide-vim/master/screenshots/Screenshot1.png)
+![alt tag](https://raw.githubusercontent.com/arithran/dotfiles/master/.config/nvim/Screenshots/neovim-setup.png)
 
 
 ## Installation Instructions
