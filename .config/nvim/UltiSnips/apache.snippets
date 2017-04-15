@@ -1,0 +1,13 @@
+snippet virtual "Generate a Vhost Config"
+<VirtualHost *:80>
+	DocumentRoot /home/ari/workspace/${1:pathToDir}
+	ServerName local.${2:site.co.uk}:80
+	ServerAlias local.$2:80
+	<Directory /home/ari/workspace/$1>
+		Options FollowSymLinks
+		AllowOverride all
+		php_flag display_errors On
+		Require all granted
+	</Directory>
+</VirtualHost>
+endsnippet
