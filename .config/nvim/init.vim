@@ -127,7 +127,8 @@ Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
 
 
 " Manipulating files controlled by CVS, SVN, SVK, git, bzr, and hg within VIM
-Plug 'vcscommand.vim'
+" Plug 'vcscommand.vim'
+Plug 'ludovicchabant/vim-lawrencium'
 
 Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
@@ -146,6 +147,15 @@ se t_Co=256 "Set the color of the terminal to 256 bits
 set colorcolumn=110 "Keep my lines 110 chars at most
 set makeprg=make\ -C\ ../build\ -j9
 let mapleader = "," " Set the leader key
+set pastetoggle=<f6> " Toggle paste mode 
+set nopaste " disable it by default
+
+"  Neovim Settings
+" set termguicolors
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " change the cursor shape to a vertical bar while in insert mode
+" set clipboard+=unnamedplus " Use system clipboard by default
+
+
 
 " Set python paths for plugins to work (run :CheckHealth to test)
 let g:python_host_prog  = '/usr/bin/python'
@@ -165,6 +175,43 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical""
+
+" Vim automatically saves undo history to an undo file
+set undofile
+set undodir="$HOME/.VIM_UNDO_FILES"
+
+" Remember cursor position between vim sessions
+autocmd BufReadPost *
+			\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+			\   exe "normal! g'\"" |
+			\ endif
+" center buffer around cursor when opening files
+autocmd BufRead * normal zz
+
+set complete=.,w,b,u,t,k " context-sensitive completion
+
+inoremap <c-d> <esc>ddi<Paste> " exit insert, dd line, enter insert
+
+nmap cp :let @+= expand("%") <cr> " copy current files path to clipboard
+tmap <esc> <c-\><c-n><esc><cr> " terminal 'normal mode'
+noremap <leader>TM :TableModeToggle<CR> " Table plugin shortcut
+
+" this is the best, let me tell you why
+" how annoying is that everytime you want to do something in vim
+" you have to do shift-; to get :, can't we just do ;?
+" Plus what does ; do anyways??
+" if you do have a plugin that needs ;, you can just swap the mapping
+" nnoremap : ;
+" give it a try and you will like it
+nnoremap ; :
+
+inoremap <c-f> <c-x><c-f> " Complete file paths
+
+" Multi-line cursor config
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 
 " Flags
@@ -299,6 +346,51 @@ nnoremap <S-l> :call AutoCorrectLastSpellingMistake()<CR>
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
+" Fold, gets it's own section  ----------------------------------------------{{{
+
+" function! MyFoldText() " {{{
+" 	let line = getline(v:foldstart)
+" 	let nucolwidth = &fdc + &number * &numberwidth
+" 	let windowwidth = winwidth(0) - nucolwidth - 3
+" 	let foldedlinecount = v:foldend - v:foldstart
+"
+" 	" expand tabs into spaces
+" 	let onetab = strpart('          ', 0, &tabstop)
+" 	let line = substitute(line, '\t', onetab, 'g')
+"
+" 	let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+" 	let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
+" 	return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines '
+" endfunction " }}}
+"
+" set foldtext=MyFoldText()
+"
+" autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+" autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+"
+" autocmd FileType vim setlocal fdc=1
+" set foldlevel=99
+" " Space to toggle folds.
+" nnoremap <Space> za
+" vnoremap <Space> za
+autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType vim setlocal foldlevel=0
+"
+" autocmd FileType html setlocal fdl=99
+
+autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
+autocmd FileType css,scss,json setlocal foldmethod=marker
+autocmd FileType css,scss,json setlocal foldmarker={,}
+
+" autocmd FileType coffee setl foldmethod=indent
+" autocmd FileType html setl foldmethod=expr
+" let g:xml_syntax_folding = 1
+" autocmd FileType xml setl foldmethod=syntax
+" autocmd FileType html setl foldexpr=HTMLFolds()
+"
+" autocmd FileType javascript,typescript,json setl foldmethod=syntax
+" }}}
+
 
 " Configure Theme
 syntax enable " Enable syntax highlighting
@@ -310,6 +402,10 @@ set encoding=utf8
 let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
+let g:airline#extensions#branch#displayed_head_limit = 10
+
+" let g:airline#extensions#branch#use_vcscommand = 1
 " Install Font and set the terminal to the same font cd~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
