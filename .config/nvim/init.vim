@@ -402,7 +402,7 @@ let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
 let g:airline#extensions#branch#displayed_head_limit = 10
 
 " let g:airline#extensions#branch#use_vcscommand = 1
-" Install Font and set the terminal to the same font cd~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
+" Install Font and set the terminal to the same font cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " Configure Neomake
