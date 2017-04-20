@@ -41,7 +41,7 @@ Plug 'groenewege/vim-less' " Less CSS syntax
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim' " Search tool from Vim
-Plug 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
+" Plug 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
 Plug 'Valloric/YouCompleteMe' " A code-completion engine for Vim
 Plug 'SirVer/ultisnips' " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets' " 3rd party snippets for ultisnips
@@ -51,7 +51,6 @@ Plug 'tobyS/pdv' "  PHP documentor
 Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
 Plug 'ivalkeen/nerdtree-execute' " Press 'x' to execute system default application
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree showing git status flags
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'itmammoth/doorboy.vim' " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'tpope/vim-repeat' " repeats the last command even if its not native with [.] 
 Plug 'sjl/gundo.vim' " Visualize your Vim undo tree
@@ -81,10 +80,11 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 
 
 " Fun Random plug-ins
-Plug 'vim-scripts/dbext.vim' " Database Editor
-Plug 'ashisha/image.vim' " Let's you open (preview) images in Vim
-Plug 'malithsen/trello-vim' " A barebone vim plugin to fetch user assigned cards from Trello
-Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
+" Plug 'vim-scripts/dbext.vim' " Database Editor
+" Plug 'ashisha/image.vim' " Let's you open (preview) images in Vim
+" Plug 'malithsen/trello-vim' " A barebone vim plugin to fetch user assigned cards from Trello
+" Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
+" Plug 'jmanoel7/vim-games' "Game
 
 " Test these plugins
 " Plug 'junegunn/vim-easy-align' " align items
@@ -113,24 +113,20 @@ Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
 " Plug 'Konfekt/FastFold'
 " Plug 'vim-scripts/php.vim-html-enhanced'
 " Plug '2072/PHP-Indenting-for-VIm'
+" Plugin 'morhetz/gruvbox'
+" Plugin 'sukima/xmledit'
 
 
 " Archived
 " ========
-" Plugin 'morhetz/gruvbox'
-" Plugin 'sukima/xmledit'
-" Plug 'jmanoel7/vim-games' "Game
-"  Vim snip mate
-" Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 
 
 " Manipulating files controlled by CVS, SVN, SVK, git, bzr, and hg within VIM
 " Plug 'vcscommand.vim'
 Plug 'ludovicchabant/vim-lawrencium'
 
-Plug 'ZoomWin'
+" Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
 
@@ -149,6 +145,7 @@ set makeprg=make\ -C\ ../build\ -j9
 let mapleader = "," " Set the leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
+set mouse= " Disable mouse imput
 
 "  Neovim Settings
 " set termguicolors

@@ -9,8 +9,23 @@ My Neovim settings for PHP based Fullstack Web Developoers
 
 
 ## Installation Instructions
+1) Install Neovim
+https://github.com/neovim/neovim/wiki/Installing-Neovim#fedora-24-and-older
 
-1) Download this Repo to your home folder
+### Plugin Support
+1. Python SUpport for bot Python 2 and 3 plug-ins to work
+```
+sudo pip2 install --upgrade neovim
+sudo pip3 install --upgrade neovim
+```
+
+2. Ruby Support
+```
+sudo gem install neovim 
+
+```
+
+2) Download this Repo to your home folder
 ```
 cd ~
 git clone https://github.com/arithran/dotfiles
@@ -18,12 +33,12 @@ mv dotfiles/* dotfiles/.* .
 rmdir dotfiles
 ```
 
-2) Open Neovim(nvim) and Install Plugins/Dependencies 
+3) Open Neovim(nvim) and Install Plugins/Dependencies 
 ```
 :PlugInstall
 ```
 
-3) Restart nvim
+4) Restart nvim
 
 ## Dependencies/Extras
 1) ctags is needed for the tagbar plugin to work.
@@ -59,6 +74,13 @@ http://www.if-not-true-then-false.com/2012/solarized-linux/
 For Fedora Linx
 ```
 sudo dnf install powerline
+```
+
+# Troubleshooting
+1) If you get the following error while instaling the Ruby Provider
+g++ error:/usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
+```
+sudo dnf install redhat-rpm-config
 ```
 
 # Help Setting up similar repos
