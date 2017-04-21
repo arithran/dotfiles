@@ -141,7 +141,7 @@ call plug#end()
 filetype plugin indent on    " required
 se t_Co=256 "Set the color of the terminal to 256 bits
 set colorcolumn=110 "Keep my lines 110 chars at most
-set makeprg=make\ -C\ ../build\ -j9
+" set makeprg=make\ -C\ ../build\ -j9
 let mapleader = "," " Set the leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
