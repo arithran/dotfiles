@@ -1,0 +1,16 @@
+[ui]
+username = Ari
+schemes = https
+# Global Ignore file
+ignore = ~/.hgignore
+
+[extensions]
+shelve=
+strip=
+
+[extdiff]
+cmd.meld =
+
+#Auth Config File @see ~/.hgrc_auth.sample
+%include ~/.hgrc_auth
+

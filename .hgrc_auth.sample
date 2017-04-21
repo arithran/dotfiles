@@ -1,0 +1,4 @@
+[auth]
+site1.prefix = https://www.ari.guru/repo
+site1.username = USERNAME
+site1.password = PASSWORD
