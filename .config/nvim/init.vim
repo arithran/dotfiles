@@ -457,6 +457,22 @@ if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running
 	endfunction
 endif
 
+if !exists("*Capitalise") " Capitalise the start of a word
+	function Capitalise()
+		" In a substitute command, place \U or \L before backreferences for the desired output. Everything 
+		" after \U, stopping at \E or  \e, is converted to uppercase. Similarly, everything after \L, 
+		" stopping at \E or \e, is converted to lowercase.
+		" Alternatively, use \u to uppercase only the first character of what follows, or \l to lowercase 
+		" only the first character.
+		"
+		" \< matches the start of a word
+		" . matches the first character of a word
+		" \u tells Vim to uppercase the following character in the substitution string (&)
+		" & means substitute whatever was matched on the LHS
+		:s/\<./\u&/g
+	endfunction
+endif
+
 " Debugging
 " =========
 " To Debug Neomake
