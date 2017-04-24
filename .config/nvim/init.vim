@@ -410,6 +410,9 @@ let g:neomake_error_sign = {'text': '⚠️', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_ft_maker_remove_invalid_entries = 0
 autocmd! BufEnter,BufRead,BufWritePost * Neomake
 
+" Configure Ack
+nnoremap <Leader>a :Ack!<Space>
+
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
 au FileChangedShell * echo "Warning: File changed on disk" " Warn if the file has been changed
