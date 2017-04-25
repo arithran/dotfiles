@@ -188,11 +188,17 @@ autocmd BufRead * normal zz
 
 set complete=.,w,b,u,t,k " context-sensitive completion
 
-inoremap <c-d> <esc>ddi<Paste> " exit insert, dd line, enter insert
+" exit insert, dd line, enter insert
+inoremap <c-d> <esc>ddi<Paste> 
 
-nmap cp :let @+= expand("%") <cr> " copy current files path to clipboard
-tmap <esc> <c-\><c-n><esc><cr> " terminal 'normal mode'
-noremap <leader>TM :TableModeToggle<CR> " Table plugin shortcut
+" copy current files path to clipboard
+nmap cp :let @+= expand("%") <cr> 
+
+" terminal 'normal mode'
+tmap <esc> <c-\><c-n><esc><cr> 
+
+" Table plugin shortcut
+noremap <leader>TM :TableModeToggle<CR> 
 
 " this is the best, let me tell you why
 " how annoying is that everytime you want to do something in vim
@@ -203,7 +209,8 @@ noremap <leader>TM :TableModeToggle<CR> " Table plugin shortcut
 " give it a try and you will like it
 nnoremap ; :
 
-inoremap <c-f> <c-x><c-f> " Complete file paths
+" Complete file paths
+inoremap <c-f> <c-x><c-f> 
 
 " Multi-line cursor config
 let g:multi_cursor_next_key='<C-n>'
@@ -410,6 +417,9 @@ let g:neomake_warning_sign = {'text': '✖', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_error_sign = {'text': '⚠️', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_ft_maker_remove_invalid_entries = 0
 autocmd! BufEnter,BufRead,BufWritePost * Neomake
+
+" Configure Ack
+nnoremap <Leader>a :Ack!<Space>
 
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
