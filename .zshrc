@@ -85,3 +85,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim='nvim'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

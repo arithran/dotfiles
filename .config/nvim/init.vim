@@ -41,7 +41,8 @@ Plug 'groenewege/vim-less' " Less CSS syntax
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim' " Search tool from Vim
-" Plug 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
+Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe' " A code-completion engine for Vim
 Plug 'SirVer/ultisnips' " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets' " 3rd party snippets for ultisnips

@@ -60,6 +60,10 @@ sudo dnf install xclip
 https://github.com/Valloric/YouCompleteMe#installation
 ./install.sh --clang-completer
 
+4) Install Silver Searcher for FZF
+```
+dnf install the_silver_searcher
+```
 # Terminal
 
 ## Extras
@@ -74,6 +78,18 @@ http://www.if-not-true-then-false.com/2012/solarized-linux/
 For Fedora Linx
 ```
 sudo dnf install powerline
+```
+
+
+# TMUX
+1) Install
+```
+sudo dnf install tmux
+```
+
+2) Install powerline
+```
+sudo dnf install tmux-powerline
 ```
 
 # Troubleshooting
