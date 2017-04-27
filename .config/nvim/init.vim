@@ -489,6 +489,7 @@ if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running
 		endfor
 	endfunction
 endif
+command! DeleteHiddenBuffers call DeleteHiddenBuffers();
 
 if !exists("*Capitalise") " Capitalise the start of a word
 	function Capitalise()
