@@ -9,6 +9,10 @@ snippet dbug "CakePHP Debug Code"
 dbug($${1:var}, ${2:1}, ${3:1});
 endsnippet
 
+snippet dlog "CakePHP Log Code"
+$this->log(print_r($${1:var}, true), 'dlog');
+endsnippet
+
 snippet pr "print_r with a die"
 print_r($${1:var});die;
 endsnippet

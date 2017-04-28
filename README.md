@@ -21,6 +21,7 @@ sudo pip3 install --upgrade neovim
 
 2. Ruby Support
 ```
+sudo dnf install ruby-devel
 sudo gem install neovim 
 
 ```
@@ -72,6 +73,9 @@ dnf install the_silver_searcher
 http://www.if-not-true-then-false.com/2012/solarized-linux/
 
 2) If Using zsh, Install oh-my-zsh. Instructions: http://ohmyz.sh/
+```
+sudo dnf install zsh
+```
 
 3) If using Bash, Install Powerline for nicer prompts
 
