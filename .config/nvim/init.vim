@@ -241,6 +241,7 @@ set foldcolumn=1
 set wildmenu " shows suggestions when tabing in normal mode
 set scrolloff=5 " adds 5 lines to the top and bottom of the window
 set laststatus=2 "adding the status line to the editor
+set splitbelow " always open splits below the current window instead of above
 " set clipboard=unnamedplus " sets the system clipboard as default
 
 
