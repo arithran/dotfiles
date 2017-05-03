@@ -49,6 +49,7 @@ Plug 'honza/vim-snippets' " 3rd party snippets for ultisnips
 Plug 'ervandew/supertab' "  insert completion needs (:help ins-completion).
 Plug 'tobyS/vmustache' "  PHP documentor dependancy
 Plug 'tobyS/pdv' "  PHP documentor
+Plug 'alvan/vim-php-manual' " PHP Manual Support from Shift+k
 Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
 Plug 'ivalkeen/nerdtree-execute' " Press 'x' to execute system default application
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree showing git status flags
@@ -167,6 +168,10 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Unbind conflicting key, Ctrl+h (@see Plug 'alvan/vim-php-manual')
+let g:php_manual_online_search_shortcut = ''
+
 
 " Configure UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
