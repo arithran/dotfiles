@@ -202,6 +202,9 @@ nmap cp :let @+= expand("%") <cr>
 " terminal 'normal mode'
 tmap <esc> <c-\><c-n><esc><cr> 
 
+" Automatically change to INSERT mode when entering a terminal
+autocmd BufEnter term://* startinsert
+
 " Table plugin shortcut
 noremap <leader>TM :TableModeToggle<CR> 
 
