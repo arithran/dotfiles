@@ -489,6 +489,11 @@ if !exists("*ClearCache") " Clear cahe shell
 		echom system("../clear_cache.sh")
 	endfunction
 endif
+if !exists("*GeneratePhpCtags") " Clear cahe shell
+	function GeneratePhpCtags()
+		echom system("ctags -R --languages=php .")
+	endfunction
+endif
 if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running 
 	function DeleteHiddenBuffers() " Vim with the 'hidden' option
 		let tpbl=[]
