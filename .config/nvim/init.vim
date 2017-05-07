@@ -208,15 +208,6 @@ autocmd BufEnter term://* startinsert
 " Table plugin shortcut
 noremap <leader>TM :TableModeToggle<CR> 
 
-" this is the best, let me tell you why
-" how annoying is that everytime you want to do something in vim
-" you have to do shift-; to get :, can't we just do ;?
-" Plus what does ; do anyways??
-" if you do have a plugin that needs ;, you can just swap the mapping
-" nnoremap : ;
-" give it a try and you will like it
-nnoremap ; :
-
 " Complete file paths
 inoremap <c-f> <c-x><c-f> 
 
