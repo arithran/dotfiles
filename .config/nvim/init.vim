@@ -205,6 +205,11 @@ tmap <esc> <c-\><c-n><esc><cr>
 " Automatically change to INSERT mode when entering a terminal
 autocmd BufEnter term://* startinsert
 
+" Don't do spell checks on terminal
+" augroup terminal
+  autocmd TermOpen * setlocal nospell
+" augroup END
+
 " Table plugin shortcut
 noremap <leader>TM :TableModeToggle<CR> 
 
