@@ -200,7 +200,8 @@ inoremap <c-d> <esc>ddi<Paste>
 nmap cp :let @+= expand("%") <cr> 
 
 " terminal 'normal mode'
-tmap <esc> <c-\><c-n><esc><cr> 
+" tmap <esc> <c-\><c-n><esc><cr> 
+tnoremap <Esc> <C-\><C-n>
 
 " Automatically change to INSERT mode when entering a terminal
 autocmd BufEnter term://* startinsert
