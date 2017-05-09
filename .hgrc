@@ -1,6 +1,7 @@
 [ui]
 username = Ari
 schemes = https
+
 # Global Ignore file
 ignore = ~/.hgignore
 
@@ -8,6 +9,7 @@ ignore = ~/.hgignore
 shelve=
 strip=
 color=
+graphlog = 
 
 [extdiff]
 cmd.meld =
