@@ -7,6 +7,7 @@ ignore = ~/.hgignore
 [extensions]
 shelve=
 strip=
+color=
 
 [extdiff]
 cmd.meld =
