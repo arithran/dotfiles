@@ -122,6 +122,14 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 " Archived
 " ========
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
+"
+" Tried Deoplete, doesn't seem to be feature rich as YouCompleteMe Try again later
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources = {}
+" let g:deoplete#sources._ = ['buffer', 'tag']
+" let g:deoplete#sources.php = ['buffer', 'tag']
+" let deoplete#tag#cache_limit_size = 5000000
 
 
 " Manipulating files controlled by CVS, SVN, SVK, git, bzr, and hg within VIM
