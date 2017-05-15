@@ -212,7 +212,7 @@ nmap cp :let @+= expand("%") <cr>
 tnoremap <Esc> <C-\><C-n>
 
 " Automatically change to INSERT mode when entering a terminal
-autocmd BufEnter term://* startinsert
+" autocmd BufEnter term://* startinsert
 
 " Don't do spell checks on terminal
 " augroup terminal
@@ -358,6 +358,7 @@ nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
 " Very Magic Search By Default
+" :help magic
 nnoremap / /\v
 
 " Auto-correct the last spelling mistake
