@@ -254,7 +254,10 @@ set foldcolumn=1
 set wildmenu " shows suggestions when tabing in normal mode
 set scrolloff=5 " adds 5 lines to the top and bottom of the window
 set laststatus=2 "adding the status line to the editor
-set splitbelow " always open splits below the current window instead of above
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 " set clipboard=unnamedplus " sets the system clipboard as default
 
 
@@ -333,6 +336,11 @@ autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
 let g:jsdoc_allow_input_prompt	= 1
 let g:jsdoc_input_description = 1
 autocmd Filetype javascript nnoremap <leader>dd :JsDoc
+
+
+" Wrap text for markdown files
+autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
 
 " Toggle Nerd Tree
 map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
