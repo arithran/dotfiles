@@ -454,6 +454,9 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 " let g:airline#extensions#branch#use_vcscommand = 1
 " Install Font and set the terminal to the same font cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
+
+
 
 " Configure Neomake
 let g:airline#extensions#neomake#error_symbol='✖ '

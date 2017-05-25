@@ -26,5 +26,5 @@ echo '<pre>'.__LINE__.__FILE__;var_dump($${1:var});die;
 endsnippet
 
 snippet mdbug "Debug Magento Code"
-Mage::log(var_dump($${1:var}), null, 'dbug.log', true);
+Mage::log(print_r($${1:var}, true), null, 'dbug.log', true);
 endsnippet
