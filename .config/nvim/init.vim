@@ -342,6 +342,8 @@ autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 
+
+
 " Toggle Nerd Tree
 map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
@@ -424,9 +426,9 @@ autocmd FileType vim setlocal foldlevel=0
 "
 " autocmd FileType html setlocal fdl=99
 
-autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
-autocmd FileType css,scss,json setlocal foldmethod=marker
-autocmd FileType css,scss,json setlocal foldmarker={,}
+autocmd FileType javascript,html,css,less,scss,typescript setlocal foldlevel=99
+autocmd FileType css,less,scss,json setlocal foldmethod=marker
+autocmd FileType css,less,scss,json setlocal foldmarker={,}
 
 " autocmd FileType coffee setl foldmethod=indent
 " autocmd FileType html setl foldmethod=expr
