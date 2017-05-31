@@ -1,5 +1,5 @@
 ! URxvt.font: xft:monaco:size=10
-URxvt.font: xft:SauceCodePro Nerd Font:size=10
-URxvt.font: xft:Source Code Pro for Powerline:size=10
-URxvt.font: xft:SauceCodePro Nerd Font:size=10, xft:FontAwesome:size=9, xft:Icons:size:9
+URxvt.font: xft:SauceCodePro\ Nerd\ Font:size=10:antialias=true
+! URxvt.font: xft:Source\ Code\ Pro\ for\ Powerline:size=10:antialias=true
+! URxvt.font: xft:SauceCodePro Nerd Font:size=10, xft:FontAwesome:size=9, xft:Icons:size:9
 
