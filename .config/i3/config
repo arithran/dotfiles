@@ -171,4 +171,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # Set Wallpaper
 exec_always feh --bg-scale /usr/share/backgrounds/gnome/Road.jpg
 
+# Open Chrome
 exec google-chrome
+
+# Open dropbox
+exec --no-startup-id dropbox start
