@@ -2,10 +2,11 @@
 ! https://wiki.archlinux.org/index.php/rxvt-unicode
 !
 ! URxvt.font: xft:monaco:size=10
-URxvt.font: xft:Source Code Pro for Powerline:size=10:antialias=true
+! URxvt.font: xft:Source Code Pro for Powerline:size=10:antialias=true
 ! URxvt.font: xft:Source\ Code\ Pro\ for\ Powerline:size=10:antialias=truehinting=true
 ! URxvt*font: xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true,xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
 ! URxvt*font: xft:Source\ Code\ Pro\ for\ Powerline:pixelsize=13:antialias=true:hinting=true,xft:Source\ Code\ Pro\ for\ Powerline:pixelsize=13:antialias=true:hinting=true
+URxvt*font: xft:SourceCodePro+Powerline+Awesome\ Regular:pixelsize=13:antialias=true:hinting=true,xft:SourceCodePro+Powerline+Awesome\ Regular:pixelsize=13:antialias=true:hinting=true
 
 ! URxvt.font: xft:SauceCodePro Nerd Font:size=10, xft:FontAwesome:size=9, xft:Icons:size:9
 
