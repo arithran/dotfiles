@@ -162,13 +162,16 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/bin/toggletouchpad.sh # toggle touchpad
 
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# Media player controls for Spotify
+bindsym $mod+i exec sp play
+bindsym  $mod+o exec sp next
+bindsym $mod+u exec sp prev
 
 # Set Wallpaper
 exec_always feh --bg-scale /usr/share/backgrounds/gnome/Road.jpg
 
+# Open Chrome
 exec google-chrome
+
+# Open dropbox
+exec --no-startup-id dropbox start
