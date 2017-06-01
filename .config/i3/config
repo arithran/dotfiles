@@ -92,13 +92,13 @@ bindsym $mod+a focus parent
 # http://fontawesome.io/cheatsheet/
 set $workspace1 "1 "
 set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 4
-set $workspace5 5
-set $workspace6 6
-set $workspace7 7
-set $workspace8 8
-set $workspace9 9
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace9 "9 "
 set $workspace10 "10 "
 
 # switch to workspace
@@ -157,10 +157,34 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+#Hide borders of windows
+hide_edge_borders both
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+	status_command i3status
+		colors {
+			background $bg-color
+				separator #757575
+				#                  border             background         text
+				focused_workspace  $bg-color          $bg-color          $text-color
+				inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+				urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+		}
 }
 
 # Lock screen
