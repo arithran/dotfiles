@@ -1,3 +1,9 @@
+#define BG_COLOR 	        #2f343f
+#define INACTIVE_BG_COLOR   #2f343f
+#define TEXT_COLOR          #f3f4f5
+#define ACTIVE_TEXT_COLOR   #4084d6
+#define INACTIVE_TEXT_COLOR #676E7D
+#define URGENT_BG_COLOR     #E53935
 ! HELP
 ! https://wiki.archlinux.org/index.php/rxvt-unicode
 !
@@ -17,12 +23,12 @@ URxvt*font: xft:SourceCodePro+Powerline+Awesome\ Regular:pixelsize=13:antialias=
 ! Copyright: 2017 leofa
 ! ------------------------------------------------------------------------------
 ! "Color scheme for normal row" Set from: File
-rofi.color-normal:                   argb:0383c4a, #c4cbd4, argb:96404552, #4084d6, #f9f9f9
+rofi.color-normal:                   BG_COLOR, ACTIVE_TEXT_COLOR, BG_COLOR, BG_COLOR, ACTIVE_TEXT_COLOR
 ! "Color scheme for urgent row" Set from: File
-rofi.color-urgent:                   argb:02d303b, #cc6666, argb:e52d303b, #a54242, #f9f9f9
+rofi.color-urgent:                   BG_COLOR, URGENT_BG_COLOR, BG_COLOR, BG_COLOR, URGENT_BG_COLOR
 ! "Color scheme for active row" Set from: File
-rofi.color-active:                   argb:02d303b, #b5bd68, argb:e42d303b, #8c9440, #f9f9f9
+rofi.color-active:                   BG_COLOR, #b5bd68, BG_COLOR, BG_COLOR, #8c9440
 ! "Color scheme window" Set from: File
-rofi.color-window:                   argb:f22d303b, #7c8389, #1d1f21
+rofi.color-window:                   BG_COLOR, BG_COLOR, BG_COLOR
 ! "Separator style (none, dash, solid)" Set from: XResources
-rofi.separator-style:                solid
+rofi.separator-style:                none
