@@ -211,8 +211,11 @@ bindsym $mod+i exec sp play
 bindsym  $mod+o exec sp next
 bindsym $mod+u exec sp prev
 
+# Move workspace left
+bindsym $mod+m move workspace to output left
+
 # Set Wallpaper
-exec_always feh --bg-scale /usr/share/backgrounds/gnome/Road.jpg
+exec_always feh --bg-scale ~/Dropbox/wallpapers/Lakeside_Sunrise_3840x2160.jpg
 
 # Open Start-up Apps
 exec google-chrome
@@ -220,7 +223,7 @@ exec spotify
 exec --no-startup-id dropbox start
 
 # Nvidia stuff ;)
-force-xinerama yes
+# force-xinerama yes
 
 # Setup display positions with arandr and save the shell to this path
 exec ~/.screenlayout/layout.sh
