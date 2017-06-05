@@ -211,7 +211,9 @@ bindsym $mod+m move workspace to output left
 assign [class="Google-chrome"] $workspace2
 assign [class="Gimp-2.8"] $workspace8
 for_window [class="Spotify"] move to workspace $workspace10
+assign [class="Thg"] $workspace3
 assign [class="Slack"] $workspace9
+assign [class="ViberPC"] $workspace9
 
 #Autostart
 exec_always feh --bg-scale ~/Dropbox/wallpapers/Lakeside_Sunrise_3840x2160.jpg
