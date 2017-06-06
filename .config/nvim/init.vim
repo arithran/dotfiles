@@ -77,6 +77,7 @@ Plug 'jlanzarotta/bufexplorer'
 "  Session Management for VIM
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'tpope/vim-obsession'
 
 Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 
