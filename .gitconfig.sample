@@ -1,0 +1,8 @@
+[user]
+	name = ari
+	email = spam@ari.guru
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
