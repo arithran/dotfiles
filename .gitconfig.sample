@@ -2,7 +2,8 @@
 	name = ari
 	email = spam@ari.guru
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+	tool = fugitive
 [mergetool]
 	prompt = false
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
