@@ -458,14 +458,15 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 " Install Font and set the terminal to the same font cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
+let g:airline#extensions#obsession#indicator_text = ''
 
 
 
 " Configure Neomake
-let g:airline#extensions#neomake#error_symbol='✖ '
-let g:airline#extensions#neomake#warning_symbol='⚠️  '
-let g:neomake_warning_sign = {'text': '✖', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_error_sign = {'text': '⚠️', 'texthl': 'NeomakeErrorSign'}
+let g:airline#extensions#neomake#error_symbol=' '
+let g:airline#extensions#neomake#warning_symbol=' '
+let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_ft_maker_remove_invalid_entries = 0
 autocmd! BufEnter,BufRead,BufWritePost * Neomake
 
