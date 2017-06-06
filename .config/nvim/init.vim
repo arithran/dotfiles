@@ -60,6 +60,7 @@ Plug 'christoomey/vim-tmux-navigator' "  Bind Tmux Keys with VIM
 Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope
 Plug 'vim-airline/vim-airline' " Status line
 Plug 'vim-airline/vim-airline-themes' " Themes for status line, g:airline_theme
+Plug 'edkolev/tmuxline.vim' " Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons' " Adds custom icons to airline, NERDTree etc.
 Plug 'ryanoasis/nerd-fonts' " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized' "  Current Theme
@@ -459,6 +460,13 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
 let g:airline#extensions#obsession#indicator_text = ''
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['#(whoami)'],
+      \'z'    : '#H'}
 
 
 
