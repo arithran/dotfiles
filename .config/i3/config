@@ -192,7 +192,7 @@ bar {
 }
 
 # start rofi (a program launcher) https://copr.fedorainfracloud.org/coprs/yaroslav/i3desktop/
-bindsym $mod+d exec rofi -show run -lines 7 -eh 2 -width 100 -padding 800 -opacity "50" -font "System San Francisco Display 18" -bw 0 
+bindsym $mod+d exec rofi -show drun -lines 7 -eh 2 -width 100 -padding 800 -opacity "50" -font "System San Francisco Display 18" -bw 0 
 
 # Lock screen
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
