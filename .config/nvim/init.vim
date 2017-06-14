@@ -265,7 +265,7 @@ set splitright
 
 " Formatting {{{
 set noexpandtab   " Make sure that every file uses real tabs, not spaces
-set shiftround    " Round indent to pultiple of 'shiftwidth'
+set shiftround    " Round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start " Backspace over everything in insert mode
 set smartindent   " Do smart indenting when starting a new line
 set autoindent    " Copy indent from current line, over to the new line
