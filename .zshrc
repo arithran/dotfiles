@@ -79,8 +79,8 @@ fi
 # Init FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Open TMUX on launch
-# if [ "$TMUX" = "" ]; then tmux; fi
+# Open TMUX  with a session called Master on launch (restore Master if already exists)
+if [ "$TMUX" = "" ]; then tmux attach -t Master || tmux new -s Master; fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
