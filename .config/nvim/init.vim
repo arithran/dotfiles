@@ -68,6 +68,7 @@ Plug 'tpope/vim-surround' " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim' " Code commenter
 Plug 'Lokaltog/vim-easymotion' " Vim motions on speed!
 Plug 'terryma/vim-multiple-cursors' " Select multiple cursors
+Plug 'arithran/vim-delete-hidden-buffers' " Remove hidden buffers
 
 
 Plug 'tpope/vim-pathogen'
@@ -523,17 +524,6 @@ if !exists("*GeneratePhpCtags") " Clear cahe shell
 		echom system("ctags -R --languages=php .")
 	endfunction
 endif
-if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running 
-	function DeleteHiddenBuffers() " Vim with the 'hidden' option
-		let tpbl=[]
-		call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-		for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-			silent execute 'bwipeout' buf
-		endfor
-	endfunction
-endif
-command! DeleteHiddenBuffers call DeleteHiddenBuffers();
-
 if !exists("*Capitalise") " Capitalise the start of a word
 	function Capitalise()
 		" In a substitute command, place \U or \L before backreferences for the desired output. Everything 
