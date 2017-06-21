@@ -69,6 +69,8 @@ Plug 'tomtom/tcomment_vim' " Code commenter
 Plug 'Lokaltog/vim-easymotion' " Vim motions on speed!
 Plug 'terryma/vim-multiple-cursors' " Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers' " Remove hidden buffers
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim' " Create a Gist file
 
 
 Plug 'tpope/vim-pathogen'
@@ -85,7 +87,7 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 
 
 " Fun Random plug-ins
-" Plug 'vim-scripts/dbext.vim' " Database Editor
+Plug 'vim-scripts/dbext.vim' " Database Editor
 " Plug 'ashisha/image.vim' " Let's you open (preview) images in Vim
 " Plug 'malithsen/trello-vim' " A barebone vim plugin to fetch user assigned cards from Trello
 " Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
@@ -102,8 +104,6 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 " Plug 'othree/jsdoc-syntax.vim'
 " Plug 'moll/vim-node'
 " Plug 'vim-markdown-folding'
-" Plug 'mattn/webapi-vim'
-" Plug 'mattn/gist-vim'
 " Plug 'editorconfig/editorconfig-vi'
 " Plug 'lambdalisue/vim-gita' "instead of fugitive
 " Plug 'tpope/vim-rhubarb' "plug-in that goes well with fugitive
