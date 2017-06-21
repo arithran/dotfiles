@@ -31,7 +31,7 @@ Plug 'elzr/vim-json', { 'for': 'json' } " Distinct highlighting of keywords vs v
 Plug 'hail2u/vim-css3-syntax', { 'for': ['less', 'css', 'scss'] }
 Plug 'ap/vim-css-color' " Colour keyword highlighter for Vim
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] } "syntax highlighting
-Plug 'dhruvasagar/vim-table-mode' "Table creator 
+Plug 'godlygeek/tabular' "Table creator and alignment plug-in
 Plug 'gregsexton/MatchTag' "Highlights the matching HTML tag
 Plug 'neomake/neomake' " Run code linters and compilers from within Vim
 Plug 'sbdchd/neoformat' " Format code
