@@ -31,7 +31,7 @@ Plug 'elzr/vim-json', { 'for': 'json' } " Distinct highlighting of keywords vs v
 Plug 'hail2u/vim-css3-syntax', { 'for': ['less', 'css', 'scss'] }
 Plug 'ap/vim-css-color' " Colour keyword highlighter for Vim
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] } "syntax highlighting
-Plug 'dhruvasagar/vim-table-mode' "Table creator 
+Plug 'godlygeek/tabular' "Table creator and alignment plug-in
 Plug 'gregsexton/MatchTag' "Highlights the matching HTML tag
 Plug 'neomake/neomake' " Run code linters and compilers from within Vim
 Plug 'sbdchd/neoformat' " Format code
@@ -68,6 +68,9 @@ Plug 'tpope/vim-surround' " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim' " Code commenter
 Plug 'Lokaltog/vim-easymotion' " Vim motions on speed!
 Plug 'terryma/vim-multiple-cursors' " Select multiple cursors
+Plug 'arithran/vim-delete-hidden-buffers' " Remove hidden buffers
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim' " Create a Gist file
 
 
 Plug 'tpope/vim-pathogen'
@@ -84,7 +87,7 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 
 
 " Fun Random plug-ins
-" Plug 'vim-scripts/dbext.vim' " Database Editor
+Plug 'vim-scripts/dbext.vim' " Database Editor
 " Plug 'ashisha/image.vim' " Let's you open (preview) images in Vim
 " Plug 'malithsen/trello-vim' " A barebone vim plugin to fetch user assigned cards from Trello
 " Plug 'uguu-org/vim-matrix-screensaver' " vim-matrix-screensaver
@@ -101,8 +104,6 @@ Plug 'mustache/vim-mustache-handlebars' " mustache and handlebars mode for vim
 " Plug 'othree/jsdoc-syntax.vim'
 " Plug 'moll/vim-node'
 " Plug 'vim-markdown-folding'
-" Plug 'mattn/webapi-vim'
-" Plug 'mattn/gist-vim'
 " Plug 'editorconfig/editorconfig-vi'
 " Plug 'lambdalisue/vim-gita' "instead of fugitive
 " Plug 'tpope/vim-rhubarb' "plug-in that goes well with fugitive
@@ -265,7 +266,7 @@ set splitright
 
 " Formatting {{{
 set noexpandtab   " Make sure that every file uses real tabs, not spaces
-set shiftround    " Round indent to pultiple of 'shiftwidth'
+set shiftround    " Round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start " Backspace over everything in insert mode
 set smartindent   " Do smart indenting when starting a new line
 set autoindent    " Copy indent from current line, over to the new line
@@ -523,17 +524,6 @@ if !exists("*GeneratePhpCtags") " Clear cahe shell
 		echom system("ctags -R --languages=php .")
 	endfunction
 endif
-if !exists("*DeleteHiddenBuffers") " Clear all hidden buffers when running 
-	function DeleteHiddenBuffers() " Vim with the 'hidden' option
-		let tpbl=[]
-		call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-		for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-			silent execute 'bwipeout' buf
-		endfor
-	endfunction
-endif
-command! DeleteHiddenBuffers call DeleteHiddenBuffers();
-
 if !exists("*Capitalise") " Capitalise the start of a word
 	function Capitalise()
 		" In a substitute command, place \U or \L before backreferences for the desired output. Everything 

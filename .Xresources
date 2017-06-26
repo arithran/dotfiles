@@ -17,18 +17,12 @@ URxvt*font: xft:SourceCodePro+Powerline+Awesome\ Regular:pixelsize=13:antialias=
 ! URxvt.font: xft:SauceCodePro Nerd Font:size=10, xft:FontAwesome:size=9, xft:Icons:size:9
 
 
-
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme
-! Copyright: 2017 leofa
+! https://davedavenport.github.io/rofi/p05-Themes.html
 ! ------------------------------------------------------------------------------
-! "Color scheme for normal row" Set from: File
-rofi.color-normal:                   BG_COLOR, ACTIVE_TEXT_COLOR, BG_COLOR, BG_COLOR, ACTIVE_TEXT_COLOR
-! "Color scheme for urgent row" Set from: File
-rofi.color-urgent:                   BG_COLOR, URGENT_BG_COLOR, BG_COLOR, BG_COLOR, URGENT_BG_COLOR
-! "Color scheme for active row" Set from: File
-rofi.color-active:                   BG_COLOR, #b5bd68, BG_COLOR, BG_COLOR, #8c9440
-! "Color scheme window" Set from: File
-rofi.color-window:                   BG_COLOR, BG_COLOR, BG_COLOR
-! "Separator style (none, dash, solid)" Set from: XResources
-rofi.separator-style:                none
+rofi.color-enabled: true
+rofi.color-window: #002b37, #002b37, #003642
+rofi.color-normal: #002b37, #819396, #002b37, #003642, #819396
+rofi.color-active: #002b37, #008ed4, #002b37, #003642, #008ed4
+rofi.color-urgent: #002b37, #da4281, #002b37, #003642, #da4281
