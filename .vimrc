@@ -1,0 +1,1 @@
+/home/ari/.config/nvim/init.vim
