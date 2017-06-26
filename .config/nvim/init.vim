@@ -1,9 +1,9 @@
-"  █████╗ ██████╗ ██╗█ ███████╗    ███╗   ██╗██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
-" ██╔══██╗██╔══██╗██║  ██╔════╝    ████╗  ██║██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-" ███████║██████╔╝██║  ███████╗    ██╔██╗ ██║██║   ██║██║██╔████╔██║██████╔╝██║     
-" ██╔══██║██╔══██╗██║  ╚════██║    ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
-" ██║  ██║██║  ██║██║  ███████║    ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
-" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝    ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+"  █████╗ ██████╗ ██╗█ ███████╗    ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
+" ██╔══██╗██╔══██╗██║  ██╔════╝    ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
+" ███████║██████╔╝██║  ███████╗    ██║   ██║██║██╔████╔██║██████╔╝██║     
+" ██╔══██║██╔══██╗██║  ╚════██║    ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
+" ██║  ██║██║  ██║██║  ███████║     ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
+" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝      ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 "                                                                                 
 " Author  : Arithran Thurairetnam (aka Ari)
 " Link    : https://github.com/arithran
@@ -39,6 +39,7 @@ Plug 'groenewege/vim-less' " Less CSS syntax
 
 " Workflow
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
+Plug 'ludovicchabant/vim-lawrencium' " Mercurial wrapper
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim' " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
@@ -126,18 +127,8 @@ Plug 'vim-scripts/dbext.vim' " Database Editor
 " ========
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 "
-" Tried Deoplete, doesn't seem to be feature rich as YouCompleteMe Try again later
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'tag']
-" let g:deoplete#sources.php = ['buffer', 'tag']
-" let deoplete#tag#cache_limit_size = 5000000
 
 
-" Manipulating files controlled by CVS, SVN, SVK, git, bzr, and hg within VIM
-" Plug 'vcscommand.vim'
-Plug 'ludovicchabant/vim-lawrencium'
 
 " Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
@@ -212,18 +203,15 @@ nmap cp :let @+= expand("%") <cr>
 
 " terminal 'normal mode'
 " tmap <esc> <c-\><c-n><esc><cr> 
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
 " Automatically change to INSERT mode when entering a terminal
 " autocmd BufEnter term://* startinsert
 
 " Don't do spell checks on terminal
 " augroup terminal
-  autocmd TermOpen * setlocal nospell
+  " autocmd TermOpen * setlocal nospell
 " augroup END
-
-" Table plugin shortcut
-noremap <leader>TM :TableModeToggle<CR> 
 
 " Complete file paths
 inoremap <c-f> <c-x><c-f> 
@@ -286,7 +274,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <C-o> <C-w>o
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
