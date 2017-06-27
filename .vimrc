@@ -78,6 +78,7 @@ Plug 'terryma/vim-multiple-cursors' " Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers' " Remove hidden buffers
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim' " Create a Gist file
+Plug 'wincent/terminus' " Auto-reload file, better mouse and paste support
 
 
 Plug 'tpope/vim-pathogen'
@@ -156,11 +157,14 @@ let mapleader = "," " Set the leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
 set mouse= " Disable mouse imput
+set autoread " Automatically update the file
 
 "  Neovim Settings
 " set termguicolors
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " change the cursor shape to a vertical bar while in insert mode
 " set clipboard+=unnamedplus " Use system clipboard by default
+
+
 
 
 
@@ -508,13 +512,23 @@ nnoremap <Leader>a :Ack!<Space>
 " Make current window more obvious by turning off/adjusting some features in non-current
 " windows.
 if exists('+colorcolumn')
-	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn='+' . join(range(0, 254), ',+') | endif
+	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
 	autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
 endif
 
+" Override the Look and Feel (Must by after colorscheme)
+" Italics start and end key sequences
+set t_ZH=[3m
+set t_ZR=[23m
+" Make comments italic
+highlight Comment cterm=italic 
+" Make Background transparent
+highlight Normal ctermbg=none 
+
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
-au FileChangedShell * echo "Warning: File changed on disk" " Warn if the file has been changed
+" Warn if the file has been changed
+au FileChangedShell * echo "Warning: File changed on disk"
 
 " Custom functions
 " ================
