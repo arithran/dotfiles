@@ -498,8 +498,19 @@ let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_ft_maker_remove_invalid_entries = 0
 autocmd! BufEnter,BufRead,BufWritePost * Neomake
 
+" Configure Gist Vim
+let g:gist_post_private = 1
+let g:gist_get_multiplefile = 1
+
 " Configure Ack
 nnoremap <Leader>a :Ack!<Space>
+
+" Make current window more obvious by turning off/adjusting some features in non-current
+" windows.
+if exists('+colorcolumn')
+	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn='+' . join(range(0, 254), ',+') | endif
+	autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
+endif
 
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
