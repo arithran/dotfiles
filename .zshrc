@@ -93,5 +93,5 @@ fi
 # alias vim='nvim'
 alias p='git add -p'
 alias vim='vimx'
-alias tm="tmux attach -t Master || tmux new -s Master"
+alias t="tmux attach -t Master || tmux new -s Master"
 
