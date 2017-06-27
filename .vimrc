@@ -157,7 +157,6 @@ let mapleader = "," " Set the leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
 set mouse= " Disable mouse imput
-set autoread " Automatically update the file
 
 "  Neovim Settings
 " set termguicolors
@@ -527,8 +526,6 @@ highlight Normal ctermbg=none
 
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
-" Warn if the file has been changed
-au FileChangedShell * echo "Warning: File changed on disk"
 
 " Custom functions
 " ================
