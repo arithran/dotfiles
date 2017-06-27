@@ -297,6 +297,10 @@ nmap <silent> <leader>s :set spell!<CR>
 " Toggle commenting Requires T-comment plugin
 map <leader>c <c-_><c-_>
 
+" <Leader>r -- Cycle through relativenumber + number, number (only), and no
+" " numbering (mnemonic: relative).
+nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
+
 " Configure FZF Preview
 " *********************
 " Augmenting Ag command using fzf#vim#with_preview function
