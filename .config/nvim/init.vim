@@ -11,9 +11,15 @@
 
 set nocompatible " be iMproved, required
 " Automatically download package manager if it doesn't exist
+" For Neovim
 if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
 	echo "Downloading package manager"
 	call system(expand("curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
+endif
+" For Vim
+if !filereadable(expand("~/.vim/autoload/plug.vim"))
+	echo "Downloading package manager"
+	call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
 endif
 
 
