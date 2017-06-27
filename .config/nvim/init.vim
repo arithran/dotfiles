@@ -1,9 +1,9 @@
-"  █████╗ ██████╗ ██╗█ ███████╗    ███╗   ██╗██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
-" ██╔══██╗██╔══██╗██║  ██╔════╝    ████╗  ██║██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-" ███████║██████╔╝██║  ███████╗    ██╔██╗ ██║██║   ██║██║██╔████╔██║██████╔╝██║     
-" ██╔══██║██╔══██╗██║  ╚════██║    ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
-" ██║  ██║██║  ██║██║  ███████║    ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
-" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝    ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+"  █████╗ ██████╗ ██╗█ ███████╗    ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
+" ██╔══██╗██╔══██╗██║  ██╔════╝    ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
+" ███████║██████╔╝██║  ███████╗    ██║   ██║██║██╔████╔██║██████╔╝██║     
+" ██╔══██║██╔══██╗██║  ╚════██║    ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
+" ██║  ██║██║  ██║██║  ███████║     ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
+" ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝      ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 "                                                                                 
 " Author  : Arithran Thurairetnam (aka Ari)
 " Link    : https://github.com/arithran
@@ -39,6 +39,7 @@ Plug 'groenewege/vim-less' " Less CSS syntax
 
 " Workflow
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
+Plug 'ludovicchabant/vim-lawrencium' " Mercurial wrapper
 Plug 'airblade/vim-gitgutter' " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim' " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
@@ -126,18 +127,8 @@ Plug 'vim-scripts/dbext.vim' " Database Editor
 " ========
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 "
-" Tried Deoplete, doesn't seem to be feature rich as YouCompleteMe Try again later
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'tag']
-" let g:deoplete#sources.php = ['buffer', 'tag']
-" let deoplete#tag#cache_limit_size = 5000000
 
 
-" Manipulating files controlled by CVS, SVN, SVK, git, bzr, and hg within VIM
-" Plug 'vcscommand.vim'
-Plug 'ludovicchabant/vim-lawrencium'
 
 " Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
@@ -212,18 +203,15 @@ nmap cp :let @+= expand("%") <cr>
 
 " terminal 'normal mode'
 " tmap <esc> <c-\><c-n><esc><cr> 
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
 " Automatically change to INSERT mode when entering a terminal
 " autocmd BufEnter term://* startinsert
 
 " Don't do spell checks on terminal
 " augroup terminal
-  autocmd TermOpen * setlocal nospell
+  " autocmd TermOpen * setlocal nospell
 " augroup END
-
-" Table plugin shortcut
-noremap <leader>TM :TableModeToggle<CR> 
 
 " Complete file paths
 inoremap <c-f> <c-x><c-f> 
@@ -250,10 +238,6 @@ set number
 set ignorecase
 set incsearch
 set smartcase
-" set foldmethod=syntax
-set foldmethod=manual
-set foldlevelstart=1
-set foldcolumn=1
 set wildmenu " shows suggestions when tabing in normal mode
 set scrolloff=5 " adds 5 lines to the top and bottom of the window
 set laststatus=2 "adding the status line to the editor
@@ -290,7 +274,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <C-o> <C-w>o
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
@@ -347,8 +330,31 @@ autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 
 
+" Ignore turds left behind by Mercurial.
+let g:NERDTreeIgnore=['\.orig']
+" The default of 31 is just a little too narrow.
+let g:NERDTreeWinSize=40
+" Disable display of '?' text and 'Bookmarks' label.
+let g:NERDTreeMinimalUI=1
+" Let <Leader><Leader> (^#) return from NERDTree window.
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 " Toggle Nerd Tree
 map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
+
+" NERDTree Like vim-vinegar {{{
+nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+" Move up a directory using "-" like vim-vinegar (usually "u" does this).
+autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
+" Highlight the current file
+autocmd User NERDTreeInit call Attempt_select_last_file()
+function! Attempt_select_last_file()
+  let l:previous=expand('#:t')
+  if l:previous != ''
+    call search('\v<' . l:previous . '>')
+  endif
+endfunction
+" }}}
+
 
 " Toggle Neoformat to format code, @TODO requires formatters: read the docs use:PHP_Beautifier
 noremap <leader>f :Neoformat<CR>
@@ -377,6 +383,9 @@ nnoremap / /\v
 " Auto-correct the last spelling mistake
 nnoremap <S-l> :call AutoCorrectLastSpellingMistake()<CR>
 
+" Fold, gets it's own section  ----------------------------------------------{{{
+
+
 " Manual Fold shotcuts, Press Space to toggle a fold in Normal mode and Create
 " in Visual Mode
 " Vim folding commands
@@ -386,18 +395,21 @@ nnoremap <S-l> :call AutoCorrectLastSpellingMistake()<CR>
 " zk moves the cursor to the previous fold.
 " zo opens a fold at the cursor.
 " zO opens all folds at the cursor.
-" zm increases the foldlevel by one.
-" zM closes all open folds.
-" zr decreases the foldlevel by one.
-" zR decreases the foldlevel to zero -- all folds will be open.
+" zm (more)increases the foldlevel by one.
+" zM (More)closes all open folds.
+" zr (remove) decreases the foldlevel by one.
+" zR (Remove)decreases the foldlevel to zero -- all folds will be open.
 " zd deletes the fold at the cursor.
 " zE deletes all folds.
 " [z move to start of open fold.
 " ]z move to end of open fold.
+
+set foldmethod=manual
+set foldlevelstart=1
+set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" Fold, gets it's own section  ----------------------------------------------{{{
 
 " function! MyFoldText() " {{{
 " 	let line = getline(v:foldstart)
@@ -426,12 +438,9 @@ vnoremap <Space> zf
 " vnoremap <Space> za
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType vim setlocal foldlevel=0
-"
-" autocmd FileType html setlocal fdl=99
-
 autocmd FileType javascript,html,css,less,scss,typescript setlocal foldlevel=99
-autocmd FileType css,less,scss,json setlocal foldmethod=marker
-autocmd FileType css,less,scss,json setlocal foldmarker={,}
+autocmd FileType css,less,scss,json,php setlocal foldmethod=marker
+autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 
 " autocmd FileType coffee setl foldmethod=indent
 " autocmd FileType html setl foldmethod=expr

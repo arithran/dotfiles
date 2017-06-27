@@ -2,17 +2,21 @@
 Nothing super crazy going on here, but some sensible neovim and bash configs
 
 # Neovim
-My Neovim settings for PHP based Fullstack Web Developoers
+My Vim settings for PHP based Fullstack Web Developoers
 
 ## Screenshots
 ![alt tag](https://raw.githubusercontent.com/arithran/dotfiles/master/.config/nvim/Screenshots/neovim-setup.png)
 
 
 ## Installation Instructions
-1) Install Neovim
+1) Install 
+Neovim (nvim)
 https://github.com/neovim/neovim/wiki/Installing-Neovim#fedora-24-and-older
+OR
+VIM (vimx)
+sudo dnf install vim-X11
 
-### Plugin Support
+### Plugin Support (for Neovim)
 1. Python SUpport for bot Python 2 and 3 plug-ins to work
 ```
 sudo pip2 install --upgrade neovim
@@ -34,12 +38,12 @@ mv dotfiles/* dotfiles/.* .
 rmdir dotfiles
 ```
 
-3) Open Neovim(nvim) and Install Plugins/Dependencies 
+3) Open Vim and Install Plugins/Dependencies 
 ```
 :PlugInstall
 ```
 
-4) Restart nvim
+4) Restart Vim
 
 ## Dependencies/Extras
 1) ctags is needed for the tagbar plugin to work.

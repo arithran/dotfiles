@@ -90,6 +90,7 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim='nvim'
+# alias vim='nvim'
+alias vim='vimx'
 alias tm="tmux attach -t Master || tmux new -s Master"
 
