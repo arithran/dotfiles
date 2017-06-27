@@ -387,7 +387,7 @@ nnoremap <leader>sc :CloseSession<CR>
 nnoremap / /\v
 
 " Auto-correct the last spelling mistake
-nnoremap <S-l> :call AutoCorrectLastSpellingMistake()<CR>
+nnoremap <leader>l :call AutoCorrectLastSpellingMistake()<CR>
 
 " Fold, gets it's own section  ----------------------------------------------{{{
 
