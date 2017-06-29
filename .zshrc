@@ -92,6 +92,6 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias vim='nvim'
 alias p='git add -p'
-alias vim='vimx'
-alias t="tmux attach -t Master || tmux new -s Master"
+# alias vim='vimx'
+alias t="tmux attach || tmux new -s Master"
 
