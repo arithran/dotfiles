@@ -1,5 +1,5 @@
 " Cycle through relativenumber + number, number (only), and no numbering.
-function! mappings#cycle_numbering() abort
+function! arithran#mappings#cycle_numbering() abort
 	if exists('+relativenumber')
 		execute {
 			\ '00': 'set relativenumber   | set number',

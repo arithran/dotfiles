@@ -10,6 +10,9 @@
 " Version : 2.0
 
 set nocompatible " be iMproved, required
+
+" PLUGIN MANAGER {{{
+"
 " Automatically download package manager if it doesn't exist
 " For Neovim
 if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
@@ -73,7 +76,7 @@ Plug 'ryanoasis/nerd-fonts' " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized' "  Current Theme
 Plug 'tpope/vim-surround' " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim' " Code commenter
-Plug 'Lokaltog/vim-easymotion' " Vim motions on speed!
+Plug 'easymotion/vim-easymotion' " Vim motions on speed!
 Plug 'terryma/vim-multiple-cursors' " Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers' " Remove hidden buffers
 Plug 'mattn/webapi-vim'
@@ -133,18 +136,13 @@ Plug 'vim-scripts/dbext.vim' " Database Editor
 " Archived
 " ========
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
-"
-
-
-
 " Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
 
-
-
 " Initialize plugin system
 call plug#end()
+" }}}
 
 
 " GENERAL SETTINGS
@@ -157,15 +155,6 @@ let mapleader = "," " Set the leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
 set mouse= " Disable mouse imput
-
-"  Neovim Settings
-" set termguicolors
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " change the cursor shape to a vertical bar while in insert mode
-" set clipboard+=unnamedplus " Use system clipboard by default
-
-
-
-
 
 " Set python paths for plugins to work (run :CheckHealth to test)
 let g:python_host_prog  = '/usr/bin/python'
@@ -182,7 +171,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Unbind conflicting key, Ctrl+h (@see Plug 'alvan/vim-php-manual')
 let g:php_manual_online_search_shortcut = ''
-
 
 " Configure UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -244,6 +232,7 @@ set winheight=5
 set winminheight=5
 set winheight=999
 set number
+set relativenumber
 set ignorecase
 set incsearch
 set smartcase
@@ -257,7 +246,7 @@ set splitright
 " set clipboard=unnamedplus " sets the system clipboard as default
 
 
-" Formatting {{{
+" FORMATTING SETTINGS {{{
 set noexpandtab   " Make sure that every file uses real tabs, not spaces
 set shiftround    " Round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start " Backspace over everything in insert mode
@@ -267,7 +256,6 @@ set fo=vt         " Set the format options ('formatoptions')
 set nojoinspaces  " :h joinspaces
 set listchars=tab:▸\ ,eol:¬ " pretify :set list
 
-
 " Set the tab width
 let s:tabwidth=4
 exec 'set tabstop='    .s:tabwidth
@@ -275,14 +263,19 @@ exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 " }}}
 
-" KEY BINDINGS
-" ============
+" #MAPPINGS
+" NORMAL MODE MAPPINGS {{{
+
+" Repeat last macro if in a normal buffer.
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'<F23>
 
 "This is a bind to navigate windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Navigate Tabs
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
@@ -291,6 +284,54 @@ nnoremap tn  :tabedit<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
+" Repurpose cursor keys (accessible near homerow via "SpaceFN" layout) for one
+" of my most oft-use key sequences.
+nnoremap <silent> <Up> :cprevious<CR>
+nnoremap <silent> <Down> :cnext<CR>
+nnoremap <silent> <Left> :cpfile<CR>
+nnoremap <silent> <Right> :cnfile<CR>
+
+" Store relative line number jumps in the jumplist if they exceed a threshold.
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+" }}}
+" VISUAL MODE MAPPINGS {{{
+
+" Navigate windows while in Visual mode
+xnoremap <C-h> <C-w>h
+xnoremap <C-j> <C-w>j
+xnoremap <C-k> <C-w>k
+xnoremap <C-l> <C-w>l
+" }}}
+" COMMAND MODE MAPPINGS {{{
+
+" <C-u> should  already delete the line
+" HOME and END keys
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
+" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
+" work.
+" cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+" cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+" }}}
+" LEADER MODE MAPPINGS {{{
+"
+" <Leader><Leader> -- Open last buffer.
+nnoremap <Leader><Leader> <C-^>
+
+" Full Screen
+nnoremap <Leader>o :only<CR>
+
+" <Leader>p -- Show the path of the current file (mnemonic: path; useful when
+" you have a lot of splits and the status line gets truncated).
+nnoremap <Leader>p :echo expand('%')<CR>
+
+" <Leader>pp -- Like <Leader>p, but additionally yanks the filename and sends it
+" off to Clipper.
+nnoremap <Leader>pp :let @0=expand('%') <Bar> :Clip<CR> :echo expand('%')<CR>
+" }}}
 " This is to sudo write a file if opened with read only permissions
 cnoremap sudow w !sudo tee % >/dev/null
 
@@ -302,7 +343,7 @@ map <leader>c <c-_><c-_>
 
 " <Leader>r -- Cycle through relativenumber + number, number (only), and no
 " " numbering (mnemonic: relative).
-nnoremap <silent> <Leader>r :call mappings#cycle_numbering()<CR>
+nnoremap <silent> <Leader>r :call arithran#mappings#cycle_numbering()<CR>
 
 " Configure FZF Preview
 " *********************
@@ -343,6 +384,9 @@ autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 
 
+
+" NERDTree {{{
+"
 " Ignore turds left behind by Mercurial.
 let g:NERDTreeIgnore=['\.orig']
 " The default of 31 is just a little too narrow.
@@ -354,18 +398,12 @@ let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 " Toggle Nerd Tree
 map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
-" NERDTree Like vim-vinegar {{{
+" Like vim-vinegar
 nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
 " Move up a directory using "-" like vim-vinegar (usually "u" does this).
 autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
 " Highlight the current file
-autocmd User NERDTreeInit call Attempt_select_last_file()
-function! Attempt_select_last_file()
-  let l:previous=expand('#:t')
-  if l:previous != ''
-    call search('\v<' . l:previous . '>')
-  endif
-endfunction
+autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
 " }}}
 
 
@@ -373,21 +411,12 @@ endfunction
 noremap <leader>f :Neoformat<CR>
 
 " Toggle easymotion
-map <leader>w <leader><leader>w
-map <leader>W <leader><leader>b
+map  <Leader>w <Plug>(easymotion-w)
+nmap <Leader>W <Plug>(easymotion-b)
 
 " Toggle Tagbar
 map <leader>g :Tagbar<CR>
 
-" Session Management
-let	g:session_directory = "~/.vim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
 
 " Very Magic Search By Default
 " :help magic
@@ -511,8 +540,8 @@ nnoremap <Leader>a :Ack!<Space>
 " Make current window more obvious by turning off/adjusting some features in non-current
 " windows.
 if exists('+colorcolumn')
-	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
-	autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
+	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
+	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
 endif
 
 " Override the Look and Feel (Must by after colorscheme)
