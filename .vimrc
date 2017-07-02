@@ -152,6 +152,7 @@ se t_Co=256 "Set the color of the terminal to 256 bits
 set colorcolumn=110 "Keep my lines 110 chars at most
 " set makeprg=make\ -C\ ../build\ -j9
 let mapleader = "," " Set the leader key
+let maplocalleader="\\" " Set the local leader key
 set pastetoggle=<f6> " Toggle paste mode 
 set nopaste " disable it by default
 set mouse= " Disable mouse imput
@@ -316,6 +317,7 @@ cnoremap <C-e> <End>
 " cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
 " cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 " }}}
+
 " LEADER MODE MAPPINGS {{{
 "
 " <Leader><Leader> -- Open last buffer.
@@ -330,20 +332,35 @@ nnoremap <Leader>p :echo expand('%')<CR>
 
 " <Leader>pp -- Like <Leader>p, but additionally yanks the filename and sends it
 " off to Clipper.
-nnoremap <Leader>pp :let @0=expand('%') <Bar> :Clip<CR> :echo expand('%')<CR>
-" }}}
-" This is to sudo write a file if opened with read only permissions
-cnoremap sudow w !sudo tee % >/dev/null
+nnoremap <Leader>pp :let @+=expand('%')<CR> :echo expand('%')<CR>
+
+" <Leader>r -- Cycle through relativenumber + number, number (only), and no
+" " numbering (mnemonic: relative).
+nnoremap <silent> <Leader>r :call arithran#mappings#cycle_numbering()<CR>
+
+" <Leader>zz -- Zap trailing whitespace in the current buffer.
+"
+"        As this one is somewhat destructive and relatively close to the
+"        oft-used <leader>a mapping, make this one a double key-stroke.
+nnoremap <silent> <Leader>zz :call arithran#mappings#zap()<CR>
+
+" <LocalLeader>c -- Fix (most) syntax highlighting problems in current buffer
+" (mnemonic: coloring).
+nnoremap <silent> <LocalLeader>c :syntax sync fromstart<CR>
+
+" <LocalLeader>e -- Edit file, starting in same directory as current file.
+nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 "Toggle spell checker
 nmap <silent> <leader>s :set spell!<CR>
 
 " Toggle commenting Requires T-comment plugin
 map <leader>c <c-_><c-_>
+" }}}
 
-" <Leader>r -- Cycle through relativenumber + number, number (only), and no
-" " numbering (mnemonic: relative).
-nnoremap <silent> <Leader>r :call arithran#mappings#cycle_numbering()<CR>
+" This is to sudo write a file if opened with read only permissions
+cnoremap sudow w !sudo tee % >/dev/null
+
 
 " Configure FZF Preview
 " *********************

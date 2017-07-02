@@ -11,3 +11,13 @@ function! arithran#mappings#cycle_numbering() abort
 		set number!<CR>
 	endif
 endfunction
+
+" Zap trailing whitespace.
+function! arithran#mappings#zap() abort
+	let l:pos=getcurpos()
+	let l:search=@/
+	keepjumps %substitute/\s\+$//e
+	let @/=l:search
+	nohlsearch
+	call setpos('.', l:pos)
+endfunction
