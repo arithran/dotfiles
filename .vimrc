@@ -144,22 +144,7 @@ Plug 'git://git.wincent.com/command-t.git'
 call plug#end()
 " }}}
 
-
-" GENERAL SETTINGS
-" ================
-filetype plugin indent on    " required
-se t_Co=256 "Set the color of the terminal to 256 bits
-set colorcolumn=110 "Keep my lines 110 chars at most
-" set makeprg=make\ -C\ ../build\ -j9
-let mapleader = "," " Set the leader key
-let maplocalleader="\\" " Set the local leader key
-set pastetoggle=<f6> " Toggle paste mode 
-set nopaste " disable it by default
-set mouse= " Disable mouse imput
-
-" Set python paths for plugins to work (run :CheckHealth to test)
-let g:python_host_prog  = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+" PLUGIN SETTINGS {{{
 
 " Configure YCM  and make it compatible with UltiSnips (using supertab)
 " NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
@@ -178,10 +163,51 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical""
+" }}}
+
+" GENERAL SETTINGS {{{
+
+set encoding=utf8 " Set vim's char encoding
+filetype plugin indent on " turn on file-type detection
+se t_Co=256 " Set the color of the terminal to 256 bits
+set colorcolumn=110 " Keep my lines 110 chars at most
+let mapleader = "," " Set the leader key
+let maplocalleader="\\" " Set the local leader key
+set pastetoggle=<f6> " Toggle paste mode 
+set nopaste " disable it by default
+set mouse= " Disable mouse imput
 
 " Vim automatically saves undo history to an undo file
 set undofile
 set undodir="$HOME/.VIM_UNDO_FILES"
+
+" }}}
+
+" FORMATTING SETTINGS {{{
+set fo=vt                      " Set the format options ('formatoptions')
+set nojoinspaces               " :h joinspaces
+set backspace=indent,eol,start " Backspace over everything in insert mode
+set autoindent                 " Copy indent from current line, over to the new line
+set smartindent                " Do smart indenting when starting a new line
+set shiftround                 " Round indent to multiple of 'shiftwidth'
+
+if has('linebreak')
+	set linebreak                       " wrap long lines at characters in 'breakat'
+	let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+	set breakindent                     " indent wrapped lines to match start
+	if exists('&breakindentopt')
+		set breakindentopt=shift:2        " emphasize broken lines by indenting them
+	endif
+endi
+
+set listchars=tab:▸\ ,eol:¬ " pretify :set list
+
+set noexpandtab " Make sure that every file uses real tabs, not spaces
+let s:tabwidth=4 " Set the tab width
+exec 'set tabstop='    .s:tabwidth
+exec 'set shiftwidth=' .s:tabwidth
+exec 'set softtabstop='.s:tabwidth
+" }}}
 
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
@@ -247,22 +273,6 @@ set splitright
 " set clipboard=unnamedplus " sets the system clipboard as default
 
 
-" FORMATTING SETTINGS {{{
-set noexpandtab   " Make sure that every file uses real tabs, not spaces
-set shiftround    " Round indent to multiple of 'shiftwidth'
-set backspace=indent,eol,start " Backspace over everything in insert mode
-set smartindent   " Do smart indenting when starting a new line
-set autoindent    " Copy indent from current line, over to the new line
-set fo=vt         " Set the format options ('formatoptions')
-set nojoinspaces  " :h joinspaces
-set listchars=tab:▸\ ,eol:¬ " pretify :set list
-
-" Set the tab width
-let s:tabwidth=4
-exec 'set tabstop='    .s:tabwidth
-exec 'set shiftwidth=' .s:tabwidth
-exec 'set softtabstop='.s:tabwidth
-" }}}
 
 " #MAPPINGS
 " NORMAL MODE MAPPINGS {{{
@@ -296,6 +306,7 @@ nnoremap <silent> <Right> :cnfile<CR>
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 " }}}
+
 " VISUAL MODE MAPPINGS {{{
 
 " Navigate windows while in Visual mode
@@ -304,6 +315,7 @@ xnoremap <C-j> <C-w>j
 xnoremap <C-k> <C-w>k
 xnoremap <C-l> <C-w>l
 " }}}
+
 " COMMAND MODE MAPPINGS {{{
 
 " <C-u> should  already delete the line
@@ -517,7 +529,6 @@ set background=dark " Set the background to dark
 colorscheme solarized " Set theme
 
 " Configure Airline
-set encoding=utf8
 let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
