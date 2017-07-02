@@ -1,9 +1,16 @@
 [user]
 	name = ari
 	email = spam@ari.guru
+[core]
+	editor = vim
+	excludesfile = /home/ari/.gitignore_global
+[color]
+	ui = true
 [merge]
 	tool = fugitive
 [mergetool]
 	prompt = false
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[include]
+    path = /home/ari/.gituser_config
