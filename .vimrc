@@ -12,29 +12,28 @@
 " GENERAL SETTINGS 
 " {{{
 
-set nocompatible " be iMproved, required
-set encoding=utf8 " Set vim's char encoding
-filetype plugin indent on " turn on file-type detection
-se t_Co=256 " Set the color of the terminal to 256 bits
-set colorcolumn=110 " Keep my lines 110 chars at most
-let mapleader = "," " Set the leader key
-let maplocalleader="\\" " Set the local leader key
-set pastetoggle=<f6> " Toggle paste mode 
-set nopaste " disable it by default
-set mouse= " Disable mouse imput
+set nocompatible                    "  be iMproved, required
+set encoding=utf8                   "  Set vim's char encoding
+filetype plugin indent on           "  turn on file-type detection
+se t_Co=256                         "  Set the color of the terminal to 256 bits
+set colorcolumn=110                 "  Keep my lines 110 chars at most
+let mapleader = ","                 "  Set the leader key
+let maplocalleader="\\"             "  Set the local leader key
+set pastetoggle=<f6>                "  Toggle paste mode
+set nopaste                         "  disable it by default
+set mouse=                          "  Disable mouse imput
 
-" Vim automatically saves undo history to an undo file
-set undofile
+set undofile                        "  Vim automatically saves undo history to an undo file
 set undodir="$HOME/.VIM_UNDO_FILES"
 
 " Flags
 " =====
-set spell " turn on spell checker
-set showcmd " see partial commands as you type them
-set spelllang=en_gb " spelling GB
-set gdefault " sets global flag by default
-set noswapfile " doesn't create a swap file
-set cursorline "adds a line for the cursor
+set spell                           "  turn on spell checker
+set showcmd                         "  see partial commands as you type them
+set spelllang=en_gb                 "  spelling GB
+set gdefault                        "  sets global flag by default
+set noswapfile                      "  doesn't create a swap file
+set cursorline                      "  adds a line for the cursor
 set winheight=5
 set winminheight=5
 set winheight=999
@@ -43,16 +42,15 @@ set relativenumber
 set ignorecase
 set incsearch
 set smartcase
-set wildmenu " shows suggestions when tabing in normal mode
-set scrolloff=5 " adds 5 lines to the top and bottom of the window
-set laststatus=2 "adding the status line to the editor
+set wildmenu                        "  shows suggestions when tabing in normal mode
+set scrolloff=5                     "  adds 5 lines to the top and bottom of the window
+set laststatus=2                    "  adding the status line to the editor
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" set clipboard=unnamedplus " sets the system clipboard as default
-set complete=.,w,b,u,t,k " context-sensitive completion
-let g:session_autosave = 'no' " Don't auto save since I got :Obsession handling that
+set splitbelow                      "  Open new split panes to right and bottom,
+set splitright                      "  which feels more natural
+" set clipboard=unnamedplus         "  sets the system clipboard as default
+set complete=.,w,b,u,t,k            "  context-sensitive completion
+let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
 
 " }}}
 
@@ -82,7 +80,7 @@ Plug 'othree/html5.vim'                                                 "  HTML5
 Plug 'othree/yajs.vim'                                                  "  Yet Another JavaScript Syntax file for Vim [NEW]
 Plug 'heavenshell/vim-jsdoc'                                            "  JavaScript JS Documentor
 Plug 'elzr/vim-json', { 'for': 'json' }                                 "  Distinct highlighting of keywords vs values, JSON-specific
-Plug 'hail2u/vim-css3-syntax', { 'for': ['less', 'css', 'scss'] }
+Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
 Plug 'ap/vim-css-color'                                                 "  Colour keyword highlighter for Vim
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                      "  Syntax highlighting
 Plug 'godlygeek/tabular'                                                "  Table creator and alignment plug-in
@@ -96,7 +94,7 @@ Plug 'tpope/vim-fugitive'                                               "  A Git
 Plug 'ludovicchabant/vim-lawrencium'                                    "  Mercurial wrapper
 Plug 'airblade/vim-gitgutter'                                           "  Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim'                                                  "  Search tool from Vim
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }       "  Fuzzy Finder
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}         "  Fuzzy Finder
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe'                                           "  A code-completion engine for Vim
 Plug 'SirVer/ultisnips'                                                 "  Snippet engine (UltiSnips is also a PHP documentor dependancy)
@@ -161,9 +159,9 @@ Plug 'vim-scripts/dbext.vim'                                            "  Datab
 " Plug 'moll/vim-node'
 " Plug 'vim-markdown-folding'
 " Plug 'editorconfig/editorconfig-vi'
-" Plug 'lambdalisue/vim-gita' "instead of fugitive
-" Plug 'tpope/vim-rhubarb' "plug-in that goes well with fugitive
-" Plug 'jreybert/vimagit' "plug-in that goes well with fugitive
+" Plug 'lambdalisue/vim-gita' " instead of fugitive
+" Plug 'tpope/vim-rhubarb' " plug-in that goes well with fugitive
+" Plug 'jreybert/vimagit' " plug-in that goes well with fugitive
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
