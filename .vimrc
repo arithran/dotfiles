@@ -11,6 +11,7 @@
 
 set nocompatible " be iMproved, required
 
+" PLUGINS
 " PLUGIN MANAGER {{{
 "
 " Automatically download package manager if it doesn't exist
@@ -163,8 +164,30 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical""
+" NERDTree {{{
+"
+" Ignore turds left behind by Mercurial.
+let g:NERDTreeIgnore=['\.orig']
+" The default of 31 is just a little too narrow.
+let g:NERDTreeWinSize=40
+" Disable display of '?' text and 'Bookmarks' label.
+let g:NERDTreeMinimalUI=1
+" Let <Leader><Leader> (^#) return from NERDTree window.
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+" Toggle Nerd Tree
+map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
+
+" Like vim-vinegar
+nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+" Move up a directory using "-" like vim-vinegar (usually "u" does this).
+autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
+" Highlight the current file
+autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
 " }}}
 
+" }}}
+
+" SETTINGS
 " GENERAL SETTINGS {{{
 
 set encoding=utf8 " Set vim's char encoding
@@ -180,6 +203,32 @@ set mouse= " Disable mouse imput
 " Vim automatically saves undo history to an undo file
 set undofile
 set undodir="$HOME/.VIM_UNDO_FILES"
+
+" Flags
+" =====
+set spell " turn on spell checker
+set showcmd " see partial commands as you type them
+set spelllang=en_gb " spelling GB
+set gdefault " sets global flag by default
+set noswapfile " doesn't create a swap file
+set cursorline "adds a line for the cursor
+set winheight=5
+set winminheight=5
+set winheight=999
+set number
+set relativenumber
+set ignorecase
+set incsearch
+set smartcase
+set wildmenu " shows suggestions when tabing in normal mode
+set scrolloff=5 " adds 5 lines to the top and bottom of the window
+set laststatus=2 "adding the status line to the editor
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" set clipboard=unnamedplus " sets the system clipboard as default
+set complete=.,w,b,u,t,k " context-sensitive completion
 
 " }}}
 
@@ -210,20 +259,15 @@ exec 'set softtabstop='.s:tabwidth
 " }}}
 
 " Remember cursor position between vim sessions
-autocmd BufReadPost *
-			\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-			\   exe "normal! g'\"" |
-			\ endif
+" autocmd BufReadPost *
+" 			\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+" 			\   exe "normal! g'\"" |
+" 			\ endif
 " center buffer around cursor when opening files
 autocmd BufRead * normal zz
 
-set complete=.,w,b,u,t,k " context-sensitive completion
 
-" exit insert, dd line, enter insert
-inoremap <c-d> <esc>ddi<Paste> 
 
-" copy current files path to clipboard
-nmap cp :let @+= expand("%") <cr> 
 
 " terminal 'normal mode'
 " tmap <esc> <c-\><c-n><esc><cr> 
@@ -237,8 +281,6 @@ nmap cp :let @+= expand("%") <cr>
   " autocmd TermOpen * setlocal nospell
 " augroup END
 
-" Complete file paths
-inoremap <c-f> <c-x><c-f> 
 
 " Multi-line cursor config
 let g:multi_cursor_next_key='<C-n>'
@@ -247,34 +289,15 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 
-" Flags
-" =====
-set spell " turn on spell checker
-set showcmd " see partial commands as you type them
-set spelllang=en_gb " spelling GB
-set gdefault " sets global flag by default
-set noswapfile " doesn't create a swap file
-set cursorline "adds a line for the cursor
-set winheight=5
-set winminheight=5
-set winheight=999
-set number
-set relativenumber
-set ignorecase
-set incsearch
-set smartcase
-set wildmenu " shows suggestions when tabing in normal mode
-set scrolloff=5 " adds 5 lines to the top and bottom of the window
-set laststatus=2 "adding the status line to the editor
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" set clipboard=unnamedplus " sets the system clipboard as default
-
 
 
 " #MAPPINGS
+" INSERT MODE MAPPINGS {{{
+
+" Complete file paths
+inoremap <c-f> <c-x><c-f> 
+" }}}
+
 " NORMAL MODE MAPPINGS {{{
 
 " Repeat last macro if in a normal buffer.
@@ -305,6 +328,7 @@ nnoremap <silent> <Right> :cnfile<CR>
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
 " }}}
 
 " VISUAL MODE MAPPINGS {{{
@@ -328,6 +352,31 @@ cnoremap <C-e> <End>
 " work.
 " cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
 " cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+
+" This is to sudo write a file if opened with read only permissions
+cnoremap sudow w !sudo tee % >/dev/null
+
+
+" Configure FZF Preview
+" *********************
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%'),
+  \                 <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " LEADER MODE MAPPINGS {{{
@@ -370,30 +419,6 @@ nmap <silent> <leader>s :set spell!<CR>
 map <leader>c <c-_><c-_>
 " }}}
 
-" This is to sudo write a file if opened with read only permissions
-cnoremap sudow w !sudo tee % >/dev/null
-
-
-" Configure FZF Preview
-" *********************
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%'),
-  \                 <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 " Configure PDV .aka PHP Doc
@@ -414,26 +439,6 @@ autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 
 
-" NERDTree {{{
-"
-" Ignore turds left behind by Mercurial.
-let g:NERDTreeIgnore=['\.orig']
-" The default of 31 is just a little too narrow.
-let g:NERDTreeWinSize=40
-" Disable display of '?' text and 'Bookmarks' label.
-let g:NERDTreeMinimalUI=1
-" Let <Leader><Leader> (^#) return from NERDTree window.
-let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
-" Toggle Nerd Tree
-map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
-
-" Like vim-vinegar
-nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
-" Move up a directory using "-" like vim-vinegar (usually "u" does this).
-autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
-" Highlight the current file
-autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
-" }}}
 
 
 " Toggle Neoformat to format code, @TODO requires formatters: read the docs use:PHP_Beautifier
@@ -558,6 +563,11 @@ let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_ft_maker_remove_invalid_entries = 0
 autocmd! BufEnter,BufRead,BufWritePost * Neomake
 
+" Automatically run these
+" autocmd VimEnter * NERDTree "Automatically Open Nerd Tree
+" autocmd VimEnter * Tagbar "Automatically Open Tagbar
+
+
 " Configure Gist Vim
 let g:gist_post_private = 1
 let g:gist_get_multiplefile = 1
@@ -584,8 +594,7 @@ highlight Normal ctermbg=none
 " Abbreviations
 iabbrev </ </<C-X><C-O> " auto complete tags
 
-" Custom functions
-" ================
+" CUSTOM FUNCTIONS {{{
 if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
 	function AutoCorrectLastSpellingMistake()
 		if !&binary && &filetype != 'diff'
@@ -666,8 +675,5 @@ endif
 " 		endif
 " 	endfunction
 " endif
-"
-" Automatically run these
-" autocmd VimEnter * NERDTree "Automatically Open Nerd Tree
-" autocmd VimEnter * Tagbar "Automatically Open Tagbar
+" }}}
 
