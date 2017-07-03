@@ -9,10 +9,55 @@
 " Link    : https://github.com/arithran
 " Version : 2.0
 
-set nocompatible " be iMproved, required
+" GENERAL SETTINGS 
+" {{{
 
-" PLUGINS
-" PLUGIN MANAGER {{{
+set nocompatible " be iMproved, required
+set encoding=utf8 " Set vim's char encoding
+filetype plugin indent on " turn on file-type detection
+se t_Co=256 " Set the color of the terminal to 256 bits
+set colorcolumn=110 " Keep my lines 110 chars at most
+let mapleader = "," " Set the leader key
+let maplocalleader="\\" " Set the local leader key
+set pastetoggle=<f6> " Toggle paste mode 
+set nopaste " disable it by default
+set mouse= " Disable mouse imput
+
+" Vim automatically saves undo history to an undo file
+set undofile
+set undodir="$HOME/.VIM_UNDO_FILES"
+
+" Flags
+" =====
+set spell " turn on spell checker
+set showcmd " see partial commands as you type them
+set spelllang=en_gb " spelling GB
+set gdefault " sets global flag by default
+set noswapfile " doesn't create a swap file
+set cursorline "adds a line for the cursor
+set winheight=5
+set winminheight=5
+set winheight=999
+set number
+set relativenumber
+set ignorecase
+set incsearch
+set smartcase
+set wildmenu " shows suggestions when tabing in normal mode
+set scrolloff=5 " adds 5 lines to the top and bottom of the window
+set laststatus=2 "adding the status line to the editor
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" set clipboard=unnamedplus " sets the system clipboard as default
+set complete=.,w,b,u,t,k " context-sensitive completion
+let g:session_autosave = 'no' " Don't auto save since I got :Obsession handling that
+
+" }}}
+
+" PLUGIN MANAGER 
+" {{{
 "
 " Automatically download package manager if it doesn't exist
 " For Neovim
@@ -138,13 +183,14 @@ Plug 'vim-scripts/dbext.vim'                                            "  Datab
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 " Plug 'ZoomWin'
 " " Git plugin not hosted on GitHub
-Plug 'git://git.wincent.com/command-t.git'
+" Plug 'git://git.wincent.com/command-t.git'
 
 " Initialize plugin system
 call plug#end()
 " }}}
 
-" PLUGIN SETTINGS {{{
+" PLUGIN SETTINGS
+" {{{
 
 " Configure YCM  and make it compatible with UltiSnips (using supertab)
 " NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
@@ -180,6 +226,21 @@ let g:jsdoc_allow_input_prompt	= 1
 let g:jsdoc_input_description = 1
 autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 
+" Configure Neomake
+let g:airline#extensions#neomake#error_symbol=' '
+let g:airline#extensions#neomake#warning_symbol=' '
+let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_ft_maker_remove_invalid_entries = 0
+autocmd! BufEnter,BufRead,BufWritePost * Neomake
+
+" Configure Gist Vim
+let g:gist_post_private = 1
+let g:gist_get_multiplefile = 1
+
+" Configure Ack
+nnoremap <Leader>a :Ack!<Space>
+
 " NERDTree {{{
 "
 " Ignore turds left behind by Mercurial.
@@ -190,8 +251,6 @@ let g:NERDTreeWinSize=40
 let g:NERDTreeMinimalUI=1
 " Let <Leader><Leader> (^#) return from NERDTree window.
 let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
-" Toggle Nerd Tree
-map <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " Like vim-vinegar
 nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
@@ -199,56 +258,15 @@ nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h'
 autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
 " Highlight the current file
 autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
+
+" Toggle Nerd Tree
+nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 " }}}
 
 " }}}
 
-" SETTINGS
-" GENERAL SETTINGS {{{
-
-set encoding=utf8 " Set vim's char encoding
-filetype plugin indent on " turn on file-type detection
-se t_Co=256 " Set the color of the terminal to 256 bits
-set colorcolumn=110 " Keep my lines 110 chars at most
-let mapleader = "," " Set the leader key
-let maplocalleader="\\" " Set the local leader key
-set pastetoggle=<f6> " Toggle paste mode 
-set nopaste " disable it by default
-set mouse= " Disable mouse imput
-
-" Vim automatically saves undo history to an undo file
-set undofile
-set undodir="$HOME/.VIM_UNDO_FILES"
-
-" Flags
-" =====
-set spell " turn on spell checker
-set showcmd " see partial commands as you type them
-set spelllang=en_gb " spelling GB
-set gdefault " sets global flag by default
-set noswapfile " doesn't create a swap file
-set cursorline "adds a line for the cursor
-set winheight=5
-set winminheight=5
-set winheight=999
-set number
-set relativenumber
-set ignorecase
-set incsearch
-set smartcase
-set wildmenu " shows suggestions when tabing in normal mode
-set scrolloff=5 " adds 5 lines to the top and bottom of the window
-set laststatus=2 "adding the status line to the editor
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" set clipboard=unnamedplus " sets the system clipboard as default
-set complete=.,w,b,u,t,k " context-sensitive completion
-
-" }}}
-
-" FORMATTING SETTINGS {{{
+" FORMATTING SETTINGS
+" {{{
 set fo=vt                      " Set the format options ('formatoptions')
 set nojoinspaces               " :h joinspaces
 set backspace=indent,eol,start " Backspace over everything in insert mode
@@ -273,9 +291,6 @@ exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 " }}}
-
-
-
 
 " #MAPPINGS
 " INSERT MODE MAPPINGS {{{
@@ -422,7 +437,7 @@ nmap <silent> <leader>s :set spell!<CR>
 map <leader>c <c-_><c-_>
 " }}}
 
-" AUTOCMDS {{{
+" AUTOCMD MAPPINGS {{{
 " Remember cursor position between vim sessions
 " autocmd BufReadPost *
 " 			\ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -434,9 +449,25 @@ autocmd BufRead * normal zz
 " Wrap text for markdown files
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
+" Automatically run these
+" autocmd VimEnter * NERDTree "Automatically Open Nerd Tree
+" autocmd VimEnter * Tagbar "Automatically Open Tagbar
+
+" Make current window more obvious by turning off/adjusting some features in non-current
+" windows.
+if exists('+colorcolumn')
+	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
+	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
+endif
+
 " }}}
 
-" Fold, gets it's own section  ----------------------------------------------{{{
+" ABBREVIATION MAPPINGS {{{
+iabbrev </ </<C-X><C-O> " auto complete tags
+" }}}
+
+" FOLDS
+" {{{
 
 
 " Manual Fold shotcuts, Press Space to toggle a fold in Normal mode and Create
@@ -504,7 +535,8 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 " autocmd FileType javascript,typescript,json setl foldmethod=syntax
 " }}}
 
-" Configure Theme
+" THEME SETTINGS
+" {{{
 syntax enable " Enable syntax highlighting
 set background=dark " Set the background to dark
 colorscheme solarized " Set theme
@@ -529,35 +561,6 @@ let g:tmuxline_preset = {
       \'y'    : ['#(whoami)'],
       \'z'    : '#H'}
 
-
-
-" Configure Neomake
-let g:airline#extensions#neomake#error_symbol=' '
-let g:airline#extensions#neomake#warning_symbol=' '
-let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_ft_maker_remove_invalid_entries = 0
-autocmd! BufEnter,BufRead,BufWritePost * Neomake
-
-" Automatically run these
-" autocmd VimEnter * NERDTree "Automatically Open Nerd Tree
-" autocmd VimEnter * Tagbar "Automatically Open Tagbar
-
-
-" Configure Gist Vim
-let g:gist_post_private = 1
-let g:gist_get_multiplefile = 1
-
-" Configure Ack
-nnoremap <Leader>a :Ack!<Space>
-
-" Make current window more obvious by turning off/adjusting some features in non-current
-" windows.
-if exists('+colorcolumn')
-	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
-	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
-endif
-
 " Override the Look and Feel (Must by after colorscheme)
 " Italics start and end key sequences
 set t_ZH=[3m
@@ -567,10 +570,10 @@ highlight Comment cterm=italic
 " Make Background transparent
 highlight Normal ctermbg=none 
 
-" Abbreviations
-iabbrev </ </<C-X><C-O> " auto complete tags
+" }}}
 
-" CUSTOM FUNCTIONS {{{
+" CUSTOM FUNCTIONS
+" {{{
 if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
 	function AutoCorrectLastSpellingMistake()
 		if !&binary && &filetype != 'diff'
