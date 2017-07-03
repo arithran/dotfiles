@@ -23,8 +23,32 @@ set pastetoggle=<f6>                "  Toggle paste mode
 set nopaste                         "  disable it by default
 set mouse=                          "  Disable mouse imput
 
-set undofile                        "  Vim automatically saves undo history to an undo file
-set undodir="$HOME/.VIM_UNDO_FILES"
+if exists('$SUDO_USER')
+  set nobackup                         " don't create root-owned files
+  set nowritebackup                    " don't create root-owned files
+else
+  set backupdir=~/.vim/tmp/backup//    " keep backup files out of the way
+  set backupdir+=.
+  set backupskip=/tmp/*,/private/tmp/*
+  set backup                           " Create a backup
+  set writebackup
+endif
+if has('persistent_undo')
+  if exists('$SUDO_USER')
+    set noundofile                     " don't create root-owned files
+  else
+    set undodir=~/.vim/tmp/undo//      " keep undo files out of the way
+    set undodir+=.
+    set undofile                       " actually use undo files
+  endif
+endif
+if exists('$SUDO_USER')
+  set noswapfile                       " don't create root-owned files
+else
+  set directory=~/.vim/tmp/swap//      " keep swap files out of the way
+  set directory+=.
+  set swapfile                         " Create swap files in case system crashes
+endif
 
 " Flags
 " =====
@@ -32,7 +56,6 @@ set spell                           "  turn on spell checker
 set showcmd                         "  see partial commands as you type them
 set spelllang=en_gb                 "  spelling GB
 set gdefault                        "  sets global flag by default
-set noswapfile                      "  doesn't create a swap file
 set cursorline                      "  adds a line for the cursor
 set winheight=5
 set winminheight=5
