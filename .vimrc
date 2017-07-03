@@ -23,31 +23,39 @@ set pastetoggle=<f6>                "  Toggle paste mode
 set nopaste                         "  disable it by default
 set mouse=                          "  Disable mouse imput
 
+
 if exists('$SUDO_USER')
-  set nobackup                         " don't create root-owned files
-  set nowritebackup                    " don't create root-owned files
+	set nobackup                          " don't create root-owned files
+	set nowritebackup                     " don't create root-owned files
 else
-  set backupdir=~/.vim/tmp/backup//    " keep backup files out of the way
-  set backupdir+=.
-  set backupskip=/tmp/*,/private/tmp/*
-  set backup                           " Create a backup
-  set writebackup
+	set backupdir=~/.vim/tmp/backup//     " keep backup files out of the way
+	set backupdir+=.
+	set backupskip=/tmp/*,/private/tmp/*
+	set backup                            " Create a backup
+	set writebackup
 endif
 if has('persistent_undo')
-  if exists('$SUDO_USER')
-    set noundofile                     " don't create root-owned files
-  else
-    set undodir=~/.vim/tmp/undo//      " keep undo files out of the way
-    set undodir+=.
-    set undofile                       " actually use undo files
-  endif
+	if exists('$SUDO_USER')
+		set noundofile                    " don't create root-owned files
+	else
+		set undodir=~/.vim/tmp/undo//     " keep undo files out of the way
+		set undodir+=.
+		set undofile                      " actually use undo files
+	endif
 endif
 if exists('$SUDO_USER')
-  set noswapfile                       " don't create root-owned files
+	set noswapfile                        " don't create root-owned files
 else
-  set directory=~/.vim/tmp/swap//      " keep swap files out of the way
-  set directory+=.
-  set swapfile                         " Create swap files in case system crashes
+	set directory=~/.vim/tmp/swap//       " keep swap files out of the way
+	set directory+=.
+	set swapfile                          " Create swap files in case system crashes
+endif
+if has('viminfo')
+	if exists('$SUDO_USER')
+		set viminfo=                      " don't create root-owned files
+	else
+		set viminfo+=n~/.vim/tmp/viminfo  " override ~/.viminfo default, remembers all command mode history
+	endif
 endif
 
 " Flags
@@ -288,7 +296,10 @@ nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " FORMATTING SETTINGS
 " {{{
-set fo=vt                      " Set the format options ('formatoptions')
+set formatoptions+=v
+set formatoptions+=t
+set formatoptions+=j                " remove comment leader when joining comment lines
+set formatoptions+=n                  " smart auto-indenting inside numbered lists
 set nojoinspaces               " :h joinspaces
 set backspace=indent,eol,start " Backspace over everything in insert mode
 set autoindent                 " Copy indent from current line, over to the new line
