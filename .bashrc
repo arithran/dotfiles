@@ -17,7 +17,7 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias vim='nvim'
+alias vim='vim'
 
 # Fuzzy Search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

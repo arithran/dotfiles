@@ -179,6 +179,7 @@ Plug 'mustache/vim-mustache-handlebars'                                 "  musta
 
 
 " Fun Random plug-ins
+Plug 'johngrib/vim-game-code-break'
 Plug 'vim-scripts/dbext.vim'                                            "  Database Editor
 " Plug 'ashisha/image.vim'                                              "  Let's you open (preview) images in Vim
 " Plug 'malithsen/trello-vim'                                           "  A barebone vim plugin to fetch user assigned cards from Trello
