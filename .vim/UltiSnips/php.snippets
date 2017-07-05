@@ -22,7 +22,7 @@ var_dump($${1:var});die;
 endsnippet
 
 snippet debug "print_r with a die"
-echo '<pre>'.__LINE__.__FILE__;var_dump($${1:var});die;
+echo '<pre>'.__LINE__.__FILE__.PHP_EOL;var_dump($${1:var});die;
 endsnippet
 
 snippet mdbug "Debug Magento Code"

@@ -75,13 +75,20 @@ set incsearch
 set smartcase
 set wildmenu                        "  shows suggestions when tabing in normal mode
 set scrolloff=5                     "  adds 5 lines to the top and bottom of the window
-set laststatus=2                    "  adding the status line to the editor
 
 set splitbelow                      "  Open new split panes to right and bottom,
 set splitright                      "  which feels more natural
 " set clipboard=unnamedplus         "  sets the system clipboard as default
 set complete=.,w,b,u,t,k            "  context-sensitive completion
 let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
+" set guifont=Source\ Code\ Pro\ Light:h13
+set hidden                            " allows you to hide buffers with unsaved changes without being prompted
+" set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
+set highlight+=N:DiffText             " make current line number stand out a little
+" set highlight+=c:LineNr               " blend vertical separators with line numbers
+set laststatus=2                      " always show status line
+set lazyredraw                        " don't bother updating screen during macro playback (better performance)
+
 
 " }}}
 
@@ -316,6 +323,12 @@ if has('linebreak')
 endi
 
 set listchars=tab:▸\ ,eol:¬ " pretify :set list
+" set listchars=nbsp:⦸                  " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+" set listchars+=tab:▸\                 " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
+"                                       " + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+" set listchars+=extends:»              " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+" set listchars+=precedes:«             " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+" set listchars+=trail:•                " BULLET (U+2022, UTF-8: E2 80 A2)
 
 set noexpandtab " Make sure that every file uses real tabs, not spaces
 let s:tabwidth=4 " Set the tab width
@@ -582,6 +595,7 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 
 " let g:airline#extensions#branch#use_vcscommand = 1
 " Install Font and set the terminal to the same font cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
+
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
 let g:airline#extensions#obsession#indicator_text = ''
