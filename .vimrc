@@ -61,7 +61,8 @@ endif
 " Flags
 " =====
 set spell                           "  turn on spell checker
-set showcmd                         "  see partial commands as you type them
+set spellcapcheck=                  "  When a lower case word is added to the dictionary, use it case insensitively 
+set showcmd                         " extra info at end of command line
 set spelllang=en_gb                 "  spelling GB
 set gdefault                        "  sets global flag by default
 set cursorline                      "  adds a line for the cursor
@@ -74,10 +75,28 @@ set ignorecase
 set incsearch
 set smartcase
 set wildmenu                        "  shows suggestions when tabing in normal mode
-set scrolloff=5                     "  adds 5 lines to the top and bottom of the window
+set scrolloff=3                     " start scrolling 3 lines before edge of viewport
+set sidescrolloff=3                   " same as scolloff, but for columns
+
+set shortmess+=A                      " ignore annoying swapfile messages
+set shortmess+=I                      " no splash screen
+" set shortmess+=O                      " file-read message overwrites previous
+set shortmess+=T                      " truncate non-file messages in middle
+set shortmess+=a                      " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=o                      " overwrite file-written messages
+" set shortmess+=t                      " truncate file messages at start
+
 
 set splitbelow                      "  Open new split panes to right and bottom,
 set splitright                      "  which feels more natural
+set switchbuf=usetab                  " try to reuse windows/tabs when switching buffers
+" if has('termguicolors')
+"   set termguicolors                   " use guifg/guibg instead of ctermfg/ctermbg in terminal
+" endif
+if has('virtualedit')
+  set virtualedit=block               " allow cursor to move where there is no text in visual block mode
+endif
+
 " set clipboard=unnamedplus         "  sets the system clipboard as default
 set complete=.,w,b,u,t,k            "  context-sensitive completion
 let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
@@ -306,13 +325,13 @@ nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 " {{{
 set formatoptions+=v
 set formatoptions+=t
-set formatoptions+=j                " remove comment leader when joining comment lines
-set formatoptions+=n                  " smart auto-indenting inside numbered lists
-set nojoinspaces               " :h joinspaces
-set backspace=indent,eol,start " Backspace over everything in insert mode
-set autoindent                 " Copy indent from current line, over to the new line
-set smartindent                " Do smart indenting when starting a new line
-set shiftround                 " Round indent to multiple of 'shiftwidth'
+set formatoptions+=j            " remove comment leader when joining comment lines
+set formatoptions+=n            " smart auto-indenting inside numbered lists
+set nojoinspaces                " don't autoinsert two spaces after '.', '?', '!' for join command
+set backspace=indent,eol,start  " Backspace over everything in insert mode
+set autoindent                  " Copy indent from current line, over to the new line
+set smartindent                 " Do smart indenting when starting a new line
+set shiftround                  " Round indent to multiple of 'shiftwidth'
 
 if has('linebreak')
 	set linebreak                       " wrap long lines at characters in 'breakat'

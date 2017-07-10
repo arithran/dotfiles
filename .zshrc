@@ -70,6 +70,20 @@ else
   export EDITOR='vim'
 fi
 
+
+Make CTRL-Z background things and unbackground them
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
