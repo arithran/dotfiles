@@ -273,7 +273,7 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " Configure PDV .aka PHP Doc
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip" " PHP Doc Template location
+let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
 " Key Binding for PHP Doc (Requires UltiSnips)
 autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
 
