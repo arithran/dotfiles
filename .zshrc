@@ -71,7 +71,7 @@ else
 fi
 
 
-Make CTRL-Z background things and unbackground them
+# Make CTRL-Z background things and unbackground them
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
