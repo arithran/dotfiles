@@ -332,6 +332,8 @@ set backspace=indent,eol,start  " Backspace over everything in insert mode
 set autoindent                  " Copy indent from current line, over to the new line
 set smartindent                 " Do smart indenting when starting a new line
 set shiftround                  " Round indent to multiple of 'shiftwidth'
+set whichwrap=b,h,l,s,<,>,[,],~       " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+
 
 if has('linebreak')
 	set linebreak                       " wrap long lines at characters in 'breakat'
@@ -554,7 +556,9 @@ iabbrev </ </<C-X><C-O> " auto complete tags
 " ]z move to end of open fold.
 
 set foldmethod=manual
-set foldlevelstart=1
+set foldlevelstart=1  " Set it to 1 tmp
+" set foldlevelstart=99               " start unfolded
+
 set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -635,6 +639,7 @@ set t_ZR=[23m
 highlight Comment cterm=italic 
 " Make Background transparent
 highlight Normal ctermbg=none 
+
 
 " }}}
 
