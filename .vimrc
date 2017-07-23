@@ -100,6 +100,7 @@ endif
 " set clipboard=unnamedplus         "  sets the system clipboard as default
 set complete=.,w,b,u,t,k            "  context-sensitive completion
 let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
+let g:session_autoload = 'no'		"  Don't prompt to load a session
 " set guifont=Source\ Code\ Pro\ Light:h13
 set hidden                            " allows you to hide buffers with unsaved changes without being prompted
 " set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
