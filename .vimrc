@@ -154,6 +154,7 @@ Plug 'airblade/vim-gitgutter'                                           "  Shows
 Plug 'mileszs/ack.vim'                                                  "  Search tool from Vim
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}         "  Fuzzy Finder
 Plug 'junegunn/fzf.vim'
+Plug 'shawncplus/phpcomplete.vim'                                       " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 Plug 'Valloric/YouCompleteMe'                                           "  A code-completion engine for Vim
 Plug 'SirVer/ultisnips'                                                 "  Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                               "  3rd party snippets for ultisnips
