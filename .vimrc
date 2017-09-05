@@ -184,6 +184,7 @@ Plug 'arithran/vim-delete-hidden-buffers'                               "  Remov
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'                                                   "  Create a Gist file
 Plug 'wincent/terminus'                                                 "  Auto-reload file, better mouse and paste support
+Plug 'chrisbra/Recover.vim'                                             "  Show differences for recovered files
 
 
 Plug 'tpope/vim-pathogen'
