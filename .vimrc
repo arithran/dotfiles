@@ -612,6 +612,8 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 syntax enable " Enable syntax highlighting
 set background=dark " Set the background to dark
 colorscheme solarized " Set theme
+let g:solarized_diffmode="high"
+
 
 " Configure Airline
 let g:airline_theme='solarized'
