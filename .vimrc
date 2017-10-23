@@ -64,6 +64,7 @@ set spell                           "  turn on spell checker
 set spellcapcheck=                  "  When a lower case word is added to the dictionary, use it case insensitively 
 set showcmd                         " extra info at end of command line
 set spelllang=en_gb                 "  spelling GB
+set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 set gdefault                        "  sets global flag by default
 set cursorline                      "  adds a line for the cursor
 set winheight=5
