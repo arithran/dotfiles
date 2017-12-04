@@ -182,6 +182,7 @@ Plug 'tomtom/tcomment_vim'                                              "  Code 
 Plug 'easymotion/vim-easymotion'                                        "  Vim motions on speed!
 Plug 'terryma/vim-multiple-cursors'                                     "  Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers'                               "  Remove hidden buffers
+Plug 'arithran/vim-pizza'                                               " Order Pizza
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'                                                   "  Create a Gist file
 Plug 'wincent/terminus'                                                 "  Auto-reload file, better mouse and paste support
@@ -275,6 +276,9 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+" Configure default pizza website
+" let g:vim_pizza_url ='https://www.dominos.com/en/pages/order/'
 
 " Configure PDV .aka PHP Doc
 let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
