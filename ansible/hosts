@@ -1,0 +1,10 @@
+# [Host]
+# 192.168.10.10
+
+[homestead:vars]
+ansible_connection=ssh 
+ansible_ssh_user=vagrant 
+
+[homestead]
+192.168.10.10
+

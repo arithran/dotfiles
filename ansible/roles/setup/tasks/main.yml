@@ -1,0 +1,10 @@
+- name: "Installing VIM"
+  apt: pkg=vim state=installed
+
+- name: "Installing XCLIP"
+  apt: pkg=xclip state=installed
+
+- name: "Changing Shell to ZSH"
+  shell: chsh -s $(grep /zsh$ /etc/shells | tail -1)
+  become: true
+
