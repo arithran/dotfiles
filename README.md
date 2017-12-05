@@ -66,6 +66,7 @@ https://github.com/Valloric/YouCompleteMe#installation
 ./install.sh --clang-completer
 
 4) Install Silver Searcher for FZF
+https://github.com/ggreer/the_silver_searcher#installing
 ```
 dnf install the_silver_searcher
 ```
