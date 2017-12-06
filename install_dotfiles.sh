@@ -1,2 +1,52 @@
-#/bin/bash
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+
+
+
+echo ""
+echo "Installing GIT"
 sudo apt-get install git
+
+echo ""
+echo "Installing VIM"
+sudo apt-get install vim
+
+echo ""
+echo "Installing Tmux"
+sudo apt-get install tmux
+
+echo ""
+echo "Installing Ctags"
+sudo apt-get install exuberant-ctags
+
+echo ""
+echo "Installing Xclip"
+sudo apt-get install xclip
+
+echo ""
+echo "Installing Ag"
+sudo apt-get install silversearcher-ag
+
+echo ""
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+echo ""
+echo "Installing Arithran's Dotfiles"
+echo ""
+if [ -d .git ]; then
+	echo "Repo already Exists"
+else
+	echo "Initialising repo"
+	git init
+	echo "Setting up remote origin"
+	git remote add origin https://github.com/arithran/dotfiles && git config branch.master.remote origin && git config branch.master.merge refs/heads/master 
+fi
+
+echo "Pulling dotfiles"
+git pull
+
+exit
+
