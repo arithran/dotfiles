@@ -1,27 +1,28 @@
 # Dotfiles
 Nothing super crazy going on here, but some sensible neovim and bash configs
 
-# Neovim
-My Vim settings for PHP based Fullstack Web Developoers
+# VIM & TMUX
+My Vim & Tmux settings for Web Developoers
 
 ## Screenshots
 ![alt tag](https://raw.githubusercontent.com/arithran/dotfiles/master/.vim/setup.png)
 
-## Quick Install via Curl if you have the apt-get package manager (Should be
-easy to change it to any package manger YMMV)
+## Quick Install: via Curl if you have the apt package manager 
+(I don't like Ubuntu but had to quickly setup Laravel's Homestead Boxes)
+```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/arithran/dotfiles/master/install_dotfiles.sh)"
-
-
+```
 ## Installation Instructions (Skip if the Quick Install Worked)
-1) Install 
-Neovim (nvim)
-https://github.com/neovim/neovim/wiki/Installing-Neovim#fedora-24-and-older
-OR
-VIM (vimx)
-sudo dnf install vim-X11
+1) Install any version of VIM. 
+I usually switch between Vim and Neovim (Can't really decide after Vim v8). 
+On Fedora I install `vim-X11` and `vim-gnome` on Ubuntu since I like to access the system clipboard 
+
+- Neovim (nvim) : https://github.com/neovim/neovim/wiki/Installing-Neovim#fedora-24-and-older
+- vimx on Fedora: `sudo dnf install vim-X11`
+- vim-gnome on Ubunto: `sudo apt-get install vim-gnome`
 
 ### Plugin Support (for Neovim)
-1. Python SUpport for bot Python 2 and 3 plug-ins to work
+1. Python Support for both Python 2 and 3 plug-ins to work
 ```
 sudo pip2 install --upgrade neovim
 sudo pip3 install --upgrade neovim
