@@ -1,0 +1,9 @@
+- name: setup-dotfiles
+  become: false
+  shell: git remote add origin https://github.com/arithran/dotfiles && git config branch.master.remote origin && git config branch.master.merge refs/heads/master 
+  notify:
+  - update-dotfiles
+
+- name: update-dotfiles
+  become: false
+  shell: git pull

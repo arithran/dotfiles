@@ -1,10 +1,29 @@
+- name: "Installing Git"
+  apt: pkg=git state=installed
+
 - name: "Installing VIM"
   apt: pkg=vim state=installed
+
+- name: "Installing Tmux"
+  apt: pkg=tmux state=installed
+
+- name: "Installing Ctags"
+  apt: pkg=exuberant-ctags state=installed
 
 - name: "Installing XCLIP"
   apt: pkg=xclip state=installed
 
-- name: "Changing Shell to ZSH"
-  shell: chsh -s $(grep /zsh$ /etc/shells | tail -1)
-  become: true
+- name: "Installing Ag"
+  apt: pkg=silversearcher-ag state=installed
+
+- name: "Installing ZSH"
+  become: false
+  shell: sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+- name: "Installing Arithran's Dotfiles"
+  become: false
+  shell: git init
+  notify:
+  - setup-dotfiles
+
 
