@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# Created this script to setup Laravel's Homestead box
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
