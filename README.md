@@ -5,10 +5,14 @@ Nothing super crazy going on here, but some sensible neovim and bash configs
 My Vim settings for PHP based Fullstack Web Developoers
 
 ## Screenshots
-![alt tag](https://raw.githubusercontent.com/arithran/dotfiles/master/.config/nvim/Screenshots/neovim-setup.png)
+![alt tag](https://raw.githubusercontent.com/arithran/dotfiles/master/.vim/setup.png)
+
+## Quick Install via Curl if you have the apt-get package manager (Should be
+easy to change it to any package manger YMMV)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/arithran/dotfiles/master/install_dotfiles.sh)"
 
 
-## Installation Instructions
+## Installation Instructions (Skip if the Quick Install Worked)
 1) Install 
 Neovim (nvim)
 https://github.com/neovim/neovim/wiki/Installing-Neovim#fedora-24-and-older

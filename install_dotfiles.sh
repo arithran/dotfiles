@@ -14,6 +14,7 @@ sudo apt-get install git
 echo ""
 echo "Installing VIM"
 sudo apt-get install vim
+# sudo apt-get install vim-gnome #Optional If you wan't +xterm_clipboard support
 
 echo ""
 echo "Installing Tmux"
