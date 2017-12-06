@@ -1,62 +1,59 @@
 #!/bin/bash
 
-
 # Created this script to setup Laravel's Homestead box
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
 
-echo ""
-echo "Adding VIM8 Repo and Updating Cache"
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
+the_ppa="jonathonf/vim"
+if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+	printf "\nAdding VIM8 Repo and Updating Cache"
+	sudo add-apt-repository ppa:jonathonf/vim
+	sudo apt update
+else
+	printf "\nVIM8 PPA Already added"
+fi
 
-echo ""
-echo "Installing VIM"
+printf "\nInstalling VIM"
+# printf "\nInstalling VIM"
+# echo -e "Normal \e[7minverted \e[27m"
+#
+# exit
+
 sudo apt-get install vim
 # sudo apt-get install vim-gnome #Optional If you wan't +xterm_clipboard support
 
-echo ""
-echo "Installing GIT"
+printf "\nInstalling GIT"
 sudo apt-get install git
 
-
-
-echo ""
-echo "Installing Ctags"
+printf "\nInstalling Ctags"
 sudo apt-get install exuberant-ctags
 
-echo ""
-echo "Installing Xclip"
+printf "\nInstalling Xclip"
 sudo apt-get install xclip
 
-echo ""
-echo "Installing Ag"
+printf "\nInstalling Ag"
 sudo apt-get install silversearcher-ag
 
-echo ""
-echo "Installing oh-my-zsh"
+printf "\nInstalling oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-echo ""
-echo "Installing Tmux"
+printf "\nInstalling Tmux"
 sudo apt-get install tmux
-echo "Installing Tmux Plugin Manager (TPM)"
+printf "\nInstalling Tmux Plugin Manager (TPM)"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-echo ""
-echo "Installing Arithran's Dotfiles"
-echo ""
+printf "\nInstalling Arithran's Dotfiles"
 if [ -d .git ]; then
-	echo "Repo already Exists"
+	printf "\nRepo already Exists"
 else
-	echo "Initialising repo"
+	printf "\nInitialising repo"
 	git init
-	echo "Setting up remote origin"
+	printf "\nSetting up remote origin"
 	git remote add origin https://github.com/arithran/dotfiles && git config branch.master.remote origin && git config branch.master.merge refs/heads/master 
 fi
 
-echo "Pulling dotfiles"
+printf "\nPulling dotfiles"
 git pull
 
 exit
