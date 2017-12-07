@@ -112,6 +112,8 @@ g++ error:/usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
 ```
 sudo dnf install redhat-rpm-config
 ```
+## License
+Licensed under the [MIT License](LICENSE.md).
 
 # Help Setting up similar repos
 https://www.foraker.com/blog/get-your-dotfiles-under-control
