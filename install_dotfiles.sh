@@ -5,62 +5,83 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
 
-the_ppa="jonathonf/vim"
-if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-	printf "\nAdding VIM8 Repo and Updating Cache"
-	sudo add-apt-repository ppa:jonathonf/vim
-	sudo apt update
-else
-	printf "\nVIM8 PPA Already added"
-fi
+main() {
+	install_vim
+	install_utility_software
+	install_zsh
+	instal_tmux
+	install_dotfiles
+	install_vim_plugins
+}
 
-printf "\nInstalling VIM"
-# printf "\nInstalling VIM"
-# echo -e "Normal \e[7minverted \e[27m"
-#
-# exit
+install_vim() {
+	echo_title "Installing VIM"
+	the_ppa="jonathonf/vim"
+	if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+		echo "Adding VIM8 Repo and Updating Cache"
+		sudo add-apt-repository ppa:jonathonf/vim
+		sudo apt update
+	else
+		echo "VIM8 PPA Already added"
+	fi
 
-sudo apt-get install vim
-# sudo apt-get install vim-gnome #Optional If you wan't +xterm_clipboard support
+	echo 'Installing Vim Package'
+	sudo apt-get install vim
+	# sudo apt-get install vim-gnome #Optional If you wan't +xterm_clipboard support
+}
+install_vim_plugins() {
+	echo_title "Installing Vim Plugins"
+	vim +PlugInstall +qall
+	echo 'Finished'
+}
+install_utility_software() {
+	echo_title "Installing GIT"
+	sudo apt-get install git
 
-printf "\nInstalling GIT"
-sudo apt-get install git
+	echo_title "Installing Ctags"
+	sudo apt-get install exuberant-ctags
 
-printf "\nInstalling Ctags"
-sudo apt-get install exuberant-ctags
+	echo_title "Installing Xclip"
+	sudo apt-get install xclip
 
-printf "\nInstalling Xclip"
-sudo apt-get install xclip
+	echo_title "Installing Ag"
+	sudo apt-get install silversearcher-ag
+}
+install_zsh() {
+	echo_title "Installing oh-my-zsh"
+	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-printf "\nInstalling Ag"
-sudo apt-get install silversearcher-ag
+	echo_title "Updating Shell to ZSH"
+	chsh -s /bin/zsh
+}
+instal_tmux() {
+	echo_title "Installing Tmux"
+	sudo apt-get install tmux
+	echo_title "Installing Tmux Plugin Manager (TPM)"
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-printf "\nInstalling oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	echo_title "Installing Tmux Plugins"
+	~/.tmux/plugins/tpm/bin/install_plugins
+}
+install_dotfiles() {
+	echo_title "Installing Arithran's Dotfiles"
+	if [ -d .git ]; then
+		echo "Repo already Exists"
+	else
+		echo "Initialising repo"
+		git init
+		echo_title "Setting up remote origin"
+		git remote add origin https://github.com/arithran/dotfiles && git config branch.master.remote origin && git config branch.master.merge refs/heads/master 
+	fi
 
-printf "\nUpdating Shell to ZSH"
-chsh -s /bin/zsh
+	echo "Pulling dotfiles"
+	git pull
+}
 
-printf "\nInstalling Tmux"
-sudo apt-get install tmux
-printf "\nInstalling Tmux Plugin Manager (TPM)"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+echo_title() {
+	echo -e "\n\e[7m    $1     \e[27m"
+}
 
-printf "\nInstalling Arithran's Dotfiles"
-if [ -d .git ]; then
-	printf "\nRepo already Exists"
-else
-	printf "\nInitialising repo"
-	git init
-	printf "\nSetting up remote origin"
-	git remote add origin https://github.com/arithran/dotfiles && git config branch.master.remote origin && git config branch.master.merge refs/heads/master 
-fi
-
-printf "\nPulling dotfiles"
-git pull
-
-printf "\nInstalling Vim Plugins"
-vim +PlugInstall +qall
-
-exit
+main
+exit 0
 
