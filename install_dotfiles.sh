@@ -38,6 +38,9 @@ sudo apt-get install silversearcher-ag
 printf "\nInstalling oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+printf "\nUpdating Shell to ZSH"
+chsh -s /bin/zsh
+
 printf "\nInstalling Tmux"
 sudo apt-get install tmux
 printf "\nInstalling Tmux Plugin Manager (TPM)"
@@ -55,6 +58,9 @@ fi
 
 printf "\nPulling dotfiles"
 git pull
+
+printf "\nInstalling Vim Plugins"
+vim +PlugInstall +qall
 
 exit
 
