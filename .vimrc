@@ -175,7 +175,7 @@ Plug 'vim-airline/vim-airline'                                          "  Statu
 Plug 'vim-airline/vim-airline-themes'                                   "  Themes for status line, g:airline_theme
 Plug 'edkolev/tmuxline.vim'                                             "  Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons'                                           "  Adds custom icons to airline, NERDTree etc.
-Plug 'ryanoasis/nerd-fonts'                                             "  Gives you patched fonts to be used
+" Plug 'ryanoasis/nerd-fonts'                                             "  Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized'                                 "  Current Theme
 Plug 'tpope/vim-surround'                                               "  Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim'                                              "  Code commenter
