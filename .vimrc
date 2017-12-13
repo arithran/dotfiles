@@ -108,7 +108,7 @@ set hidden                            " allows you to hide buffers with unsaved 
 set highlight+=N:DiffText             " make current line number stand out a little
 " set highlight+=c:LineNr               " blend vertical separators with line numbers
 set laststatus=2                      " always show status line
-set lazyredraw                        " don't bother updating screen during macro playback (better performance)
+" set lazyredraw                        " don't bother updating screen during macro playback (better performance)
 
 
 " }}}
