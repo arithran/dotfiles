@@ -1,5 +1,16 @@
 #!/bin/bash
 
+cat << "EOF"
+
+ █████╗ ██████╗ ██╗█ ███████╗    ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
+██╔══██╗██╔══██╗██║  ██╔════╝    ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
+███████║██████╔╝██║  ███████╗    ██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
+██╔══██║██╔══██╗██║  ╚════██║    ██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
+██║  ██║██║  ██║██║  ███████║    ██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝    ╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
+EOF
+# http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Ari's%20Dotfiles%0A
+                                                                                            
 # Created this script to setup Laravel's Homestead box
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
@@ -57,11 +68,15 @@ install_zsh() {
 instal_tmux() {
 	echo_title "Installing Tmux"
 	sudo apt-get install tmux
-	echo_title "Installing Tmux Plugin Manager (TPM)"
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+	if ["! -d ~/.tmux/plugins/tpm"]; then
+		echo_title "Installing Tmux Plugin Manager (TPM)"
+		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	fi
 
 	echo_title "Installing Tmux Plugins"
 	~/.tmux/plugins/tpm/bin/install_plugins
+
 }
 install_dotfiles() {
 	echo_title "Installing Arithran's Dotfiles"
