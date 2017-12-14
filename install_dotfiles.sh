@@ -30,15 +30,15 @@ install_vim() {
 	the_ppa="jonathonf/vim"
 	if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 		echo "Adding VIM8 Repo and Updating Cache"
-		sudo add-apt-repository ppa:jonathonf/vim
+		sudo add-apt-repository -y ppa:jonathonf/vim
 		sudo apt update
 	else
 		echo "VIM8 PPA Already added"
 	fi
 
 	echo 'Installing Vim Package'
-	sudo apt-get install vim
-	# sudo apt-get install vim-gnome #Optional If you wan't +xterm_clipboard support
+	sudo apt-get -y install vim
+	# sudo apt-get -y install vim-gnome #Optional If you wan't +xterm_clipboard support
 }
 install_vim_plugins() {
 	echo_title "Installing Vim Plugins"
@@ -47,16 +47,16 @@ install_vim_plugins() {
 }
 install_utility_software() {
 	echo_title "Installing GIT"
-	sudo apt-get install git
+	sudo apt-get -y install git
 
 	echo_title "Installing Ctags"
-	sudo apt-get install exuberant-ctags
+	sudo apt-get -y install exuberant-ctags
 
 	echo_title "Installing Xclip"
-	sudo apt-get install xclip
+	sudo apt-get -y install xclip
 
 	echo_title "Installing Ag"
-	sudo apt-get install silversearcher-ag
+	sudo apt-get -y install silversearcher-ag
 }
 install_zsh() {
 	echo_title "Installing oh-my-zsh"
@@ -67,7 +67,7 @@ install_zsh() {
 }
 instal_tmux() {
 	echo_title "Installing Tmux"
-	sudo apt-get install tmux
+	sudo apt-get -y install tmux
 
 	if ["! -d ~/.tmux/plugins/tpm"]; then
 		echo_title "Installing Tmux Plugin Manager (TPM)"
