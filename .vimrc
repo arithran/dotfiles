@@ -74,6 +74,7 @@ set number
 set relativenumber
 set ignorecase
 set incsearch
+set hlsearch
 set smartcase
 set wildmenu                        "  shows suggestions when tabing in normal mode
 set scrolloff=3                     " start scrolling 3 lines before edge of viewport
