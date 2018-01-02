@@ -59,6 +59,9 @@ install_utility_software() {
 	sudo apt-get -y install silversearcher-ag
 }
 install_zsh() {
+	echo_title "Installing ZSH"
+	sudo apt-get -y install zsh
+
 	echo_title "Installing oh-my-zsh"
 	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
