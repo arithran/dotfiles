@@ -191,15 +191,9 @@ Plug 'chrisbra/Recover.vim'                                             "  Show 
 
 
 Plug 'tpope/vim-pathogen'
-" Plug 'StanAngeloff/php.vim'                                           "  @TODO check if you still need this
 Plug 'tmhedberg/matchit'
-
 Plug 'jlanzarotta/bufexplorer'
-"  Session Management for VIM
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'tpope/vim-obsession'
-
+Plug 'tpope/vim-obsession'                                              "  Session Management for VIM
 Plug 'mustache/vim-mustache-handlebars'                                 "  mustache and handlebars mode for vim
 
 
