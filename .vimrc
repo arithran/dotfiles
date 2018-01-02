@@ -137,6 +137,7 @@ call plug#begin('~/.vim/plugged')
 " Syntax
 Plug 'othree/html5.vim'                                                 "  HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
 Plug 'othree/yajs.vim'                                                  "  Yet Another JavaScript Syntax file for Vim [NEW]
+Plug 'posva/vim-vue'                                                    "  Vim syntax highlighting for Vue components.
 Plug 'heavenshell/vim-jsdoc'                                            "  JavaScript JS Documentor
 Plug 'elzr/vim-json', { 'for': 'json' }                                 "  Distinct highlighting of keywords vs values, JSON-specific
 Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
@@ -147,7 +148,6 @@ Plug 'gregsexton/MatchTag'                                              "  Highl
 Plug 'neomake/neomake'                                                  "  Run code linters and compilers from within Vim
 Plug 'sbdchd/neoformat'                                                 "  Format code
 Plug 'groenewege/vim-less'                                              "  Less CSS syntax
-Plug 'posva/vim-vue'                                                    "  Vue.js components
 
 " Workflow
 Plug 'tpope/vim-fugitive'                                               "  A Git wrapper so awesome, it should be illegal
