@@ -147,6 +147,7 @@ Plug 'gregsexton/MatchTag'                                              "  Highl
 Plug 'neomake/neomake'                                                  "  Run code linters and compilers from within Vim
 Plug 'sbdchd/neoformat'                                                 "  Format code
 Plug 'groenewege/vim-less'                                              "  Less CSS syntax
+Plug 'posva/vim-vue'                                                    "  Vue.js components
 
 " Workflow
 Plug 'tpope/vim-fugitive'                                               "  A Git wrapper so awesome, it should be illegal
