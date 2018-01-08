@@ -97,7 +97,9 @@ install_dotfiles() {
 }
 
 echo_title() {
-	echo -e "\n\e[7m    $1     \e[27m"
+	# echo -e "\n\e[7m    $1     \e[27m"
+	# echo -e "\n\n<<<<<           $1           >>>>>"
+	echo -e "\n\n<============$1=============>"
 }
 
 main
