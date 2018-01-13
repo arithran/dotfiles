@@ -103,7 +103,15 @@ endif
 set complete=.,w,b,u,t,k            "  context-sensitive completion
 let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
 let g:session_autoload = 'no'		"  Don't prompt to load a session
-" set guifont=Source\ Code\ Pro\ Light:h13
+
+if has("gui_running")
+	" set guifont=SauseCodePro\ NF\ Medium\ 9
+	set guifont=SauceCodePro\ NF:h9
+	set guioptions-=m  "remove menu bar
+	set guioptions-=T  "remove toolbar
+	set guioptions-=r  "remove right-hand scroll bar
+	set guioptions-=L  "remove left-hand scroll bar
+endif
 set hidden                            " allows you to hide buffers with unsaved changes without being prompted
 " set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
 set highlight+=N:DiffText             " make current line number stand out a little
