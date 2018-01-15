@@ -119,6 +119,9 @@ set highlight+=N:DiffText             " make current line number stand out a lit
 set laststatus=2                      " always show status line
 " set lazyredraw                        " don't bother updating screen during macro playback (better performance)
 
+if has("win32")
+	let g:ruby_path = 'C:\Ruby25-x64\bin'
+endif
 
 " }}}
 
@@ -126,15 +129,19 @@ set laststatus=2                      " always show status line
 " {{{
 "
 " Automatically download package manager if it doesn't exist
-" For Neovim
-if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
-	echo "Downloading package manager"
-	call system(expand("curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
-endif
-" For Vim
-if !filereadable(expand("~/.vim/autoload/plug.vim"))
-	echo "Downloading package manager"
-	call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
+if has("win32")
+	"@TODO Windows options here
+else
+	" For Neovim
+	if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
+		echo "Downloading package manager"
+		call system(expand("curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
+	endif
+	" For Vim
+	if !filereadable(expand("~/.vim/autoload/plug.vim"))
+		echo "Downloading package manager"
+		call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
+	endif
 endif
 
 
@@ -144,71 +151,77 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Syntax
-Plug 'othree/html5.vim'                                                 "  HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
-Plug 'othree/yajs.vim'                                                  "  Yet Another JavaScript Syntax file for Vim [NEW]
-Plug 'posva/vim-vue'                                                    "  Vim syntax highlighting for Vue components.
-Plug 'heavenshell/vim-jsdoc'                                            "  JavaScript JS Documentor
-Plug 'elzr/vim-json', { 'for': 'json' }                                 "  Distinct highlighting of keywords vs values, JSON-specific
+Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
+Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
+Plug 'posva/vim-vue'                                                 " Vim syntax highlighting for Vue components.
+Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
+Plug 'elzr/vim-json', { 'for': 'json' }                              " Distinct highlighting of keywords vs values, JSON-specific
 Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
-Plug 'ap/vim-css-color'                                                 "  Colour keyword highlighter for Vim
-Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                      "  Syntax highlighting
-Plug 'godlygeek/tabular'                                                "  Table creator and alignment plug-in
-Plug 'gregsexton/MatchTag'                                              "  Highlights the matching HTML tag
-Plug 'neomake/neomake'                                                  "  Run code linters and compilers from within Vim
-Plug 'sbdchd/neoformat'                                                 "  Format code
-Plug 'groenewege/vim-less'                                              "  Less CSS syntax
+Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
+Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
+Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
+Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
+Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
+Plug 'sbdchd/neoformat'                                              " Format code
+Plug 'groenewege/vim-less'                                           " Less CSS syntax
 
 " Workflow
-Plug 'tpope/vim-fugitive'                                               "  A Git wrapper so awesome, it should be illegal
-Plug 'ludovicchabant/vim-lawrencium'                                    "  Mercurial wrapper
-Plug 'airblade/vim-gitgutter'                                           "  Shows a git diff in the 'gutter'
-Plug 'mileszs/ack.vim'                                                  "  Search tool from Vim
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}         "  Fuzzy Finder
+Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
+Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
+Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
+Plug 'mileszs/ack.vim'                                               " Search tool from Vim
+if has("win32")
+	Plug 'C:\ProgramData\chocolatey\bin'
+else
+	Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}  " Fuzzy Finder
+endif
 Plug 'junegunn/fzf.vim'
-Plug 'shawncplus/phpcomplete.vim'                                       " Improved PHP omni-completion. Based on the default phpcomplete.vim.
-Plug 'Valloric/YouCompleteMe'                                           "  A code-completion engine for Vim
-Plug 'SirVer/ultisnips'                                                 "  Snippet engine (UltiSnips is also a PHP documentor dependancy)
-Plug 'honza/vim-snippets'                                               "  3rd party snippets for ultisnips
-Plug 'ervandew/supertab'                                                "  insert completion needs (:help ins-completion).
-Plug 'tobyS/vmustache'                                                  "  PHP documentor dependancy
-Plug 'tobyS/pdv'                                                        "  PHP documentor
-Plug 'alvan/vim-php-manual'                                             "  PHP Manual Support from Shift+k
-Plug 'scrooloose/nerdtree'                                              "  A tree explorer plugin for vim.
-Plug 'ivalkeen/nerdtree-execute'                                        "  Press 'x' to execute system default application
-Plug 'Xuyuanp/nerdtree-git-plugin'                                      "  NERDTree showing git status flags
-Plug 'itmammoth/doorboy.vim'                                            "  Inserts matching brackets((){}[]) and quotations('`).
-Plug 'tpope/vim-repeat'                                                 "  repeats the last command even if its not native with [.]
-Plug 'sjl/gundo.vim'                                                    "  Visualize your Vim undo tree
-Plug 'christoomey/vim-tmux-navigator'                                   "  Bind Tmux Keys with VIM
-Plug 'majutsushi/tagbar'                                                "  Displays tags in a window, ordered by scope
-Plug 'vim-airline/vim-airline'                                          "  Status line
-Plug 'vim-airline/vim-airline-themes'                                   "  Themes for status line, g:airline_theme
-Plug 'edkolev/tmuxline.vim'                                             "  Generate status line colours for tmux
-Plug 'ryanoasis/vim-devicons'                                           "  Adds custom icons to airline, NERDTree etc.
-" Plug 'ryanoasis/nerd-fonts'                                             "  Gives you patched fonts to be used
-Plug 'altercation/vim-colors-solarized'                                 "  Current Theme
-Plug 'tpope/vim-surround'                                               "  Easily delete and change surroundings
-Plug 'tomtom/tcomment_vim'                                              "  Code commenter
-Plug 'easymotion/vim-easymotion'                                        "  Vim motions on speed!
-Plug 'terryma/vim-multiple-cursors'                                     "  Select multiple cursors
-Plug 'arithran/vim-delete-hidden-buffers'                               "  Remove hidden buffers
-Plug 'arithran/vim-pizza'                                               " Order Pizza
+Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
+Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
+Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
+Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
+Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
+Plug 'tobyS/pdv'                                                     " PHP documentor
+Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
+Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
+Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
+Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
+Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
+Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
+Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
+Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
+Plug 'vim-airline/vim-airline'                                       " Status line
+Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
+Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
+Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
+" Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
+Plug 'altercation/vim-colors-solarized'                              " Current Theme
+Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
+Plug 'tomtom/tcomment_vim'                                           " Code commenter
+Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
+Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
+Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
+Plug 'arithran/vim-pizza'                                            " Order Pizza
 Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'                                                   "  Create a Gist file
-Plug 'wincent/terminus'                                                 "  Auto-reload file, better mouse and paste support
-Plug 'chrisbra/Recover.vim'                                             "  Show differences for recovered files
+Plug 'mattn/gist-vim'                                                " Create a Gist file
+Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
+" Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
+Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
+Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 
 
 Plug 'tpope/vim-pathogen'
 Plug 'tmhedberg/matchit'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'tpope/vim-obsession'                                              "  Session Management for VIM
-Plug 'mustache/vim-mustache-handlebars'                                 "  mustache and handlebars mode for vim
+Plug 'tpope/vim-obsession'                                           " Session Management for VIM
+Plug 'mustache/vim-mustache-handlebars'                              " mustache and handlebars mode for vim
 
 
 " Fun Random plug-ins
-Plug 'johngrib/vim-game-code-break'
-Plug 'vim-scripts/dbext.vim'                                            "  Database Editor
+" Plug 'johngrib/vim-game-code-break'
+" Plug 'vim-scripts/dbext.vim'                                            "  Database Editor
 " Plug 'ashisha/image.vim'                                              "  Let's you open (preview) images in Vim
 " Plug 'malithsen/trello-vim'                                           "  A barebone vim plugin to fetch user assigned cards from Trello
 " Plug 'uguu-org/vim-matrix-screensaver'                                "  vim-matrix-screensaver
@@ -247,8 +260,6 @@ Plug 'vim-scripts/dbext.vim'                                            "  Datab
 " ========
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 " Plug 'ZoomWin'
-" " Git plugin not hosted on GitHub
-" Plug 'git://git.wincent.com/command-t.git'
 
 " Initialize plugin system
 call plug#end()
