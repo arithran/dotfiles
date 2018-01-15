@@ -82,6 +82,7 @@ instal_tmux() {
 
 }
 install_dotfiles() {
+	cd ~
 	echo_title "Installing Arithran's Dotfiles"
 	if [ -d .git ]; then
 		echo "Repo already Exists"
@@ -94,6 +95,7 @@ install_dotfiles() {
 
 	echo "Pulling dotfiles"
 	git pull
+	cd $DIR
 }
 
 echo_title() {
