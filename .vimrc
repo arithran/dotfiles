@@ -28,7 +28,7 @@ if exists('$SUDO_USER')
 	set nobackup                          " don't create root-owned files
 	set nowritebackup                     " don't create root-owned files
 else
-	set backupdir=~/.vim/tmp/backup//     " keep backup files out of the way
+	set backupdir=$HOME/.vim/tmp/backup//     " keep backup files out of the way
 	set backupdir+=.
 	set backupskip=/tmp/*,/private/tmp/*
 	set backup                            " Create a backup
@@ -38,7 +38,7 @@ if has('persistent_undo')
 	if exists('$SUDO_USER')
 		set noundofile                    " don't create root-owned files
 	else
-		set undodir=~/.vim/tmp/undo//     " keep undo files out of the way
+		set undodir=$HOME/.vim/tmp/undo//     " keep undo files out of the way
 		set undodir+=.
 		set undofile                      " actually use undo files
 	endif
@@ -46,7 +46,7 @@ endif
 if exists('$SUDO_USER')
 	set noswapfile                        " don't create root-owned files
 else
-	set directory=~/.vim/tmp/swap//       " keep swap files out of the way
+	set directory=$HOME/.vim/tmp/swap//       " keep swap files out of the way
 	set directory+=.
 	set swapfile                          " Create swap files in case system crashes
 endif
@@ -54,7 +54,7 @@ if has('viminfo')
 	if exists('$SUDO_USER')
 		set viminfo=                      " don't create root-owned files
 	else
-		set viminfo+=n~/.vim/tmp/viminfo  " override ~/.viminfo default, remembers all command mode history
+		set viminfo+=n$HOME/.vim/tmp/viminfo  " override ~/.viminfo default, remembers all command mode history
 	endif
 endif
 
@@ -79,6 +79,7 @@ set smartcase
 set wildmenu                        "  shows suggestions when tabing in normal mode
 set scrolloff=3                     " start scrolling 3 lines before edge of viewport
 set sidescrolloff=3                   " same as scolloff, but for columns
+set nofixendofline                  " Don't add End-Of-line  character at the bottom of a file
 
 set shortmess+=A                      " ignore annoying swapfile messages
 set shortmess+=I                      " no splash screen
@@ -151,73 +152,73 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Syntax
-Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
-Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
-Plug 'posva/vim-vue'                                                 " Vim syntax highlighting for Vue components.
+" Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
+" Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
+Plug 'posva/vim-vue', {'for': 'vue'}                                                 " Vim syntax highlighting for Vue components.
 Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
-Plug 'elzr/vim-json', { 'for': 'json' }                              " Distinct highlighting of keywords vs values, JSON-specific
-Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
-Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
-Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
+" Plug 'elzr/vim-json', { 'for': 'json' }                              " Distinct highlighting of keywords vs values, JSON-specific
+" Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
+" Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
+" Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
-Plug 'sbdchd/neoformat'                                              " Format code
-Plug 'groenewege/vim-less'                                           " Less CSS syntax
+" Plug 'sbdchd/neoformat'                                              " Format code
+" Plug 'groenewege/vim-less'                                           " Less CSS syntax
 
 " Workflow
-Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
-Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
-Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
+" Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
+" Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
+" Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
-if has("win32")
-	Plug 'C:\ProgramData\chocolatey\bin'
-else
-	Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}  " Fuzzy Finder
-endif
-Plug 'junegunn/fzf.vim'
+" if has("win32")
+" 	Plug 'C:\ProgramData\chocolatey\bin'
+" else
+	" Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}  " Fuzzy Finder
+" endif
+" Plug 'junegunn/fzf.vim'
+Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
 Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
-Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+" Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
-Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
-Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
-Plug 'tobyS/pdv'                                                     " PHP documentor
-Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
+" Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
+" Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
+" Plug 'tobyS/pdv'                                                     " PHP documentor
+" Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
-Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
-Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
+" Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
+" Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
-Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
-Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+" Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
+" Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
-Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
+" Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
-" Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
+" " Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized'                              " Current Theme
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim'                                           " Code commenter
 Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
-Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
+" Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
-Plug 'arithran/vim-pizza'                                            " Order Pizza
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'                                                " Create a Gist file
+" Plug 'arithran/vim-pizza'                                            " Order Pizza
+" Plug 'mattn/webapi-vim'
+" Plug 'mattn/gist-vim'                                                " Create a Gist file
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 " Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
-Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
-
-
-Plug 'tpope/vim-pathogen'
-Plug 'tmhedberg/matchit'
-Plug 'jlanzarotta/bufexplorer'
+"
+"
+" Plug 'tpope/vim-pathogen'
+" Plug 'tmhedberg/matchit'
+" Plug 'jlanzarotta/bufexplorer'
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
-Plug 'mustache/vim-mustache-handlebars'                              " mustache and handlebars mode for vim
-
+" Plug 'mustache/vim-mustache-handlebars'                              " mustache and handlebars mode for vim
+"
 
 " Fun Random plug-ins
 " Plug 'johngrib/vim-game-code-break'
@@ -277,8 +278,12 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" Unbind conflicting key, Ctrl+h (@see Plug 'alvan/vim-php-manual')
-let g:php_manual_online_search_shortcut = ''
+" Configure Ctrl+P
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:php_manual_online_search_shortcut = '' " Unbind conflicting key, Ctrl+h (@see Plug 'alvan/vim-php-manual')
 
 " Configure UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -303,6 +308,11 @@ autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
 " Toggle javascript Doc Requires tobyS/pdv plugin
 let g:jsdoc_allow_input_prompt	= 1
 let g:jsdoc_input_description = 1
+let g:jsdoc_allow_shorthand = 1
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_user_defined_tags = {
+\ '@author': 'Arithran Thurairetnam <arithran.thurairetnam@adp.com>',
+\}
 autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 
 " Configure Neomake
@@ -319,6 +329,7 @@ let g:gist_get_multiplefile = 1
 
 " Configure Ack
 nnoremap <Leader>a :Ack!<Space>
+
 
 " NERDTree {{{
 "
@@ -476,16 +487,16 @@ cnoremap sudow w !sudo tee % >/dev/null
 "
 "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%'),
-  \                 <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-" }}}
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#ag(<q-args>,
+"   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \                         : fzf#vim#with_preview('right:50%'),
+"   \                 <bang>0)
+"
+" " Likewise, Files command with preview window
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" " }}}
 
 " LEADER MODE MAPPINGS {{{
 "
@@ -658,8 +669,8 @@ let g:tmuxline_preset = {
 
 " Override the Look and Feel (Must by after colorscheme)
 " Italics start and end key sequences
-set t_ZH=[3m
-set t_ZR=[23m
+" set t_ZH=[3m
+" set t_ZR=[23m
 " Make comments italic
 highlight Comment cterm=italic 
 " Make Background transparent

@@ -106,6 +106,10 @@ sudo dnf install tmux
 sudo dnf install tmux-powerline
 ```
 
+# Windows Installation
+1) Clone the repo to the Documents folder.
+2) Create a hard symlink of the .vimrc and .vim folder
+
 # Troubleshooting
 1) If you get the following error while instaling the Ruby Provider
 g++ error:/usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
@@ -115,5 +119,3 @@ sudo dnf install redhat-rpm-config
 ## License
 Licensed under the [MIT License](LICENSE.md).
 
-# Help Setting up similar repos
-https://www.foraker.com/blog/get-your-dotfiles-under-control
