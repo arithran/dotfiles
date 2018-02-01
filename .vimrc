@@ -7,7 +7,7 @@
 "                                                                                 
 " Author  : Arithran Thurairetnam (aka Ari)
 " Link    : https://github.com/arithran
-" Version : 2.0
+" Version : 3.0
 
 " GENERAL SETTINGS 
 " {{{
@@ -160,13 +160,14 @@ Plug 'heavenshell/vim-jsdoc'                                         " JavaScrip
 " Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
 " Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
-Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
 " Plug 'sbdchd/neoformat'                                              " Format code
 " Plug 'groenewege/vim-less'                                           " Less CSS syntax
 
+
 " Workflow
+Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
 " Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 " Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
 " Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
@@ -179,12 +180,16 @@ Plug 'mileszs/ack.vim'                                               " Search to
 " Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
 Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
-" Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+endif
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
 " Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
-" Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
-" Plug 'tobyS/pdv'                                                     " PHP documentor
+Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
+Plug 'tobyS/pdv'                                                     " PHP documentor
 " Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 " Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
@@ -198,7 +203,7 @@ Plug 'vim-airline/vim-airline'                                       " Status li
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 " Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
-" " Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
+" Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized'                              " Current Theme
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim'                                           " Code commenter
@@ -209,7 +214,7 @@ Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hi
 " Plug 'mattn/webapi-vim'
 " Plug 'mattn/gist-vim'                                                " Create a Gist file
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
-" Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
+Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 "
 "
@@ -269,11 +274,16 @@ call plug#end()
 " PLUGIN SETTINGS
 " {{{
 
-" Configure YCM  and make it compatible with UltiSnips (using supertab)
+" Configure YouCompleteMe (YCM)  and make it compatible with UltiSnips (using supertab)
 " NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
 let g:ymc_server_python_interpreter = '/usr/bin/python'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+" Configure deoplete
+let g:deoplete#enable_at_startup = 1 " Use deoplete.
+let g:python3_host_prog = 'C:\Users\thuraira\AppData\Local\Programs\Python\Python35-32\python.exe'
+
 
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -640,6 +650,11 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 
 " THEME SETTINGS
 " {{{
+
+" @TODO When running inside a terminal
+" Install Font and set the terminal to the same font 
+" cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
+
 syntax enable " Enable syntax highlighting
 set background=dark " Set the background to dark
 colorscheme solarized " Set theme
@@ -654,7 +669,6 @@ let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
 let g:airline#extensions#branch#displayed_head_limit = 10
 
 " let g:airline#extensions#branch#use_vcscommand = 1
-" Install Font and set the terminal to the same font cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
@@ -667,10 +681,12 @@ let g:tmuxline_preset = {
       \'y'    : ['#(whoami)'],
       \'z'    : '#H'}
 
-" Override the Look and Feel (Must by after colorscheme)
-" Italics start and end key sequences
-" set t_ZH=[3m
-" set t_ZR=[23m
+" Override the Look and Feel (Must be after colorscheme)
+if !has('gui_running')
+	" Italics start and end key sequences
+	set t_ZH=[3m
+	set t_ZR=[23m
+endif
 " Make comments italic
 highlight Comment cterm=italic 
 " Make Background transparent
