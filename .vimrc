@@ -12,6 +12,11 @@
 " GENERAL SETTINGS 
 " {{{
 
+" Custom Interpreter Path Names
+let g:python3_interpreter= 'C:\Users\thuraira\AppData\Local\Programs\Python\Python36\python.exe'
+let g:python2_interpreter= 'C:\Python27\python.exe'
+let g:ruby_interpreter= 'C:\Ruby25-x64\bin\ruby.exe'
+
 set nocompatible                    "  be iMproved, required
 set encoding=utf8                   "  Set vim's char encoding
 filetype plugin indent on           "  turn on file-type detection
@@ -64,7 +69,9 @@ set spell                           "  turn on spell checker
 set spellcapcheck=                  "  When a lower case word is added to the dictionary, use it case insensitively 
 set showcmd                         " extra info at end of command line
 set spelllang=en_gb                 "  spelling GB
-set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
+if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add"))
+	set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
+endif
 set gdefault                        "  sets global flag by default
 set cursorline                      "  adds a line for the cursor
 set winheight=5
@@ -115,13 +122,15 @@ if has("gui_running")
 endif
 set hidden                            " allows you to hide buffers with unsaved changes without being prompted
 " set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
-set highlight+=N:DiffText             " make current line number stand out a little
+" set highlight+=N:DiffText             " make current line number stand out a little
 " set highlight+=c:LineNr               " blend vertical separators with line numbers
 set laststatus=2                      " always show status line
 " set lazyredraw                        " don't bother updating screen during macro playback (better performance)
 
 if has("win32")
-	let g:ruby_path = 'C:\Ruby25-x64\bin'
+	let g:ruby_path='C:\Ruby25-x64\bin'
+	let g:ruby_host_prog=g:ruby_interpreter
+
 endif
 
 " }}}
@@ -179,10 +188,11 @@ Plug 'mileszs/ack.vim'                                               " Search to
 " endif
 " Plug 'junegunn/fzf.vim'
 Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
-Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 else
+	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
 endif
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
@@ -276,13 +286,14 @@ call plug#end()
 
 " Configure YouCompleteMe (YCM)  and make it compatible with UltiSnips (using supertab)
 " NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
-let g:ymc_server_python_interpreter = '/usr/bin/python'
+let g:ymc_server_python_interpreter = g:python3_interpreter
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " Configure deoplete
 let g:deoplete#enable_at_startup = 1 " Use deoplete.
-let g:python3_host_prog = 'C:\Users\thuraira\AppData\Local\Programs\Python\Python35-32\python.exe'
+let g:python3_host_prog=g:python3_interpreter
+let g:python_host_prog=g:python2_interpreter
 
 
 " Configure supertab
@@ -560,16 +571,13 @@ autocmd BufRead * normal zz
 " Wrap text for markdown files
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
-" Automatically run these
-" autocmd VimEnter * NERDTree "Automatically Open Nerd Tree
-" autocmd VimEnter * Tagbar "Automatically Open Tagbar
 
 " Make current window more obvious by turning off/adjusting some features in non-current
 " windows.
-if exists('+colorcolumn')
-	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
-	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
-endif
+" if exists('+colorcolumn')
+" 	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
+" 	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
+" endif
 
 " }}}
 
@@ -681,16 +689,16 @@ let g:tmuxline_preset = {
       \'y'    : ['#(whoami)'],
       \'z'    : '#H'}
 
-" Override the Look and Feel (Must be after colorscheme)
-if !has('gui_running')
+if has('unix')
+	" Override the Look and Feel (Must be after colorscheme)
 	" Italics start and end key sequences
 	set t_ZH=[3m
 	set t_ZR=[23m
+	" Make comments italic
+	highlight Comment cterm=italic 
+	" Make Background transparent
+	highlight Normal ctermbg=none 
 endif
-" Make comments italic
-highlight Comment cterm=italic 
-" Make Background transparent
-highlight Normal ctermbg=none 
 
 
 " }}}
@@ -720,7 +728,7 @@ if !exists("*StripTrailingWhitespace") " Strip trailing white spaces
 endif
 if !exists("*StripDosLineEndings") " Strip windows line endings
 	function StripDosLineEndings()
-		:%s/$//
+		:%s/$//
 	endfunction
 endif
 if !exists("*ClearCache") " Clear cahe shell
