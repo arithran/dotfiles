@@ -13,9 +13,15 @@
 " {{{
 
 " Custom Interpreter Path Names
-let g:python3_interpreter= 'C:\Users\thuraira\AppData\Local\Programs\Python\Python36\python.exe'
-let g:python2_interpreter= 'C:\Python27\python.exe'
-let g:ruby_interpreter= 'C:\Ruby25-x64\bin\ruby.exe'
+if has('unix')
+	let g:python3_interpreter= '/usr/bin/python3'
+	let g:python2_interpreter= '/usr/bin/python'
+	let g:ruby_interpreter= '/usr/bin/ruby'
+else
+	let g:python3_interpreter= 'C:\Users\thuraira\AppData\Local\Programs\Python\Python36\python.exe'
+	let g:python2_interpreter= 'C:\Python27\python.exe'
+	let g:ruby_interpreter= 'C:\Ruby25-x64\bin\ruby.exe'
+endif
 
 set nocompatible                    "  be iMproved, required
 set encoding=utf8                   "  Set vim's char encoding
@@ -171,7 +177,7 @@ Plug 'heavenshell/vim-jsdoc'                                         " JavaScrip
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
-" Plug 'sbdchd/neoformat'                                              " Format code
+Plug 'sbdchd/neoformat'                                              " Format code
 " Plug 'groenewege/vim-less'                                           " Less CSS syntax
 
 
@@ -181,13 +187,9 @@ Plug 'godlygeek/tabular'                                             " Table cre
 " Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
 " Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
-" if has("win32")
-" 	Plug 'C:\ProgramData\chocolatey\bin'
-" else
-	" Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}  " Fuzzy Finder
-" endif
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
-Plug 'kien/ctrlp.vim'                                                " Fuzzy finder for Files, Buffers, Tags
+
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
@@ -207,11 +209,11 @@ Plug 'scrooloose/nerdtree'                                           " A tree ex
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
 " Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
-" Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
-" Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
+Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
 " Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized'                              " Current Theme
@@ -261,8 +263,6 @@ Plug 'tpope/vim-obsession'                                           " Session M
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
-" Plug 'Lokaltog/vim-powerline'                                         "  Replaced with airline
-" Plug 'scrooloose/syntastic'                                           "  Replaced with Neomake
 " Plug 'mattn/emmet-vim'                                                "  Pretty much what zen coding does
 " Plug 'itchyny/calendar.vim'                                           "  A calendar application for Vim
 " Plug 'Konfekt/FastFold'
@@ -452,9 +452,6 @@ nnoremap <silent> <Right> :cnfile<CR>
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
-" Toggle Neoformat to format code, @TODO requires formatters: read the docs use:PHP_Beautifier
-noremap <leader>f :Neoformat<CR>
-
 " Toggle easymotion
 map  <Leader>w <Plug>(easymotion-w)
 nmap <Leader>W <Plug>(easymotion-b)
@@ -468,6 +465,10 @@ nnoremap / /\v
 
 " Auto-correct the last spelling mistake
 nnoremap <leader>l :call AutoCorrectLastSpellingMistake()<CR>
+
+" CommandT Mappings
+nnoremap <silent> <leader>f :CommandT<CR>
+nnoremap <silent> <leader>b :CommandTBuffer<CR>
 
 " }}}
 
@@ -678,7 +679,7 @@ let g:airline#extensions#branch#displayed_head_limit = 10
 
 " let g:airline#extensions#branch#use_vcscommand = 1
 
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
 let g:airline#extensions#obsession#indicator_text = ''
 
