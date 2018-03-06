@@ -192,7 +192,8 @@ Plug 'mileszs/ack.vim'                                               " Search to
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+	" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
