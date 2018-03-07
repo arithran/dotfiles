@@ -193,7 +193,6 @@ Plug 'mileszs/ack.vim'                                               " Search to
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
@@ -295,7 +294,6 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:deoplete#enable_at_startup = 1 " Use deoplete.
 let g:python3_host_prog=g:python3_interpreter
 let g:python_host_prog=g:python2_interpreter
-
 
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
