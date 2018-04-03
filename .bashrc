@@ -18,6 +18,8 @@ fi
 
 # User specific aliases and functions
 alias vim='vim'
+alias t="tmux attach || tmux new -s Master"
+
 
 # Fuzzy Search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
