@@ -126,12 +126,12 @@ if has("gui_running")
 	set guioptions-=r  "remove right-hand scroll bar
 	set guioptions-=L  "remove left-hand scroll bar
 endif
+
 set hidden                            " allows you to hide buffers with unsaved changes without being prompted
 " set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
 " set highlight+=N:DiffText             " make current line number stand out a little
 " set highlight+=c:LineNr               " blend vertical separators with line numbers
 set laststatus=2                      " always show status line
-" set lazyredraw                        " don't bother updating screen during macro playback (better performance)
 
 if has("win32")
 	let g:ruby_path='C:\Ruby25-x64\bin'
@@ -167,31 +167,20 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Syntax
-" Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
-" Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
 Plug 'posva/vim-vue', {'for': 'vue'}                                                 " Vim syntax highlighting for Vue components.
 Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
-" Plug 'elzr/vim-json', { 'for': 'json' }                              " Distinct highlighting of keywords vs values, JSON-specific
-" Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
-" Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
-" Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
-Plug 'sbdchd/neoformat'                                              " Format code
-" Plug 'groenewege/vim-less'                                           " Less CSS syntax
 
 
 " Workflow
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
-" Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
-" Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
-" Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'                                            " Fuzzy finder for Files, Buffers, Tags
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'equalsraf/neovim-gui-shim'
 	" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
@@ -199,41 +188,52 @@ else
 endif
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
-" Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
 Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
 Plug 'tobyS/pdv'                                                     " PHP documentor
-" Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
-" Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
-" Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
-" Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
-Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
-Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
-" Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 Plug 'altercation/vim-colors-solarized'                              " Current Theme
+Plug 'lifepillar/vim-solarized8'                              " Current Theme
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tomtom/tcomment_vim'                                           " Code commenter
 Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
-" Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
 Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
-" Plug 'arithran/vim-pizza'                                            " Order Pizza
+Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
+Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
+Plug 'tpope/vim-obsession'                                           " Session Management for VIM
+
+
+" Plug 'sbdchd/neoformat'                                              " Format code
+" Plug 'groenewege/vim-less'                                           " Less CSS syntax
+" Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
+" Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
+" Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
+" Plug 'junegunn/fzf.vim'
+" Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
+" Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
+" Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
+" Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
+" Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
+" Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
+" Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
+" Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
+" Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
+" Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
+" Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
+" Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+" Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
+" Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
+" Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
 " Plug 'mattn/webapi-vim'
 " Plug 'mattn/gist-vim'                                                " Create a Gist file
-Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
-Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
-Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
-"
-"
 " Plug 'tpope/vim-pathogen'
 " Plug 'tmhedberg/matchit'
 " Plug 'jlanzarotta/bufexplorer'
-Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 " Plug 'mustache/vim-mustache-handlebars'                              " mustache and handlebars mode for vim
 "
 
@@ -263,6 +263,8 @@ Plug 'tpope/vim-obsession'                                           " Session M
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
+" Plug 'Lokaltog/vim-powerline'                                         "  Replaced with airline
+" Plug 'scrooloose/syntastic'                                           "  Replaced with Neomake
 " Plug 'mattn/emmet-vim'                                                "  Pretty much what zen coding does
 " Plug 'itchyny/calendar.vim'                                           "  A calendar application for Vim
 " Plug 'Konfekt/FastFold'
@@ -295,10 +297,20 @@ let g:deoplete#enable_at_startup = 1 " Use deoplete.
 let g:python3_host_prog=g:python3_interpreter
 let g:python_host_prog=g:python2_interpreter
 
+
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Configure Ctrl+P
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+
+" Swap Delete Buffer and Toggle By File name bindings
+let g:ctrlp_prompt_mappings = {
+  \ 'ToggleByFname()':      ['<F7>'],
+  \ 'PrtDeleteEnt()':       ['<c-d>'],
+  \ }
+
+
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -451,6 +463,9 @@ nnoremap <silent> <Right> :cnfile<CR>
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
+" Toggle Neoformat to format code, @TODO requires formatters: read the docs use:PHP_Beautifier
+noremap <leader>f :Neoformat<CR>
+
 " Toggle easymotion
 map  <Leader>w <Plug>(easymotion-w)
 nmap <Leader>W <Plug>(easymotion-b)
@@ -464,10 +479,6 @@ nnoremap / /\v
 
 " Auto-correct the last spelling mistake
 nnoremap <leader>l :call AutoCorrectLastSpellingMistake()<CR>
-
-" CommandT Mappings
-nnoremap <silent> <leader>f :CommandT<CR>
-nnoremap <silent> <leader>b :CommandTBuffer<CR>
 
 " }}}
 
