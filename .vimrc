@@ -71,10 +71,10 @@ endif
 
 " Flags
 " =====
-set spell                           "  turn on spell checker
+set nospell                           "  turn on spell checker
 set spellcapcheck=                  "  When a lower case word is added to the dictionary, use it case insensitively 
 set showcmd                         " extra info at end of command line
-set spelllang=en_gb                 "  spelling GB
+set spelllang=en_us                 "  spelling US
 if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add"))
 	set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 endif
@@ -423,6 +423,9 @@ let s:tabwidth=4 " Set the tab width
 exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
+
+" Compound Filetypes
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " #MAPPINGS
@@ -564,7 +567,9 @@ nnoremap <silent> <LocalLeader>c :syntax sync fromstart<CR>
 nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 "Toggle spell checker
-nmap <silent> <leader>s :set spell!<CR>
+nmap <silent> <leader>s :setlocal spell!<CR>
+autocmd InsertEnter * setlocal spell
+autocmd InsertLeave * setlocal nospell
 
 " Toggle commenting Requires T-comment plugin
 map <leader>c <c-_><c-_>
