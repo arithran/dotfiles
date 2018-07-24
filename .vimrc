@@ -1,4 +1,4 @@
-"  █████╗ ██████╗ ██╗█ ███████╗    ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
+"  █████╗ ██████╗ ██╗█ ███████╗    ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗{{{}}}
 " ██╔══██╗██╔══██╗██║  ██╔════╝    ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
 " ███████║██████╔╝██║  ███████╗    ██║   ██║██║██╔████╔██║██████╔╝██║     
 " ██╔══██║██╔══██╗██║  ╚════██║    ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
@@ -9,6 +9,14 @@
 " Link    : https://github.com/arithran
 " Version : 3.0
 
+" *********
+" Checklist
+" *********
+" 1. Make sure python, python3, ruby and php interpreters are executable from CLI
+" 2. Make sure git, fzf, ack and ctags utils are executable from CLI
+" 3. If you are using a terminal make sure you install the solarized
+"    colorscheme and set the correct font
+
 " GENERAL SETTINGS 
 " {{{
 
@@ -16,11 +24,10 @@
 if has('unix')
 	let g:python3_interpreter= '/usr/bin/python3'
 	let g:python2_interpreter= '/usr/bin/python'
-	let g:ruby_interpreter= '/usr/bin/ruby'
 else
 	let g:python3_interpreter= 'C:\Users\thuraira\AppData\Local\Programs\Python\Python36\python.exe'
 	let g:python2_interpreter= 'C:\Python27\python.exe'
-	let g:ruby_interpreter= 'C:\Ruby25-x64\bin\ruby.exe'
+	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
 endif
 
 set nocompatible                    "  be iMproved, required
@@ -133,12 +140,6 @@ set hidden                            " allows you to hide buffers with unsaved 
 " set highlight+=c:LineNr               " blend vertical separators with line numbers
 set laststatus=2                      " always show status line
 
-if has("win32")
-	let g:ruby_path='C:\Ruby25-x64\bin'
-	let g:ruby_host_prog=g:ruby_interpreter
-
-endif
-
 " }}}
 
 " PLUGIN MANAGER 
@@ -179,9 +180,15 @@ Plug 'mileszs/ack.vim'                                               " Search to
 Plug 'ctrlpvim/ctrlp.vim'                                            " Fuzzy finder for Files, Buffers, Tags
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'equalsraf/neovim-gui-shim'
-	" Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+
+	Plug 'roxma/nvim-completion-manager'
+	Plug 'phpactor/phpactor', {'do': 'composer install'}
+	Plug 'roxma/ncm-phpactor'
+
+	" Plug 'Shougo/deoplete.nvim'
+	" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+	" Plug 'kristijanhusak/deoplete-phpactor'
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
@@ -213,7 +220,8 @@ Plug 'tpope/vim-obsession'                                           " Session M
 " Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
 " Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
 " Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
 " Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
@@ -296,6 +304,26 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:deoplete#enable_at_startup = 1 " Use deoplete.
 let g:python3_host_prog=g:python3_interpreter
 let g:python_host_prog=g:python2_interpreter
+
+" phpactor
+let g:phpactorBranch = "develop"
+autocmd FileType php setlocal omnifunc=phpactor#Complete
+
+
+
+
+" don't give |ins-completion-menu| messages.  For example,
+" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
+set shortmess+=c
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
+imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+inoremap <c-c> <ESC>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
+
 
 
 " Configure supertab
@@ -681,8 +709,14 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 
 syntax enable " Enable syntax highlighting
 set background=dark " Set the background to dark
-colorscheme solarized " Set theme
 let g:solarized_diffmode="high"
+
+" Set theme
+if has('unix')
+	colorscheme solarized
+else
+	colorscheme solarized8
+endif
 
 
 " Configure Airline
