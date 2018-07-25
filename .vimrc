@@ -7,154 +7,149 @@
 "                                                                                 
 " Author  : Arithran Thurairetnam (aka Ari)
 " Link    : https://github.com/arithran
-" Version : 3.0
+" Version : 4.0
 
 " *********
 " Checklist
 " *********
-" 1. Make sure python, python3, ruby and php interpreters are executable from CLI
-" 2. Make sure git, fzf, ack and ctags utils are executable from CLI
-" 3. If you are using a terminal make sure you install the solarized
-"    colorscheme and set the correct font
+" 1. Install these interpreters and make sure they are executable from the CLI
+"    - python, 
+"    - python3, 
+"    - ruby 
+"    - php
+"
+" 2. Install these providers: 
+"    - pip install neovim, 
+"    - pip2 install neovim, 
+"    - gem install neovim, 
+"    - npm install -g neovim
+"
+" 3. Install these linters: 
+"    - npm install -g eslint eslint-plugin-vue@next
+"
+" 4. Install these tools and make sure they are executable from the CLI 
+"    - git, 
+"    - fzf, 
+"    - ack 
+"    - ctags 
+"
+" 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font 
+"    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
+
 
 " GENERAL SETTINGS 
 " {{{
 
-" Custom Interpreter Path Names
-if has('unix')
-	let g:python3_interpreter= '/usr/bin/python3'
-	let g:python2_interpreter= '/usr/bin/python'
-else
-	let g:python3_interpreter= 'C:\Users\thuraira\AppData\Local\Programs\Python\Python36\python.exe'
-	let g:python2_interpreter= 'C:\Python27\python.exe'
+filetype plugin indent on      " turn on file-type detection
+let g:session_autoload = 'no'  " Don't prompt to load a session
+let g:session_autosave = 'no'  " Don't auto save since I got :Obsession handling that
+let mapleader = ","            " Set the leader key
+let maplocalleader="\\"        " Set the local leader key
+set t_Co=256                   " Set the color of the terminal to 256 bits
+set colorcolumn=110            " Keep my lines 110 chars at most
+set complete=.,w,b,u,t,k       " context-sensitive completion
+set cursorline                 " adds a line for the cursor
+set encoding=utf8              " Set vim's char encoding
+set gdefault                   " sets global flag by default
+set hidden                     " allows you to hide buffers with unsaved changes without being prompted
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2               " always show status line
+set mouse=                     " Disable mouse imput
+set nocompatible               " be iMproved, required
+set nofixendofline             " Don't add End-Of-line  character at the bottom of a file
+set nopaste                    " Disable past mode by default
+set nospell                    " turn on spell checker
+set number
+set pastetoggle=<f6>           " Toggle paste mode key
+set relativenumber
+set scrolloff=3                " start scrolling 3 lines before edge of viewport
+set shortmess+=A               " ignore annoying swapfile messages
+set shortmess+=I               " no splash screen
+set shortmess+=T               " truncate non-file messages in middle
+set shortmess+=a               " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=o               " overwrite file-written messages
+set showcmd                    " extra info at end of command line
+set sidescrolloff=3            " same as scolloff, but for columns
+set smartcase
+set spellcapcheck=             " When a lower case word is added to the dictionary, use it case insensitively
+set spelllang=en_us            " spelling US
+set splitbelow                 " Open new split panes to right and bottom,
+set splitright                 " which feels more natural
+set switchbuf=usetab           " try to reuse windows/tabs when switching buffers
+set wildmenu                   " shows suggestions when tabing in normal mode
+set winheight=5
+set winminheight=5
+set winheight=999
+" set highlight+=@:ColorColumn " ~/@ at end of window, 'showbreak'
+" set highlight+=N:DiffText    " make current line number stand out a little
+" set highlight+=c:LineNr      " blend vertical separators with line numbers
+" set shortmess+=O             " file-read message overwrites previous
+" set shortmess+=t             " truncate file messages at start
+
+" Custom Windows Settings
+if has('win32')
 	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
 endif
 
-set nocompatible                    "  be iMproved, required
-set encoding=utf8                   "  Set vim's char encoding
-filetype plugin indent on           "  turn on file-type detection
-se t_Co=256                         "  Set the color of the terminal to 256 bits
-set colorcolumn=110                 "  Keep my lines 110 chars at most
-let mapleader = ","                 "  Set the leader key
-let maplocalleader="\\"             "  Set the local leader key
-set pastetoggle=<f6>                "  Toggle paste mode
-set nopaste                         "  disable it by default
-set mouse=                          "  Disable mouse imput
-
-
 if exists('$SUDO_USER')
-	set nobackup                          " don't create root-owned files
-	set nowritebackup                     " don't create root-owned files
+	set nobackup                                         " don't create root-owned files
+	set nowritebackup                                    " don't create root-owned files
 else
-	set backupdir=$HOME/.vim/tmp/backup//     " keep backup files out of the way
+	set backupdir=$HOME/.vim/tmp/backup//                " keep backup files out of the way
 	set backupdir+=.
 	set backupskip=/tmp/*,/private/tmp/*
-	set backup                            " Create a backup
+	set backup                                           " Create a backup
 	set writebackup
 endif
 if has('persistent_undo')
 	if exists('$SUDO_USER')
-		set noundofile                    " don't create root-owned files
+		set noundofile                                   " don't create root-owned files
 	else
-		set undodir=$HOME/.vim/tmp/undo//     " keep undo files out of the way
+		set undodir=$HOME/.vim/tmp/undo//                " keep undo files out of the way
 		set undodir+=.
-		set undofile                      " actually use undo files
+		set undofile                                     " actually use undo files
 	endif
 endif
 if exists('$SUDO_USER')
-	set noswapfile                        " don't create root-owned files
+	set noswapfile                                       " don't create root-owned files
 else
-	set directory=$HOME/.vim/tmp/swap//       " keep swap files out of the way
+	set directory=$HOME/.vim/tmp/swap//                  " keep swap files out of the way
 	set directory+=.
-	set swapfile                          " Create swap files in case system crashes
+	set swapfile                                         " Create swap files in case system crashes
 endif
 if has('viminfo')
 	if exists('$SUDO_USER')
-		set viminfo=                      " don't create root-owned files
+		set viminfo=                                     " don't create root-owned files
 	else
-		set viminfo+=n$HOME/.vim/tmp/viminfo  " override ~/.viminfo default, remembers all command mode history
+		set viminfo+=n$HOME/.vim/tmp/viminfo             " override ~/.viminfo default, remembers all command mode history
 	endif
 endif
-
-" Flags
-" =====
-set nospell                           "  turn on spell checker
-set spellcapcheck=                  "  When a lower case word is added to the dictionary, use it case insensitively 
-set showcmd                         " extra info at end of command line
-set spelllang=en_us                 "  spelling US
-if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add"))
+if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add " ))
 	set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 endif
-set gdefault                        "  sets global flag by default
-set cursorline                      "  adds a line for the cursor
-set winheight=5
-set winminheight=5
-set winheight=999
-set number
-set relativenumber
-set ignorecase
-set incsearch
-set hlsearch
-set smartcase
-set wildmenu                        "  shows suggestions when tabing in normal mode
-set scrolloff=3                     " start scrolling 3 lines before edge of viewport
-set sidescrolloff=3                   " same as scolloff, but for columns
-set nofixendofline                  " Don't add End-Of-line  character at the bottom of a file
-
-set shortmess+=A                      " ignore annoying swapfile messages
-set shortmess+=I                      " no splash screen
-" set shortmess+=O                      " file-read message overwrites previous
-set shortmess+=T                      " truncate non-file messages in middle
-set shortmess+=a                      " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
-set shortmess+=o                      " overwrite file-written messages
-" set shortmess+=t                      " truncate file messages at start
-
-
-set splitbelow                      "  Open new split panes to right and bottom,
-set splitright                      "  which feels more natural
-set switchbuf=usetab                  " try to reuse windows/tabs when switching buffers
 " if has('termguicolors')
-"   set termguicolors                   " use guifg/guibg instead of ctermfg/ctermbg in terminal
+"   set termguicolors                                    " use guifg/guibg instead of ctermfg/ctermbg in terminal
 " endif
 if has('virtualedit')
-  set virtualedit=block               " allow cursor to move where there is no text in visual block mode
+  set virtualedit=block                                  " allow cursor to move where there is no text in visual block mode
 endif
 
-" set clipboard=unnamedplus         "  sets the system clipboard as default
-set complete=.,w,b,u,t,k            "  context-sensitive completion
-let g:session_autosave = 'no'       "  Don't auto save since I got :Obsession handling that
-let g:session_autoload = 'no'		"  Don't prompt to load a session
-
-if has("gui_running")
-	" set guifont=SauseCodePro\ NF\ Medium\ 9
-	set guifont=SauceCodePro\ NF:h9
-	set guioptions-=m  "remove menu bar
-	set guioptions-=T  "remove toolbar
-	set guioptions-=r  "remove right-hand scroll bar
-	set guioptions-=L  "remove left-hand scroll bar
-endif
-
-set hidden                            " allows you to hide buffers with unsaved changes without being prompted
-" set highlight+=@:ColorColumn          " ~/@ at end of window, 'showbreak'
-" set highlight+=N:DiffText             " make current line number stand out a little
-" set highlight+=c:LineNr               " blend vertical separators with line numbers
-set laststatus=2                      " always show status line
 
 " }}}
 
 " PLUGIN MANAGER 
 " {{{
-"
-" Automatically download package manager if it doesn't exist
-if has("win32")
-	"@TODO Windows options here
-else
-	" For Neovim
+
+" Automatically download package manager on Unix if it doesn't already exist.
+if has('unix')
+	" Neovim
 	if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
 		echo "Downloading package manager"
 		call system(expand("curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
 	endif
-	" For Vim
+	" Vim
 	if !filereadable(expand("~/.vim/autoload/plug.vim"))
 		echo "Downloading package manager"
 		call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
@@ -163,25 +158,43 @@ endif
 
 
 " Plug-ins
-" ========
-" Specify a directory for plugins 
 call plug#begin('~/.vim/plugged')
 
-" Syntax
-Plug 'posva/vim-vue', {'for': 'vue'}                                                 " Vim syntax highlighting for Vue components.
-Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
+" Syntax, Linting & Themes
+Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim syntax highlighting for Vue components.
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
-Plug 'neomake/neomake'                                               " Run code linters and compilers from within Vim
-
+Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
+Plug 'altercation/vim-colors-solarized'                              " Current Theme
+Plug 'lifepillar/vim-solarized8'                                     " Current Theme
 
 " Workflow
+Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
+Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'ctrlpvim/ctrlp.vim'                                            " Fuzzy finder for Files, Buffers, Tags
+Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
+Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
+Plug 'tobyS/pdv'                                                     " PHP documentor
+Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
+Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
+Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
+Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
+Plug 'vim-airline/vim-airline'                                       " Status line
+Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
+Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
+Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
+Plug 'tomtom/tcomment_vim'                                           " Code commenter
+Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
+Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
+Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
+Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
+Plug 'tpope/vim-obsession'                                           " Session Management for VIM
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 if has('nvim')
 	Plug 'equalsraf/neovim-gui-shim'
-
 	Plug 'roxma/nvim-completion-manager'
 	Plug 'phpactor/phpactor', {'do': 'composer install'}
 	Plug 'roxma/ncm-phpactor'
@@ -193,35 +206,12 @@ else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
 endif
-Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
-Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
-Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
-Plug 'tobyS/pdv'                                                     " PHP documentor
-Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
-Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
-Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
-Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
-Plug 'vim-airline/vim-airline'                                       " Status line
-Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
-Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
-Plug 'altercation/vim-colors-solarized'                              " Current Theme
-Plug 'lifepillar/vim-solarized8'                              " Current Theme
-Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
-Plug 'tomtom/tcomment_vim'                                           " Code commenter
-Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
-Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
-Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
-Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
-Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 
 
-" Plug 'sbdchd/neoformat'                                              " Format code
 " Plug 'groenewege/vim-less'                                           " Less CSS syntax
 " Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
 " Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 " Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
 " Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
 " Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
@@ -272,7 +262,6 @@ Plug 'junegunn/fzf.vim'
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
 " Plug 'Lokaltog/vim-powerline'                                         "  Replaced with airline
-" Plug 'scrooloose/syntastic'                                           "  Replaced with Neomake
 " Plug 'mattn/emmet-vim'                                                "  Pretty much what zen coding does
 " Plug 'itchyny/calendar.vim'                                           "  A calendar application for Vim
 " Plug 'Konfekt/FastFold'
@@ -287,7 +276,6 @@ Plug 'junegunn/fzf.vim'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
 " Plug 'ZoomWin'
 
-" Initialize plugin system
 call plug#end()
 " }}}
 
@@ -296,14 +284,11 @@ call plug#end()
 
 " Configure YouCompleteMe (YCM)  and make it compatible with UltiSnips (using supertab)
 " NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
-let g:ymc_server_python_interpreter = g:python3_interpreter
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " Configure deoplete
 let g:deoplete#enable_at_startup = 1 " Use deoplete.
-let g:python3_host_prog=g:python3_interpreter
-let g:python_host_prog=g:python2_interpreter
 
 " phpactor
 let g:phpactorBranch = "develop"
@@ -357,9 +342,6 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-" Configure default pizza website
-" let g:vim_pizza_url ='https://www.dominos.com/en/pages/order/'
-
 " Configure PDV .aka PHP Doc
 let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
 " Key Binding for PHP Doc (Requires UltiSnips)
@@ -375,17 +357,11 @@ let g:jsdoc_user_defined_tags = {
 \}
 autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 
-" Configure Neomake
-let g:airline#extensions#neomake#error_symbol=' '
-let g:airline#extensions#neomake#warning_symbol=' '
-let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_ft_maker_remove_invalid_entries = 0
-autocmd! BufEnter,BufRead,BufWritePost * Neomake
 
-" Configure Gist Vim
-let g:gist_post_private = 1
-let g:gist_get_multiplefile = 1
+" Configure ALE
+let g:ale_sign_error = ' '
+let g:ale_sign_warning = ' '
+let g:airline#extensions#ale#enabled = 1
 
 " Configure Ack
 nnoremap <Leader>a :Ack!<Space>
@@ -453,7 +429,7 @@ exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 
 " Compound Filetypes
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " #MAPPINGS
@@ -494,8 +470,6 @@ nnoremap <silent> <Right> :cnfile<CR>
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
-" Toggle Neoformat to format code, @TODO requires formatters: read the docs use:PHP_Beautifier
-noremap <leader>f :Neoformat<CR>
 
 " Toggle easymotion
 map  <Leader>w <Plug>(easymotion-w)
@@ -703,9 +677,6 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 " THEME SETTINGS
 " {{{
 
-" @TODO When running inside a terminal
-" Install Font and set the terminal to the same font 
-" cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 
 syntax enable " Enable syntax highlighting
 set background=dark " Set the background to dark
@@ -720,15 +691,12 @@ endif
 
 
 " Configure Airline
-let g:airline_theme='solarized'
+let g:airline_theme='solarized' " Set theme
+let g:airline#extensions#whitespace#enabled = 0 " Don't show whitespace or indentation errors
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
 let g:airline#extensions#branch#displayed_head_limit = 10
-
-" let g:airline#extensions#branch#use_vcscommand = 1
-
-let g:airline#extensions#whitespace#mixed_indent_algo = 0
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
 let g:airline#extensions#obsession#indicator_text = ''
 
@@ -806,34 +774,3 @@ if !exists("*Capitalise") " Capitalise the start of a word
 		:s/\<./\u&/g
 	endfunction
 endif
-
-" Debugging
-" =========
-" To Debug Neomake
-" let g:neomake_open_list = 2
-" let g:neomake_verbose=3
-" let g:neomake_logfile='/tmp/error.log'
-
-
-" Archive
-" =======
-" if !exists("*TidyFunctionBrackets")
-" 	function TidyFunctionBrackets()
-" 		if !&binary && &filetype != 'diff'
-" 			let colnumber1 = col('.')
-" 			echo colnumber1
-" 			normal ^
-" 			let colnumber2 = col('.')
-" 			echo colnumber2
-"
-" 			if colnumber1 == colnumber2
-" 				echo "Moving Up"
-" 				normal kJ
-" 			else
-" 				echo "This one is ok"
-" 			endif
-" 		endif
-" 	endfunction
-" endif
-" }}}
-
