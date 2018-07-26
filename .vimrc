@@ -160,15 +160,19 @@ endif
 " Plug-ins
 call plug#begin('~/.vim/plugged')
 
-" Syntax, Linting & Themes
+" Syntax, Themes & Fonts
 Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim syntax highlighting for Vue components.
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
-Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
-Plug 'altercation/vim-colors-solarized'                              " Current Theme
-Plug 'lifepillar/vim-solarized8'                                     " Current Theme
+Plug 'altercation/vim-colors-solarized'                              " Theme for nvim
+Plug 'lifepillar/vim-solarized8'                                     " Theme for nvim-qt
+Plug 'vim-airline/vim-airline'                                       " Status line
+Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
+Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
 
-" Workflow
+" Workflow & Tools
+Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
+Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
@@ -179,13 +183,9 @@ Plug 'tobyS/pdv'                                                     " PHP docum
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
 Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
-Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
-Plug 'vim-airline/vim-airline'                                       " Status line
-Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
-Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
-Plug 'tomtom/tcomment_vim'                                           " Code commenter
 Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
+Plug 'tomtom/tcomment_vim'                                           " Code commenter
 Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
@@ -291,7 +291,6 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:deoplete#enable_at_startup = 1 " Use deoplete.
 
 " phpactor
-let g:phpactorBranch = "develop"
 autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 
