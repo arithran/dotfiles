@@ -9,8 +9,8 @@ snippet dbug "CakePHP Debug Code"
 dbug($${1:var}, ${2:1}, ${3:1});
 endsnippet
 
-snippet dlog "CakePHP Log Code"
-$this->log(print_r($${1:var}, true), 'dlog');
+snippet dlog "Laravel Log Code"
+\Illuminate\Support\Facades\Log::debug('Debug-->>', ['data' => $${1:var}]);
 endsnippet
 
 snippet pr "print_r with a die"

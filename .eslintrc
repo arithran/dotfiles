@@ -1,0 +1,16 @@
+{
+	"parser": "babel-eslint",
+	"extends": [
+		"plugin:vue/essential"
+	],
+	"rules": {
+		"no-tabs": "off",
+		"indent": "off",
+		"comma-dangle": "off",
+		"linebreak-style": "off",
+		"vue/require-v-for-key": "off",
+		"vue/html-indent": "off",
+		"vue/attributes-order": "off",
+		"vue/attribute-hyphenation": "off"
+	}
+}
