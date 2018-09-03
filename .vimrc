@@ -162,6 +162,7 @@ call plug#begin('~/.vim/plugged')
 
 " Syntax, Themes & Fonts
 Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim syntax highlighting for Vue components.
+Plug 'leafgarland/typescript-vim'                                    " Typescript Syntax for Vim
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'altercation/vim-colors-solarized'                              " Theme for nvim
 Plug 'lifepillar/vim-solarized8'                                     " Theme for nvim-qt
@@ -198,13 +199,14 @@ if has('nvim')
 	Plug 'roxma/nvim-completion-manager'
 	Plug 'phpactor/phpactor', {'do': 'composer install'}
 	Plug 'roxma/ncm-phpactor'
-
-	" Plug 'Shougo/deoplete.nvim'
-	" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-	" Plug 'kristijanhusak/deoplete-phpactor'
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+endif
+
+" Unix Specific Tools
+if has('unix')
+	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 endif
 
 
@@ -223,7 +225,6 @@ endif
 " Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
 " Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
 " Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
-" Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 " Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 " Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 " Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
