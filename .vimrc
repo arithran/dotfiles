@@ -197,8 +197,15 @@ Plug 'junegunn/fzf.vim'
 if has('nvim')
 	Plug 'equalsraf/neovim-gui-shim'
 	Plug 'roxma/nvim-completion-manager'
+
+	" PHP Completion
 	Plug 'phpactor/phpactor', {'do': 'composer install'}
 	Plug 'roxma/ncm-phpactor'
+
+	" Golang Completion
+	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
+
+
 else
 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
@@ -207,6 +214,8 @@ endif
 " Unix Specific Tools
 if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+	let g:go_fmt_command = "goimports"
 endif
 
 
