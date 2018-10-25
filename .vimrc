@@ -10,7 +10,7 @@
 " Version       : 4.0
 " Description   : I use the same vimrc for both nvim and vim
 "
-" INSTALL ---------------------------------------
+" INSTRUCTIONS ----------------------------------
 " {{{
 " 1. Install these interpreters and make sure they are executable from the CLI
 "    - python, 
@@ -57,7 +57,6 @@ Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim synta
 Plug 'leafgarland/typescript-vim'                                    " Typescript Syntax for Vim
 Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'altercation/vim-colors-solarized'                              " Theme for nvim
-Plug 'lifepillar/vim-solarized8'                                     " Theme for nvim-qt
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
@@ -172,25 +171,19 @@ call plug#end()
 " GENERAL SETTINGS ------------------------------ 
 " {{{
 set nocompatible               " be iMproved, required
-filetype plugin indent on      " turn on file-type detection
+filetype off                   " No idea why this is good practice, somebody PM me please
+filetype plugin indent on      " Turn on file-type detection (I just turned it off above)
 
 let mapleader = ","            " Set the leader key
 let maplocalleader="\\"        " Set the local leader key
-set autoread			       " Automatically read file when changed outside Vim
-set history=100		           " Keep 100 lines of command line history
 
 
-set t_Co=256                   " Set the color of the terminal to 256 bits
 set colorcolumn=110            " Keep my lines 110 chars at most
 set complete=.,w,b,u,t,k       " context-sensitive completion
 set cursorline                 " adds a line for the cursor
-set encoding=utf8              " Set vim's char encoding
 set gdefault                   " sets global flag by default
 set hidden                     " allows you to hide buffers with unsaved changes without being prompted
-set hlsearch
 set ignorecase
-set incsearch
-set laststatus=2               " always show status line
 set mouse=a                    " Enable mouse imput
 set nofixendofline             " Don't add End-Of-line  character at the bottom of a file
 set nopaste                    " Disable past mode by default
@@ -212,18 +205,32 @@ set spelllang=en_us            " spelling US
 set splitbelow                 " Open new split panes to right and bottom,
 set splitright                 " which feels more natural
 set switchbuf=usetab           " try to reuse windows/tabs when switching buffers
-set wildmenu                   " shows suggestions when tabing in normal mode
-set winheight=5
-set winminheight=5
-set winheight=999
+set termguicolors              " use guifg/guibg instead of ctermfg/ctermbg in terminal
+set virtualedit=block          " allow cursor to move where there is no text in visual block mode
+
 " set highlight+=@:ColorColumn " ~/@ at end of window, 'showbreak'
 " set highlight+=N:DiffText    " make current line number stand out a little
 " set highlight+=c:LineNr      " blend vertical separators with line numbers
 " set shortmess+=O             " file-read message overwrites previous
 " set shortmess+=t             " truncate file messages at start
 
-if !has('nvim')
-	set ttyfast			       " Fast Terminal, Send more characters to the screen for redrawing
+
+" These are 'ON' by default on nvim @see :help nvim-defaults
+if !has('nvim')                     
+	set autoindent                  " Copy indent from current line, over to the new line
+	set autoread                    " Automatically read file when changed outside Vim
+	set backspace=indent,eol,start  " Backspace over everything in insert mode
+	set encoding=utf8               " Set vim's char encoding
+	set history=10000               " Keep 10000 lines of command line history
+	set hlsearch                    " Highlights search results
+	set incsearch                   " Searches as you type
+	set laststatus=2                " always show status line
+	set ttyfast                     " Fast Terminal, Send more characters to the screen for redrawing
+	set wildmenu                    " shows suggestions when tabing in normal mode
+endif
+
+if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add " ))
+	set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
 endif
 
 if exists('$SUDO_USER')
@@ -236,6 +243,13 @@ else
 	set backup                                           " Create a backup
 	set writebackup
 endif
+if exists('$SUDO_USER')
+	set noswapfile                                       " don't create root-owned files
+else
+	set directory=$HOME/.vim/tmp/swap//                  " keep swap files out of the way
+	set directory+=.
+	set swapfile                                         " Create swap files in case system crashes
+endif
 if has('persistent_undo')
 	if exists('$SUDO_USER')
 		set noundofile                                   " don't create root-owned files
@@ -245,28 +259,12 @@ if has('persistent_undo')
 		set undofile                                     " actually use undo files
 	endif
 endif
-if exists('$SUDO_USER')
-	set noswapfile                                       " don't create root-owned files
-else
-	set directory=$HOME/.vim/tmp/swap//                  " keep swap files out of the way
-	set directory+=.
-	set swapfile                                         " Create swap files in case system crashes
-endif
 if has('viminfo')
 	if exists('$SUDO_USER')
 		set viminfo=                                     " don't create root-owned files
 	else
 		set viminfo+=n$HOME/.vim/tmp/viminfo             " override ~/.viminfo default, remembers all command mode history
 	endif
-endif
-if filereadable(expand("~/Dropbox/vim/spell/en.utf-8.add " ))
-	set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
-endif
-" if has('termguicolors')
-"   set termguicolors                                    " use guifg/guibg instead of ctermfg/ctermbg in terminal
-" endif
-if has('virtualedit')
-  set virtualedit=block                                  " allow cursor to move where there is no text in visual block mode
 endif
 
 
@@ -390,8 +388,6 @@ set formatoptions+=t
 set formatoptions+=j            " remove comment leader when joining comment lines
 set formatoptions+=n            " smart auto-indenting inside numbered lists
 set nojoinspaces                " don't autoinsert two spaces after '.', '?', '!' for join command
-set backspace=indent,eol,start  " Backspace over everything in insert mode
-set autoindent                  " Copy indent from current line, over to the new line
 set smartindent                 " Do smart indenting when starting a new line
 set shiftround                  " Round indent to multiple of 'shiftwidth'
 set whichwrap=b,h,l,s,<,>,[,],~       " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
@@ -420,11 +416,17 @@ exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 
+" When moving around, Maximize the current window 
+" but show a minimum of 5 lines on all other windows
+set winheight=5
+set winminheight=5
+set winheight=999
+
 " Compound Filetypes
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
-" #CUSTOM MAPPINGS ------------------------------
+" CUSTOM MAPPINGS -------------------------------
 " INSERT MODE MAPPINGS {{{
 
 " Complete file paths
@@ -570,18 +572,25 @@ map <leader>c <c-_><c-_>
 " }}}
 
 " AUTOCMD MAPPINGS {{{
-" Remember cursor position between vim sessions
-" autocmd BufReadPost *
-" 			\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-" 			\   exe "normal! g'\"" |
-" 			\ endif
-" center buffer around cursor when opening files
-autocmd BufRead * normal zz
 
-" Wrap text for markdown files
-autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+augroup filetypedetect
 
+	" Clear this group when re-sourcing .vimrc
+	autocmd!
 
+	" Center buffer around cursor when opening files
+	autocmd BufRead * normal zz
+
+	" Set Filetypes
+	autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+
+	" Wrap text for markdown files
+	autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
+	" Set custom tab behavior
+	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2
+	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2
+augroup END
 
 " }}}
 
@@ -620,60 +629,23 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
 
-" function! MyFoldText() " {{{
-" 	let line = getline(v:foldstart)
-" 	let nucolwidth = &fdc + &number * &numberwidth
-" 	let windowwidth = winwidth(0) - nucolwidth - 3
-" 	let foldedlinecount = v:foldend - v:foldstart
-"
-" 	" expand tabs into spaces
-" 	let onetab = strpart('          ', 0, &tabstop)
-" 	let line = substitute(line, '\t', onetab, 'g')
-"
-" 	let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-" 	let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-" 	return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines '
-" endfunction " }}}
-"
-" set foldtext=MyFoldText()
-"
-" autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-" autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-"
 " autocmd FileType vim setlocal fdc=1
-" set foldlevel=99
 " " Space to toggle folds.
-" nnoremap <Space> za
-" vnoremap <Space> za
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType vim setlocal foldlevel=0
 autocmd FileType javascript,html,css,less,scss,typescript setlocal foldlevel=99
 autocmd FileType css,less,scss,json,php setlocal foldmethod=marker
 autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
-
-" autocmd FileType coffee setl foldmethod=indent
-" autocmd FileType html setl foldmethod=expr
-" let g:xml_syntax_folding = 1
-" autocmd FileType xml setl foldmethod=syntax
-" autocmd FileType html setl foldexpr=HTMLFolds()
-"
-" autocmd FileType javascript,typescript,json setl foldmethod=syntax
 " }}}
 
 " THEME SETTINGS --------------------------------
 " {{{
 
-
 syntax enable " Enable syntax highlighting
+set t_Co=256                   " Set the color of the terminal to 256 bits
 set background=dark " Set the background to dark
 let g:solarized_diffmode="high"
-
-" Set theme
-if has('unix')
-	colorscheme solarized
-else
-	colorscheme solarized8
-endif
+colorscheme solarized
 
 
 " Configure Airline
