@@ -36,15 +36,17 @@
 " 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font 
 "    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 
+set nocompatible               " be iMproved, required
+filetype plugin indent on      " turn on file-type detection
 
 " GENERAL SETTINGS 
 " {{{
-
-filetype plugin indent on      " turn on file-type detection
-let g:session_autoload = 'no'  " Don't prompt to load a session
-let g:session_autosave = 'no'  " Don't auto save since I got :Obsession handling that
 let mapleader = ","            " Set the leader key
 let maplocalleader="\\"        " Set the local leader key
+set autoread			       " Automatically read file when changed outside Vim
+set history=100		           " Keep 100 lines of command line history
+
+
 set t_Co=256                   " Set the color of the terminal to 256 bits
 set colorcolumn=110            " Keep my lines 110 chars at most
 set complete=.,w,b,u,t,k       " context-sensitive completion
@@ -56,8 +58,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2               " always show status line
-set mouse=                     " Disable mouse imput
-set nocompatible               " be iMproved, required
+set mouse=a                    " Enable mouse imput
 set nofixendofline             " Don't add End-Of-line  character at the bottom of a file
 set nopaste                    " Disable past mode by default
 set nospell                    " turn on spell checker
@@ -88,9 +89,8 @@ set winheight=999
 " set shortmess+=O             " file-read message overwrites previous
 " set shortmess+=t             " truncate file messages at start
 
-" Custom Windows Settings
-if has('win32')
-	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
+if !has('nvim')
+	set ttyfast			       " Fast Terminal, Send more characters to the screen for redrawing
 endif
 
 if exists('$SUDO_USER')
@@ -193,41 +193,48 @@ Plug 'chrisbra/Recover.vim'                                          " Show diff
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
+Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 
 if has('nvim')
-	Plug 'equalsraf/neovim-gui-shim'
-	Plug 'roxma/nvim-completion-manager'
-
-	" PHP Completion
-	Plug 'phpactor/phpactor', {'do': 'composer install'}
-	Plug 'roxma/ncm-phpactor'
-
-	" Golang Completion
-	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
-
-
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'zchee/deoplete-go', {'build': {'unix': 'make'}}
 else
-	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
-	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'roxma/nvim-yarp'
+	Plug 'roxma/vim-hug-neovim-rpc'
 endif
+let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+" 	Plug 'equalsraf/neovim-gui-shim'
+" 	Plug 'roxma/nvim-completion-manager'
+"
+" 	" PHP Completion
+" 	Plug 'phpactor/phpactor', {'do': 'composer install'}
+" 	Plug 'roxma/ncm-phpactor'
+"
+" 	" Golang Completion
+" 	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
+"
+"
+" else
+" 	Plug 'shawncplus/phpcomplete.vim'                                    " Improved PHP omni-completion. Based on the default phpcomplete.vim.
+" 	Plug 'Valloric/YouCompleteMe'                                        " A code-completion engine for Vim
+" endif
 
 " Unix Specific Tools
 if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 	let g:go_fmt_command = "goimports"
+	let g:go_gocode_unimported_packages = 1
+
 endif
 
-
-" Plug 'groenewege/vim-less'                                           " Less CSS syntax
-" Plug 'hail2u/vim-css3-syntax', {'for': ['less', 'css', 'scss']}
-" Plug 'ap/vim-css-color'                                              " Colour keyword highlighter for Vim
+" Plug 'airblade/vim-rooter'         " sets current working directory based on project files (vcs, rakefile, etc)
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
 " Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
 " Plug 'othree/yajs.vim'                                               " Yet Another JavaScript Syntax file for Vim [NEW]
-" Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
-" Plug 'ludovicchabant/vim-lawrencium'                                 " Mercurial wrapper
-" Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 " Plug 'alvan/vim-php-manual'                                          " PHP Manual Support from Shift+k
 " Plug 'ervandew/supertab'                                             " insert completion needs (:help ins-completion).
 " Plug 'ivalkeen/nerdtree-execute'                                     " Press 'x' to execute system default application
@@ -248,8 +255,6 @@ endif
 " Fun Random plug-ins
 " Plug 'johngrib/vim-game-code-break'
 " Plug 'vim-scripts/dbext.vim'                                            "  Database Editor
-" Plug 'ashisha/image.vim'                                              "  Let's you open (preview) images in Vim
-" Plug 'malithsen/trello-vim'                                           "  A barebone vim plugin to fetch user assigned cards from Trello
 " Plug 'uguu-org/vim-matrix-screensaver'                                "  vim-matrix-screensaver
 " Plug 'jmanoel7/vim-games' "Game
 
@@ -271,14 +276,13 @@ endif
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
-" Plug 'Lokaltog/vim-powerline'                                         "  Replaced with airline
-" Plug 'mattn/emmet-vim'                                                "  Pretty much what zen coding does
 " Plug 'itchyny/calendar.vim'                                           "  A calendar application for Vim
 " Plug 'Konfekt/FastFold'
 " Plug 'vim-scripts/php.vim-html-enhanced'
 " Plug '2072/PHP-Indenting-for-VIm'
-" Plugin 'morhetz/gruvbox'
-" Plugin 'sukima/xmledit'
+" Plug 'morhetz/gruvbox'
+" Plug 'sukima/xmledit'
+" Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
 
 
 " Archived
@@ -599,12 +603,6 @@ autocmd BufRead * normal zz
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 
-" Make current window more obvious by turning off/adjusting some features in non-current
-" windows.
-" if exists('+colorcolumn')
-" 	autocmd BufEnter,FocusGained,VimEnter,WinEnter * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=0 | endif
-" 	autocmd FocusLost,WinLeave * if arithran#autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
-" endif
 
 " }}}
 
@@ -782,4 +780,8 @@ if !exists("*Capitalise") " Capitalise the start of a word
 		" & means substitute whatever was matched on the LHS
 		:s/\<./\u&/g
 	endfunction
+endif
+" Custom Windows Settings
+if has('win32')
+	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
 endif
