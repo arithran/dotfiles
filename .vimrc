@@ -5,13 +5,13 @@
 " ██║  ██║██║  ██║██║  ███████║     ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
 " ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝      ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 "                                                                                 
-" Author  : Arithran Thurairetnam (aka Ari)
-" Link    : https://github.com/arithran
-" Version : 4.0
-
-" *********
-" Checklist
-" *********
+" Author        : Arithran Thurairetnam (aka Ari)
+" Link          : https://github.com/arithran
+" Version       : 4.0
+" Description   : I use the same vimrc for both nvim and vim
+"
+" INSTALL ---------------------------------------
+" {{{
 " 1. Install these interpreters and make sure they are executable from the CLI
 "    - python, 
 "    - python3, 
@@ -35,24 +35,19 @@
 "
 " 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font 
 "    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
+" }}}
 
-" PLUGIN MANAGER 
+" PLUGIN MANAGER --------------------------------
 " {{{
 
-" Automatically download package manager on Unix if it doesn't already exist.
+" Automatically download package manager on Unix if it doesn't exist.
 if has('unix')
-	" Neovim
-	if !filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
-		echo "Downloading package manager"
-		call system(expand("curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
-	endif
 	" Vim
 	if !filereadable(expand("~/.vim/autoload/plug.vim"))
 		echo "Downloading package manager"
 		call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
 	endif
 endif
-
 
 " Plug-ins
 call plug#begin('~/.vim/plugged')
@@ -127,7 +122,6 @@ endif
 " Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
 " Plug 'mattn/webapi-vim'
 " Plug 'mattn/gist-vim'                                                " Create a Gist file
-" Plug 'tpope/vim-pathogen'
 " Plug 'tmhedberg/matchit'
 " Plug 'jlanzarotta/bufexplorer'
 " Plug 'mustache/vim-mustache-handlebars'                              " mustache and handlebars mode for vim
@@ -175,7 +169,7 @@ call plug#end()
 " }}}
 
 
-" GENERAL SETTINGS 
+" GENERAL SETTINGS ------------------------------ 
 " {{{
 set nocompatible               " be iMproved, required
 filetype plugin indent on      " turn on file-type detection
@@ -278,7 +272,7 @@ endif
 
 " }}}
 
-" PLUGIN SETTINGS
+" PLUGIN SETTINGS -------------------------------
 " {{{
 
 " Configure YouCompleteMe (YCM)  and make it compatible with UltiSnips (using supertab)
@@ -389,7 +383,7 @@ nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " }}}
 
-" FORMATTING SETTINGS
+" FORMATTING SETTINGS ---------------------------
 " {{{
 set formatoptions+=v
 set formatoptions+=t
@@ -430,7 +424,7 @@ exec 'set softtabstop='.s:tabwidth
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
-" #MAPPINGS
+" #CUSTOM MAPPINGS ------------------------------
 " INSERT MODE MAPPINGS {{{
 
 " Complete file paths
@@ -595,7 +589,7 @@ autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 iabbrev </ </<C-X><C-O> " auto complete tags
 " }}}
 
-" FOLDS
+" FOLDS -----------------------------------------
 " {{{
 
 
@@ -666,7 +660,7 @@ autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
 " autocmd FileType javascript,typescript,json setl foldmethod=syntax
 " }}}
 
-" THEME SETTINGS
+" THEME SETTINGS --------------------------------
 " {{{
 
 
@@ -713,7 +707,7 @@ endif
 
 " }}}
 
-" CUSTOM FUNCTIONS
+" CUSTOM FUNCTIONS ------------------------------
 " {{{
 if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
 	function AutoCorrectLastSpellingMistake()
