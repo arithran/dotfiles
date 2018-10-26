@@ -52,22 +52,28 @@ endif
 " Plug-ins
 call plug#begin('~/.vim/plugged')
 
-" Syntax, Themes & Fonts
-Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim syntax highlighting for Vue components.
-Plug 'leafgarland/typescript-vim'                                    " Typescript Syntax for Vim
-Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
+" Language Syntax and tools
+Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vue syntax and tools
+Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}               " Docker syntax and tools
+Plug 'elzr/vim-json', {'for' : 'json'}                               " Json syntax and tools
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }                  " Go syntax and tools
+Plug 'leafgarland/typescript-vim'                                    " Typescript syntax and tools
+Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}                        " Tmux syntax
+
+
+" Themes & Fonts
 Plug 'altercation/vim-colors-solarized'                              " Theme for nvim
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
 
 " Workflow & Tools
+Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
-Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'ctrlpvim/ctrlp.vim'                                            " Fuzzy finder for Files, Buffers, Tags
 Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
 Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
@@ -82,8 +88,12 @@ Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hi
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
+Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+Plug 'rhysd/vim-grammarous'                                          " Powerful grammar checker for Vim
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'mileszs/ack.vim'                                               " Text Search tool
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " Fuzzy find Buffers & Files etc.
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
@@ -99,14 +109,6 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-" Unix Specific Tools
-if has('unix')
-	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
-	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-	let g:go_fmt_command = "goimports"
-	let g:go_gocode_unimported_packages = 1
-
-endif
 
 " Plug 'airblade/vim-rooter'         " sets current working directory based on project files (vcs, rakefile, etc)
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
@@ -177,6 +179,7 @@ let maplocalleader="\\"        " Set the local leader key
 
 set colorcolumn=110            " Keep my lines 110 chars at most
 set complete=.,w,b,u,t,k       " context-sensitive completion
+set completeopt+=menuone,noinsert,noselect
 set cursorline                 " adds a line for the cursor
 set gdefault                   " sets global flag by default
 set hidden                     " allows you to hide buffers with unsaved changes without being prompted
@@ -268,24 +271,25 @@ endif
 " PLUGIN SETTINGS -------------------------------
 " {{{
 
+" Configure Vim Go
+let g:go_fmt_command = "goimports"
+let g:go_gocode_unimported_packages = 1
+
 " Configure Supertab ----
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
+" Configure Grammarous ----
+nmap <Leader>gi <Plug>(grammarous-open-info-window)
+nmap <Leader>gc <Plug>(grammarous-close-info-window)
+nmap <Leader>gf <Plug>(grammarous-fixit)
+" Only check comments only except for markdown and vim help
+let g:grammarous#default_comments_only_filetypes = {
+			\ '*' : 1, 'help' : 0, 'markdown' : 0,
+			\ }
 
-" Configure Ctrl+P ----
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
-
-" Swap Delete Buffer and Toggle By File name bindings
-let g:ctrlp_prompt_mappings = {
-  \ 'ToggleByFname()':      ['<F7>'],
-  \ 'PrtDeleteEnt()':       ['<c-d>'],
-  \ }
-
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
+" Configure Fzf.vim ----
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
 
 " Configure PDV .aka PHP Doc ----
 let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
@@ -425,6 +429,10 @@ nnoremap tl  :tablast<CR>
 nnoremap tn  :tabedit<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
+
+" Some useful quickfix shortcuts for quickfix
+nnoremap <C-n> :cn<CR>
+nnoremap <C-m> :cp<CR>
 
 " Repurpose cursor keys (accessible near homerow via "SpaceFN" layout) for one
 " of my most oft-use key sequences.
@@ -677,7 +685,10 @@ if !exists("*Capitalise") " Capitalise the start of a word
 		:s/\<./\u&/g
 	endfunction
 endif
-" Custom Windows Settings
-if has('win32')
-	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
-endif
+
+" Ctrl P Config
+" " Swap Delete Buffer and Toggle By File name bindings
+" let g:ctrlp_prompt_mappings = {
+"   \ 'ToggleByFname()':      ['<F7>'],
+"   \ 'PrtDeleteEnt()':       ['<c-d>'],
+"   \ }
