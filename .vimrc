@@ -82,8 +82,10 @@ Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hi
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 
@@ -142,7 +144,6 @@ endif
 " Plug 'othree/jspc.vim'
 " Plug 'othree/jsdoc-syntax.vim'
 " Plug 'moll/vim-node'
-" Plug 'vim-markdown-folding'
 " Plug 'editorconfig/editorconfig-vi'
 " Plug 'lambdalisue/vim-gita' " instead of fugitive
 " Plug 'tpope/vim-rhubarb' " plug-in that goes well with fugitive
@@ -150,10 +151,6 @@ endif
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
 " Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
-" Plug 'itchyny/calendar.vim'                                           "  A calendar application for Vim
-" Plug 'Konfekt/FastFold'
-" Plug 'vim-scripts/php.vim-html-enhanced'
-" Plug '2072/PHP-Indenting-for-VIm'
 " Plug 'morhetz/gruvbox'
 " Plug 'sukima/xmledit'
 " Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
@@ -205,7 +202,6 @@ set spelllang=en_us            " spelling US
 set splitbelow                 " Open new split panes to right and bottom,
 set splitright                 " which feels more natural
 set switchbuf=usetab           " try to reuse windows/tabs when switching buffers
-set termguicolors              " use guifg/guibg instead of ctermfg/ctermbg in terminal
 set virtualedit=block          " allow cursor to move where there is no text in visual block mode
 
 " set highlight+=@:ColorColumn " ~/@ at end of window, 'showbreak'
@@ -273,33 +269,16 @@ endif
 " PLUGIN SETTINGS -------------------------------
 " {{{
 
-" Configure YouCompleteMe (YCM)  and make it compatible with UltiSnips (using supertab)
-" NOTE: You can use Ctrl+Space to trigger the completion suggestions anywhere, even without a string prefix.
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-
-" Configure deoplete
-let g:deoplete#enable_at_startup = 1 " Use deoplete.
-
-" phpactor
-autocmd FileType php setlocal omnifunc=phpactor#Complete
-
-
-
 
 " don't give |ins-completion-menu| messages.  For example,
 " '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
 set shortmess+=c
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
-imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
-inoremap <c-c> <ESC>
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-
-
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
+" imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+" inoremap <c-c> <ESC>
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -318,24 +297,9 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-let g:php_manual_online_search_shortcut = '' " Unbind conflicting key, Ctrl+h (@see Plug 'alvan/vim-php-manual')
-
-" Configure UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical""
-
-" Multi-line cursor config
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
 
 " Configure PDV .aka PHP Doc
 let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
-" Key Binding for PHP Doc (Requires UltiSnips)
-autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
 
 " Toggle javascript Doc Requires tobyS/pdv plugin
 let g:jsdoc_allow_input_prompt	= 1
@@ -345,7 +309,6 @@ let g:jsdoc_enable_es6 = 1
 let g:jsdoc_user_defined_tags = {
 \ '@author': 'Arithran Thurairetnam <arithran.thurairetnam@adp.com>',
 \}
-autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 
 
 " Configure ALE
@@ -358,15 +321,10 @@ nnoremap <Leader>a :Ack!<Space>
 
 
 " NERDTree {{{
-"
-" Ignore turds left behind by Mercurial.
-let g:NERDTreeIgnore=['\.orig']
-" The default of 31 is just a little too narrow.
-let g:NERDTreeWinSize=40
-" Disable display of '?' text and 'Bookmarks' label.
-let g:NERDTreeMinimalUI=1
-" Let <Leader><Leader> (^#) return from NERDTree window.
-let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+let g:NERDTreeIgnore=['\.orig']                        " Ignore turds left behind by Mercurial.
+let g:NERDTreeWinSize=40                               " The default of 31 is just a little too narrow.
+let g:NERDTreeMinimalUI=1                              " Disable display of '?' text and 'Bookmarks' label.
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'  " Let <Leader><Leader> (^#) return from NERDTree window.
 
 " Like vim-vinegar
 nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
@@ -422,8 +380,6 @@ set winheight=5
 set winminheight=5
 set winheight=999
 
-" Compound Filetypes
-" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " }}}
 
 " CUSTOM MAPPINGS -------------------------------
@@ -564,8 +520,6 @@ nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 "Toggle spell checker
 nmap <silent> <leader>s :setlocal spell!<CR>
-autocmd InsertEnter * setlocal spell
-autocmd InsertLeave * setlocal nospell
 
 " Toggle commenting Requires T-comment plugin
 map <leader>c <c-_><c-_>
@@ -573,7 +527,7 @@ map <leader>c <c-_><c-_>
 
 " AUTOCMD MAPPINGS {{{
 
-augroup filetypedetect
+augroup custom_filetypedetect
 
 	" Clear this group when re-sourcing .vimrc
 	autocmd!
@@ -581,8 +535,15 @@ augroup filetypedetect
 	" Center buffer around cursor when opening files
 	autocmd BufRead * normal zz
 
+	" Toggle spell between INSERT and NORMAL modes
+	autocmd InsertEnter * setlocal spell
+	autocmd InsertLeave * setlocal nospell
+
 	" Set Filetypes
 	autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+
+	" Set Compound Filetypes
+	autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 	" Wrap text for markdown files
 	autocmd BufRead,BufNewFile *.md setlocal textwidth=80
@@ -590,6 +551,10 @@ augroup filetypedetect
 	" Set custom tab behavior
 	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2
 	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2
+
+	" Insert Doc Block
+	autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
+	autocmd Filetype javascript nnoremap <leader>dd :JsDoc
 augroup END
 
 " }}}
