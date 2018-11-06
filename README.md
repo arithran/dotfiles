@@ -116,6 +116,15 @@ g++ error:/usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
 ```
 sudo dnf install redhat-rpm-config
 ```
+
+2) If comments are not italicised, see setting up custom
+
+```
+tmux-256color.terminfo
+```
+
+https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+
 ## License
 Licensed under the [MIT License](LICENSE.md).
 
