@@ -106,6 +106,6 @@ bindkey '^Z' fancy-ctrl-z
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias vim='nvim'
 alias p='git add -p'
-# alias vim='vimx'
+alias vim='nvim'
 alias t="tmux attach || tmux new -s Master"
 
