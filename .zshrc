@@ -109,3 +109,4 @@ alias p='git add -p'
 alias vim='nvim'
 alias t="tmux attach || tmux new -s Master"
 
+export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json

@@ -60,6 +60,8 @@ Plug 'altercation/vim-colors-solarized'                              " Theme for
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
+Plug 'cespare/vim-toml'
+
 
 " Workflow & Tools
 Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
@@ -67,7 +69,6 @@ Plug 'scrooloose/nerdtree'                                           " A tree ex
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
 Plug 'godlygeek/tabular'                                             " Table creator and alignment plug-in
-Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'ctrlpvim/ctrlp.vim'                                            " Fuzzy finder for Files, Buffers, Tags
 Plug 'heavenshell/vim-jsdoc'                                         " JavaScript JS Documentor
 Plug 'tobyS/vmustache'                                               " PHP documentor dependancy
@@ -83,8 +84,10 @@ Plug 'wincent/terminus'                                              " Auto-relo
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 
+Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
