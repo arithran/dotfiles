@@ -116,6 +116,18 @@ g++ error:/usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
 ```
 sudo dnf install redhat-rpm-config
 ```
+
+2) If comments are not italicised, see setting up custom
+
+```
+tmux-256color.terminfo
+```
+
+3) For iTerm2 install the following fonts and update the terminal font to the same
+https://github.com/ryanoasis/nerd-fonts#font-installation
+
+https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+
 ## License
 Licensed under the [MIT License](LICENSE.md).
 

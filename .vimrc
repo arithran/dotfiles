@@ -52,23 +52,18 @@ endif
 " Plug-ins
 call plug#begin('~/.vim/plugged')
 
-" Language Syntax and tools
-Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vue syntax and tools
-Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}               " Docker syntax and tools
-Plug 'elzr/vim-json', {'for' : 'json'}                               " Json syntax and tools
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }                  " Go syntax and tools
-Plug 'leafgarland/typescript-vim'                                    " Typescript syntax and tools
-Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}                        " Tmux syntax
-
-
-" Themes & Fonts
+" Syntax, Themes & Fonts
+Plug 'posva/vim-vue', {'for': 'vue'}                                 " Vim syntax highlighting for Vue components.
+Plug 'leafgarland/typescript-vim'                                    " Typescript Syntax for Vim
+Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'altercation/vim-colors-solarized'                              " Theme for nvim
 Plug 'vim-airline/vim-airline'                                       " Status line
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
+Plug 'cespare/vim-toml'
+
 
 " Workflow & Tools
-Plug 'gregsexton/MatchTag'                                           " Highlights the matching HTML tag
 Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
@@ -88,13 +83,11 @@ Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hi
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
-Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
-Plug 'rhysd/vim-grammarous'                                          " Powerful grammar checker for Vim
 
-
-Plug 'mileszs/ack.vim'                                               " Text Search tool
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " Fuzzy find Buffers & Files etc.
+Plug 'mileszs/ack.vim'                                               " Search tool from Vim
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
@@ -109,6 +102,14 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
+" Unix Specific Tools
+if has('unix')
+	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+	let g:go_fmt_command = "goimports"
+	let g:go_gocode_unimported_packages = 1
+
+endif
 
 " Plug 'airblade/vim-rooter'         " sets current working directory based on project files (vcs, rakefile, etc)
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
@@ -179,7 +180,6 @@ let maplocalleader="\\"        " Set the local leader key
 
 set colorcolumn=110            " Keep my lines 110 chars at most
 set complete=.,w,b,u,t,k       " context-sensitive completion
-set completeopt+=menuone,noinsert,noselect
 set cursorline                 " adds a line for the cursor
 set gdefault                   " sets global flag by default
 set hidden                     " allows you to hide buffers with unsaved changes without being prompted
@@ -197,7 +197,6 @@ set shortmess+=I               " no splash screen
 set shortmess+=T               " truncate non-file messages in middle
 set shortmess+=a               " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
 set shortmess+=o               " overwrite file-written messages
-set shortmess+=c               " don't give |ins-completion-menu| messages.
 set showcmd                    " extra info at end of command line
 set sidescrolloff=3            " same as scolloff, but for columns
 set smartcase
@@ -211,6 +210,8 @@ set virtualedit=block          " allow cursor to move where there is no text in 
 " set highlight+=@:ColorColumn " ~/@ at end of window, 'showbreak'
 " set highlight+=N:DiffText    " make current line number stand out a little
 " set highlight+=c:LineNr      " blend vertical separators with line numbers
+" set shortmess+=O             " file-read message overwrites previous
+" set shortmess+=t             " truncate file messages at start
 
 
 " These are 'ON' by default on nvim @see :help nvim-defaults
@@ -271,31 +272,39 @@ endif
 " PLUGIN SETTINGS -------------------------------
 " {{{
 
-" Configure Vim Go
-let g:go_fmt_command = "goimports"
-let g:go_gocode_unimported_packages = 1
 
-" Configure Supertab ----
+" don't give |ins-completion-menu| messages.  For example,
+" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
+set shortmess+=c
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
+" imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+" inoremap <c-c> <ESC>
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Configure supertab
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" Configure Grammarous ----
-nmap <Leader>gi <Plug>(grammarous-open-info-window)
-nmap <Leader>gc <Plug>(grammarous-close-info-window)
-nmap <Leader>gf <Plug>(grammarous-fixit)
-" Only check comments only except for markdown and vim help
-let g:grammarous#default_comments_only_filetypes = {
-			\ '*' : 1, 'help' : 0, 'markdown' : 0,
-			\ }
+" Configure Ctrl+P
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
-" Configure Fzf.vim ----
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>f :Files<CR>
+" Swap Delete Buffer and Toggle By File name bindings
+let g:ctrlp_prompt_mappings = {
+  \ 'ToggleByFname()':      ['<F7>'],
+  \ 'PrtDeleteEnt()':       ['<c-d>'],
+  \ }
 
-" Configure PDV .aka PHP Doc ----
+
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" Configure PDV .aka PHP Doc
 let g:pdv_template_dir = $HOME ."/.vim/templates_snip" " PHP Doc Template location
 
-
-" Configure JsDoc ----
+" Toggle javascript Doc Requires tobyS/pdv plugin
 let g:jsdoc_allow_input_prompt	= 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_allow_shorthand = 1
@@ -305,15 +314,16 @@ let g:jsdoc_user_defined_tags = {
 \}
 
 
-" Configure ALE ----
+" Configure ALE
 let g:ale_sign_error = ' '
 let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
 
-" Configure Ack ----
+" Configure Ack
 nnoremap <Leader>a :Ack!<Space>
 
-" Configure NERDTree ----
+
+" NERDTree {{{
 let g:NERDTreeIgnore=['\.orig']                        " Ignore turds left behind by Mercurial.
 let g:NERDTreeWinSize=40                               " The default of 31 is just a little too narrow.
 let g:NERDTreeMinimalUI=1                              " Disable display of '?' text and 'Bookmarks' label.
@@ -326,40 +336,9 @@ autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
 " Highlight the current file
 autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
 
-" Configure NERDTree ----
 " Toggle Nerd Tree
 nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
-
-" Configure Tagbar ----
-" Toggle Tagbar
-map <leader>g :Tagbar<CR>
-
-" Configure easymotion ----
-" Toggle Easymotion
-map  <Leader>w <Plug>(easymotion-w)
-nmap <Leader>W <Plug>(easymotion-b)
-
-" Configure T-Comment ----
-" Toggle commenting Requires T-comment plugin
-map <leader>c <c-_><c-_>
-
-" Configure Airline ----
-let g:airline_theme='solarized' " Set theme
-let g:airline#extensions#whitespace#enabled = 0 " Don't show whitespace or indentation errors
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
-let g:airline#extensions#branch#displayed_head_limit = 10
-let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
-let g:airline#extensions#obsession#indicator_text = ''
-
-" Configure Tmuxline ----
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'y'    : ['#(whoami)'],
-      \'z'    : '#H'}
+" }}}
 
 " }}}
 
@@ -415,6 +394,9 @@ inoremap <c-f> <c-x><c-f>
 
 " NORMAL MODE MAPPINGS {{{
 
+" Repeat last macro if in a normal buffer.
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'<F23>
+
 "This is a bind to navigate windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -430,10 +412,6 @@ nnoremap tn  :tabedit<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
-" Some useful quickfix shortcuts for quickfix
-nnoremap <C-n> :cn<CR>
-nnoremap <C-m> :cp<CR>
-
 " Repurpose cursor keys (accessible near homerow via "SpaceFN" layout) for one
 " of my most oft-use key sequences.
 nnoremap <silent> <Up> :cprevious<CR>
@@ -444,6 +422,14 @@ nnoremap <silent> <Right> :cnfile<CR>
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
+
+" Toggle easymotion
+map  <Leader>w <Plug>(easymotion-w)
+nmap <Leader>W <Plug>(easymotion-b)
+
+" Toggle Tagbar
+map <leader>g :Tagbar<CR>
 
 " Very Magic Search By Default
 " :help magic
@@ -469,6 +455,12 @@ xnoremap <C-l> <C-w>l
 " HOME and END keys
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
+" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
+" work.
+" cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+" cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 
 " This is to sudo write a file if opened with read only permissions
 cnoremap sudow w !sudo tee % >/dev/null
@@ -497,6 +489,9 @@ cnoremap sudow w !sudo tee % >/dev/null
 " " }}}
 
 " LEADER MODE MAPPINGS {{{
+"
+" <Leader><Leader> -- Open last buffer.
+nnoremap <Leader><Leader> <C-^>
 
 " Full Screen
 nnoremap <Leader>o :only<CR>
@@ -529,6 +524,8 @@ nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 "Toggle spell checker
 nmap <silent> <leader>s :setlocal spell!<CR>
 
+" Toggle commenting Requires T-comment plugin
+map <leader>c <c-_><c-_>
 " }}}
 
 " AUTOCMD MAPPINGS {{{
@@ -618,6 +615,24 @@ set background=dark " Set the background to dark
 let g:solarized_diffmode="high"
 colorscheme solarized
 
+
+" Configure Airline
+let g:airline_theme='solarized' " Set theme
+let g:airline#extensions#whitespace#enabled = 0 " Don't show whitespace or indentation errors
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
+let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
+let g:airline#extensions#obsession#indicator_text = ''
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['#(whoami)'],
+      \'z'    : '#H'}
+
 if has('unix')
 	" Override the Look and Feel (Must be after colorscheme)
 	" Italics start and end key sequences
@@ -685,10 +700,7 @@ if !exists("*Capitalise") " Capitalise the start of a word
 		:s/\<./\u&/g
 	endfunction
 endif
-
-" Ctrl P Config
-" " Swap Delete Buffer and Toggle By File name bindings
-" let g:ctrlp_prompt_mappings = {
-"   \ 'ToggleByFname()':      ['<F7>'],
-"   \ 'PrtDeleteEnt()':       ['<c-d>'],
-"   \ }
+" Custom Windows Settings
+if has('win32')
+	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
+endif

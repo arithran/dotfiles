@@ -2,7 +2,7 @@
 	name = ari
 	email = spam@ari.guru
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /home/ari/.gitignore_global
 [color]
 	ui = true

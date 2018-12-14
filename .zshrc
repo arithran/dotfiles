@@ -2,7 +2,7 @@
 export PATH=$PATH:$HOME/go/bin 
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/$USER/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -106,5 +106,10 @@ bindkey '^Z' fancy-ctrl-z
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim='nvim'
 alias p='git add -p'
+<<<<<<< HEAD
+=======
+alias vim='nvim'
+>>>>>>> 6cba94ab935133e242cc23d8823d19b5197a17b7
 alias t="tmux attach || tmux new -s Master"
 
+export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
