@@ -106,10 +106,6 @@ bindkey '^Z' fancy-ctrl-z
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim='nvim'
 alias p='git add -p'
-<<<<<<< HEAD
-=======
-alias vim='nvim'
->>>>>>> 6cba94ab935133e242cc23d8823d19b5197a17b7
 alias t="tmux attach || tmux new -s Master"
 
 export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
