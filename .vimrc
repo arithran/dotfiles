@@ -536,7 +536,7 @@ augroup custom_filetypedetect
 	autocmd!
 
 	" Center buffer around cursor when opening files
-	autocmd BufRead * normal zz
+	" autocmd BufRead * normal zz
 
 	" Toggle spell between INSERT and NORMAL modes
 	autocmd InsertEnter * setlocal spell
