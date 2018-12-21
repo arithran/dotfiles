@@ -14,3 +14,5 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [include]
     path = /home/ari/.gituser_config
+[alias]
+	hist = log --graph --oneline --decorate --all
