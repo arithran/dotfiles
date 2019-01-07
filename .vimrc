@@ -64,6 +64,7 @@ Plug 'cespare/vim-toml'
 
 
 " Workflow & Tools
+Plug 'AndrewRadev/splitjoin.vim'                                     " Transition between multiline and single-line code 
 Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
@@ -107,6 +108,7 @@ if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 	let g:go_fmt_command = "goimports"
+	let g:go_auto_type_info = 1
 	let g:go_gocode_unimported_packages = 1
 
 endif
