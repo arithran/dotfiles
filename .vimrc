@@ -76,21 +76,19 @@ Plug 'tobyS/vmustache'                                               " PHP docum
 Plug 'tobyS/pdv'                                                     " PHP documentor
 Plug 'SirVer/ultisnips'                                              " Snippet engine (UltiSnips is also a PHP documentor dependancy)
 Plug 'honza/vim-snippets'                                            " 3rd party snippets for ultisnips
-Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
-Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'easymotion/vim-easymotion'                                     " Vim motions on speed!
 Plug 'tomtom/tcomment_vim'                                           " Code commenter
 Plug 'arithran/vim-delete-hidden-buffers'                            " Remove hidden buffers
 Plug 'wincent/terminus'                                              " Auto-reload file, better mouse and paste support
 Plug 'chrisbra/Recover.vim'                                          " Show differences for recovered files
+Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
+Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
-
+Plug 'tpope/vim-unimpaired'                                          "  Tpope's complementary pairs of mappings
+Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-
-Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
 
 if has('nvim')
@@ -155,7 +153,6 @@ endif
 " Plug 'jreybert/vimagit' " plug-in that goes well with fugitive
 " Plug 'cakebaker/scss-syntax.vim'                                      "  SCSS syntax highlighting (trying hail2u/vim-css3-syntax for now)
 " Plug 'AndrewRadev/switch.vim'
-" Plugin 'tpope/vim-unimpaired'                                         "  Tpope's complementary pairs of mappings
 " Plug 'morhetz/gruvbox'
 " Plug 'sukima/xmledit'
 " Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.

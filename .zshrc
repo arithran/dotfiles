@@ -56,6 +56,24 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+
+function powerline_precmd() {
+    PS1="$(~/go/bin/powerline-go -error $? -shell zsh -theme solarized-dark16)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ]; then
+    install_powerline_precmd
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -109,3 +127,8 @@ alias p='git add -p'
 alias t="tmux attach || tmux new -s Master"
 
 export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
+
+if [ -f ~/.zshrc_secret ]; then
+	source ~/.zshrc_secret
+fi
+
