@@ -155,7 +155,7 @@ endif
 " Plug 'AndrewRadev/switch.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'sukima/xmledit'
-" Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
+Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
 
 
 " Archived
