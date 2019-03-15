@@ -57,9 +57,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 
-function powerline_precmd() {
-    PS1="$(~/go/bin/powerline-go -error $? -shell zsh -theme solarized-dark16)"
-}
+# function powerline_precmd() {
+#     PS1="$(~/go/bin/powerline-go -error $? -shell zsh -theme solarized-dark16)"
+# }
 
 function install_powerline_precmd() {
   for s in "${precmd_functions[@]}"; do
@@ -131,4 +131,4 @@ export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
 if [ -f ~/.zshrc_secret ]; then
 	source ~/.zshrc_secret
 fi
-
+eval `dircolors /home/ari/.dir_colors/dircolors`
