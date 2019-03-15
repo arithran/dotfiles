@@ -1,5 +1,0 @@
----
-- hosts: homestead
-  become: true
-  roles:
-  - setup 
