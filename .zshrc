@@ -119,9 +119,16 @@ alias p='git add -p'
 alias t="tmux attach || tmux new -s Home"
 
 export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
+export CDPATH=$HOME:$HOME/go/src/
 
 if [ -f ~/.zshrc_secret ]; then
 	source ~/.zshrc_secret
 fi
+
 # @TODO
 # eval `dircolors /home/ari/.dir_colors/dircolors`
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
