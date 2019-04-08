@@ -46,7 +46,7 @@ http://www.if-not-true-then-false.com/2012/solarized-linux/
 2) For iTerm2 install the following fonts and update the terminal font to the same
 https://github.com/ryanoasis/nerd-fonts#font-installation
 
-3) Enable Italics on the Terminal (Code comments in Vim are usually italicised)
+3) Enable Italics on the Terminal (Code comments in Vim are usually italicised, also fixes backspace issue in Tmux)
 https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
 
 ## License
