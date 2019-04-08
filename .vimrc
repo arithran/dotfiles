@@ -319,7 +319,7 @@ let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
 
 " Configure Ack
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>a :Ack! -i<Space>
 
 
 " NERDTree {{{
@@ -551,8 +551,9 @@ augroup custom_filetypedetect
 	autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 	" Set custom tab behavior
-	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2
-	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2
+	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+	autocmd BufNewFile,BufRead *.yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 	" Insert Doc Block
 	autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
