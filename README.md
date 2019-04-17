@@ -48,10 +48,10 @@ vim
 
 ## Terminal font & colors
 
-1) Solarized color scheme for most editors including most terminals (item2 already ships with Solarized dark).
+1) Solarized color scheme for most editors including most terminals (iTerm2 already ships with Solarized dark).
 http://www.if-not-true-then-false.com/2012/solarized-linux/
 
-2) For iTerm2 install the following fonts and update the terminal font to the same (`Hack Nerd Font` works well)
+2) Install the following fonts and update the terminal font to the same (`Hack Nerd Font` works well)
 https://github.com/ryanoasis/nerd-fonts#font-installation
 
 3) Enable Italics on the Terminal (Code comments in Vim are usually italicised, also fixes backspace issue in Tmux)
