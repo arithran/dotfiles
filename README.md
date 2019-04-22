@@ -12,12 +12,13 @@ mv dotfiles/* dotfiles/.* .
 rmdir dotfiles
 ```
 
-2) Install VIM or Neovim,  Tmux, Zsh & any Terminal
+2) Install VIM or Neovim,  Tmux, Zsh, Ack & any Terminal
 ```
 brew install neovim
 brew install tmux
 brew install ctags
 brew install zsh
+brew install ack
 brew cask install item2
 ```
 
