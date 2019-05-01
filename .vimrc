@@ -106,7 +106,7 @@ if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 	let g:go_fmt_command = "goimports"
-	let g:go_auto_type_info = 1
+	" let g:go_auto_type_info = 1
 	let g:go_gocode_unimported_packages = 1
 
 endif
@@ -319,7 +319,7 @@ let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
 
 " Configure Ack
-nnoremap <Leader>a :Ack! -i<Space>
+nnoremap <Leader>f :Ack! -i<Space>
 
 
 " NERDTree {{{
@@ -558,6 +558,19 @@ augroup custom_filetypedetect
 	" Insert Doc Block
 	autocmd Filetype php nnoremap <leader>dd :call pdv#DocumentWithSnip()<CR>
 	autocmd Filetype javascript nnoremap <leader>dd :JsDoc
+augroup END
+
+
+augroup go
+  autocmd!
+  autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
+  autocmd FileType go nmap <silent> <Leader>a <Plug>(go-coverage-toggle)
+
+  " I like these more!
+  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
 
 " }}}
