@@ -12,38 +12,47 @@ mv dotfiles/* dotfiles/.* .
 rmdir dotfiles
 ```
 
-2) Install VIM or Neovim,  Tmux, Zsh & any Terminal
+2) Install VIM or Neovim,  Tmux, Zsh, Ack & any Terminal
 ```
 brew install neovim
 brew install tmux
 brew install ctags
 brew install zsh
+brew install ack
 brew cask install item2
 ```
 
-3)  Install python Support for nvim
+3) Install Oh-my-zsh
+```
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+4) Install Tmux plugins
+```
+tmux
+```
+ Press `prefix` + <kbd>I</kbd> (capital i, as in **I**nstall) to fetch the plugin.
+
+
+5)  Install python Support for nvim
 ```
 pip2 install --upgrade neovim
 pip3 install --upgrade neovim
 ```
 
-4) Install vim plugins
+6) Install vim plugins
 ```
 vim
 :PlugInstall
 ```
 
-5) Install Oh-my-zsh
-```
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
 
 ## Terminal font & colors
 
-1) Solarized color scheme for most editors including most terminals.
+1) Solarized color scheme for most editors including most terminals (iTerm2 already ships with Solarized dark).
 http://www.if-not-true-then-false.com/2012/solarized-linux/
 
-2) For iTerm2 install the following fonts and update the terminal font to the same
+2) Install the following fonts and update the terminal font to the same (`Hack Nerd Font` works well)
 https://github.com/ryanoasis/nerd-fonts#font-installation
 
 3) Enable Italics on the Terminal (Code comments in Vim are usually italicised, also fixes backspace issue in Tmux)
