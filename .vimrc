@@ -108,6 +108,7 @@ if has('unix')
 	let g:go_fmt_command = "goimports"
 	" let g:go_auto_type_info = 1
 	let g:go_gocode_unimported_packages = 1
+	Plug 'buoto/gotests-vim', { 'do': 'go get -u github.com/cweill/gotests/...' }
 
 endif
 
