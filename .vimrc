@@ -61,6 +61,8 @@ Plug 'vim-airline/vim-airline'                                       " Status li
 Plug 'vim-airline/vim-airline-themes'                                " Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                        " Adds custom icons to airline, NERDTree etc.
 Plug 'cespare/vim-toml'
+Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
+
 
 
 " Workflow & Tools
@@ -104,6 +106,7 @@ let g:deoplete#enable_at_startup = 1
 " Unix Specific Tools
 if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
+	Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 	let g:go_fmt_command = "goimports"
 	" let g:go_auto_type_info = 1
@@ -112,6 +115,11 @@ if has('unix')
 
 endif
 
+"  ARCHIVED PLUGINS  -----------------------------
+"  {{{
+" Plug 'hashivim/vim-terraform'                                        " Basic vim/terraform integration 
+" Plug 'vim-syntastic/syntastic'
+" Plug 'juliosueiras/vim-terraform-completion'
 " Plug 'airblade/vim-rooter'         " sets current working directory based on project files (vcs, rakefile, etc)
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }                   " Syntax highlighting
 " Plug 'othree/html5.vim'                                              " HTML5 + inline SVG omnicomplete function, indent and syntax for Vim.
@@ -122,7 +130,6 @@ endif
 " Plug 'Xuyuanp/nerdtree-git-plugin'                                   " NERDTree showing git status flags
 " Plug 'wincent/command-t'                                             " Fuzzy finder for Files, Buffers, Tags, Help and Running commands
 " Plug 'sjl/gundo.vim'                                                 " Visualize your Vim undo tree
-" Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
 " Plug 'ryanoasis/nerd-fonts'                                        " Gives you patched fonts to be used
 " Plug 'terryma/vim-multiple-cursors'                                  " Select multiple cursors
 " Plug 'mattn/webapi-vim'
@@ -156,13 +163,8 @@ endif
 " Plug 'AndrewRadev/switch.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'sukima/xmledit'
-Plug 'sheerun/vim-polyglot'                                           " A collection of language packs for Vim.
+"  }}}
 
-
-" Archived
-" ========
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Was slowing down NERDTree
-" Plug 'ZoomWin'
 
 call plug#end()
 " }}}
@@ -321,6 +323,11 @@ let g:airline#extensions#ale#enabled = 1
 
 " Configure Ack
 nnoremap <Leader>f :Ack! -i<Space>
+nnoremap <Leader>F :Ack! <Space>
+
+" Configure vim-terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 
 " NERDTree {{{
@@ -546,12 +553,13 @@ augroup custom_filetypedetect
 	autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
 	" Set Compound Filetypes
-	autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+	" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 	" Wrap text for markdown files
 	autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 	" Set custom tab behavior
+	autocmd BufNewFile,BufRead *.vue setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
@@ -584,31 +592,24 @@ iabbrev </ </<C-X><C-O> " auto complete tags
 " {{{
 
 
-" Manual Fold shotcuts, Press Space to toggle a fold in Normal mode and Create
-" in Visual Mode
 " Vim folding commands
-" zf#j creates a fold from the cursor down # lines.
-" zf/string creates a fold from the cursor to string .
-" zj moves the cursor to the next fold.
-" zk moves the cursor to the previous fold.
-" zo opens a fold at the cursor.
-" zO opens all folds at the cursor.
-" zm (more)increases the foldlevel by one.
-" zM (More)closes all open folds.
+" <Space> toggle a fold (custom: 'za' has been mapped)
 " zr (remove) decreases the foldlevel by one.
 " zR (Remove)decreases the foldlevel to zero -- all folds will be open.
-" zd deletes the fold at the cursor.
-" zE deletes all folds.
-" [z move to start of open fold.
-" ]z move to end of open fold.
+" zm (more)increases the foldlevel by one.
+" zM (More)closes all open folds.
+" zo opens a fold at the cursor.
+" zO opens all folds recursively
+" zc closes a fold at the cursor.
+" zO closes all folds recursively 
+" zj moves the cursor to the next fold.
+" zk moves the cursor to the previous fold.
 
 set foldmethod=manual
-set foldlevelstart=1  " Set it to 1 tmp
+set foldlevelstart=0  " Set it to 1 tmp
 " set foldlevelstart=99               " start unfolded
-
 set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
 
 
 " autocmd FileType vim setlocal fdc=1
@@ -616,8 +617,8 @@ vnoremap <Space> zf
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType vim setlocal foldlevel=0
 autocmd FileType javascript,html,css,less,scss,typescript setlocal foldlevel=99
-autocmd FileType css,less,scss,json,php setlocal foldmethod=marker
-autocmd FileType css,less,scss,json,php setlocal foldmarker={,}
+autocmd FileType css,less,scss,json,php,go setlocal foldmethod=marker
+autocmd FileType css,less,scss,json,php,go setlocal foldmarker={,}
 " }}}
 
 " THEME SETTINGS --------------------------------
