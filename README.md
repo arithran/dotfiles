@@ -1,6 +1,6 @@
 # VIM & TMUX
 
-## Screenshots
+## Screenshot
 ![alt tag](https://user-images.githubusercontent.com/1830088/61106587-746aff00-a432-11e9-8f23-feddf323a780.png)
 
 ## Installation Instructions 
