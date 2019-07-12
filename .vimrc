@@ -1,10 +1,10 @@
 "  █████╗ ██████╗ ██╗█ ███████╗    ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 " ██╔══██╗██╔══██╗██║  ██╔════╝    ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-" ███████║██████╔╝██║  ███████╗    ██║   ██║██║██╔████╔██║██████╔╝██║     
-" ██╔══██║██╔══██╗██║  ╚════██║    ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
+" ███████║██████╔╝██║  ███████╗    ██║   ██║██║██╔████╔██║██████╔╝██║
+" ██╔══██║██╔══██╗██║  ╚════██║    ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║
 " ██║  ██║██║  ██║██║  ███████║     ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
 " ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚══════╝      ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
-"                                                                                 
+"
 " Author        : Arithran Thurairetnam (aka Ari)
 " Link          : https://github.com/arithran
 " Version       : 4.0
@@ -13,27 +13,27 @@
 " INSTRUCTIONS ----------------------------------
 " {{{
 " 1. Install these interpreters and make sure they are executable from the CLI
-"    - python, 
-"    - python3, 
-"    - ruby 
+"    - python,
+"    - python3,
+"    - ruby
 "    - php
 "
-" 2. Install these providers: 
-"    - pip install neovim, 
-"    - pip2 install neovim, 
-"    - gem install neovim, 
+" 2. Install these providers:
+"    - pip install neovim,
+"    - pip2 install neovim,
+"    - gem install neovim,
 "    - npm install -g neovim
 "
-" 3. Install these linters: 
+" 3. Install these linters:
 "    - npm install -g eslint eslint-plugin-vue@next
 "
-" 4. Install these tools and make sure they are executable from the CLI 
-"    - git, 
-"    - fzf, 
-"    - ack 
-"    - ctags 
+" 4. Install these tools and make sure they are executable from the CLI
+"    - git,
+"    - fzf,
+"    - ack
+"    - ctags
 "
-" 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font 
+" 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font
 "    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 " }}}
 
@@ -66,7 +66,7 @@ Plug 'sheerun/vim-polyglot'                                           " A collec
 
 
 " Workflow & Tools
-Plug 'AndrewRadev/splitjoin.vim'                                     " Transition between multiline and single-line code 
+Plug 'AndrewRadev/splitjoin.vim'                                     " Transition between multiline and single-line code
 Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
@@ -88,10 +88,12 @@ Plug 'tpope/vim-surround'                                            " Easily de
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 Plug 'tpope/vim-unimpaired'                                          "  Tpope's complementary pairs of mappings
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-rhubarb'                                             " Integrates fugitive's :Gbrowse with GitHub
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
+Plug 'troydm/zoomwintab.vim'                                         " Toggle between one window and multi-window
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -106,7 +108,7 @@ let g:deoplete#enable_at_startup = 1
 " Unix Specific Tools
 if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
-	Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux
+	Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux. To save this config run :TmuxlineSnapshot .tmuxline
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 	let g:go_fmt_command = "goimports"
 	" let g:go_auto_type_info = 1
@@ -117,7 +119,7 @@ endif
 
 "  ARCHIVED PLUGINS  -----------------------------
 "  {{{
-" Plug 'hashivim/vim-terraform'                                        " Basic vim/terraform integration 
+" Plug 'hashivim/vim-terraform'                                        " Basic vim/terraform integration
 " Plug 'vim-syntastic/syntastic'
 " Plug 'juliosueiras/vim-terraform-completion'
 " Plug 'airblade/vim-rooter'         " sets current working directory based on project files (vcs, rakefile, etc)
@@ -170,7 +172,7 @@ call plug#end()
 " }}}
 
 
-" GENERAL SETTINGS ------------------------------ 
+" GENERAL SETTINGS ------------------------------
 " {{{
 set nocompatible               " be iMproved, required
 filetype off                   " No idea why this is good practice, somebody PM me please
@@ -209,15 +211,9 @@ set splitright                 " which feels more natural
 set switchbuf=usetab           " try to reuse windows/tabs when switching buffers
 set virtualedit=block          " allow cursor to move where there is no text in visual block mode
 
-" set highlight+=@:ColorColumn " ~/@ at end of window, 'showbreak'
-" set highlight+=N:DiffText    " make current line number stand out a little
-" set highlight+=c:LineNr      " blend vertical separators with line numbers
-" set shortmess+=O             " file-read message overwrites previous
-" set shortmess+=t             " truncate file messages at start
-
 
 " These are 'ON' by default on nvim @see :help nvim-defaults
-if !has('nvim')                     
+if !has('nvim')
 	set autoindent                  " Copy indent from current line, over to the new line
 	set autoread                    " Automatically read file when changed outside Vim
 	set backspace=indent,eol,start  " Backspace over everything in insert mode
@@ -275,18 +271,10 @@ endif
 " {{{
 
 
-" don't give |ins-completion-menu| messages.  For example,
-" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
 set shortmess+=c
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
-" imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
-" inoremap <c-c> <ESC>
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Configure supertab
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" Configure zoomwintab.vim
+nnoremap <leader>z :ZoomWinTabToggle<CR>
 
 " Configure Ctrl+P
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
@@ -312,7 +300,7 @@ let g:jsdoc_input_description = 1
 let g:jsdoc_allow_shorthand = 1
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_user_defined_tags = {
-\ '@author': 'Arithran Thurairetnam <arithran.thurairetnam@adp.com>',
+\ '@author': 'Arithran Thurairetnam <arithran.thurairetnam@email.com>',
 \}
 
 
@@ -321,7 +309,7 @@ let g:ale_sign_error = ' '
 let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
 
-" Configure Ack
+" Configure Ack, <leader>f ignore case, <leader>F include case
 nnoremap <Leader>f :Ack! -i<Space>
 nnoremap <Leader>F :Ack! <Space>
 
@@ -340,8 +328,7 @@ let g:NERDTreeCreatePrefix='silent keepalt keepjumps'  " Let <Leader><Leader> (^
 nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
 " Move up a directory using "-" like vim-vinegar (usually "u" does this).
 autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
-" Highlight the current file
-autocmd User NERDTreeInit call arithran#autocmds#attempt_select_last_file()
+
 
 " Toggle Nerd Tree
 nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
@@ -358,7 +345,8 @@ set formatoptions+=n            " smart auto-indenting inside numbered lists
 set nojoinspaces                " don't autoinsert two spaces after '.', '?', '!' for join command
 set smartindent                 " Do smart indenting when starting a new line
 set shiftround                  " Round indent to multiple of 'shiftwidth'
-set whichwrap=b,h,l,s,<,>,[,],~       " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+set whichwrap=b,h,l,s,<,>,[,],~ " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+set listchars=tab:▸\ ,eol:¬     " pretify :set list
 
 
 if has('linebreak')
@@ -370,13 +358,6 @@ if has('linebreak')
 	endif
 endi
 
-set listchars=tab:▸\ ,eol:¬ " pretify :set list
-" set listchars=nbsp:⦸                  " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
-" set listchars+=tab:▸\                 " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
-"                                       " + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
-" set listchars+=extends:»              " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
-" set listchars+=precedes:«             " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
-" set listchars+=trail:•                " BULLET (U+2022, UTF-8: E2 80 A2)
 
 set noexpandtab " Make sure that every file uses real tabs, not spaces
 let s:tabwidth=4 " Set the tab width
@@ -384,7 +365,7 @@ exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 
-" When moving around, Maximize the current window 
+" When moving around, Maximize the current window
 " but show a minimum of 5 lines on all other windows
 set winheight=5
 set winminheight=5
@@ -396,7 +377,7 @@ set winheight=999
 " INSERT MODE MAPPINGS {{{
 
 " Complete file paths
-inoremap <c-f> <c-x><c-f> 
+inoremap <c-f> <c-x><c-f>
 " }}}
 
 " NORMAL MODE MAPPINGS {{{
@@ -472,36 +453,12 @@ cnoremap <C-e> <End>
 " This is to sudo write a file if opened with read only permissions
 cnoremap sudow w !sudo tee % >/dev/null
 
-
-" Configure FZF Preview
-" *********************
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
-" command! -bang -nargs=* Ag
-"   \ call fzf#vim#ag(<q-args>,
-"   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \                         : fzf#vim#with_preview('right:50%'),
-"   \                 <bang>0)
-"
-" " Likewise, Files command with preview window
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-" " }}}
+" }}}
 
 " LEADER MODE MAPPINGS {{{
 "
 " <Leader><Leader> -- Open last buffer.
 nnoremap <Leader><Leader> <C-^>
-
-" Full Screen
-nnoremap <Leader>o :only<CR>
 
 " <Leader>p -- Show the path of the current file (mnemonic: path; useful when
 " you have a lot of splits and the status line gets truncated).
@@ -510,16 +467,6 @@ nnoremap <Leader>p :echo expand('%')<CR>
 " <Leader>pp -- Like <Leader>p, but additionally yanks the filename and sends it
 " off to Clipper.
 nnoremap <Leader>pp :let @+=expand('%')<CR> :echo expand('%')<CR>
-
-" <Leader>r -- Cycle through relativenumber + number, number (only), and no
-" " numbering (mnemonic: relative).
-nnoremap <silent> <Leader>r :call arithran#mappings#cycle_numbering()<CR>
-
-" <Leader>zz -- Zap trailing whitespace in the current buffer.
-"
-"        As this one is somewhat destructive and relatively close to the
-"        oft-used <leader>a mapping, make this one a double key-stroke.
-nnoremap <silent> <Leader>zz :call arithran#mappings#zap()<CR>
 
 " <LocalLeader>c -- Fix (most) syntax highlighting problems in current buffer
 " (mnemonic: coloring).
@@ -601,7 +548,7 @@ iabbrev </ </<C-X><C-O> " auto complete tags
 " zo opens a fold at the cursor.
 " zO opens all folds recursively
 " zc closes a fold at the cursor.
-" zO closes all folds recursively 
+" zC closes all folds recursively
 " zj moves the cursor to the next fold.
 " zk moves the cursor to the previous fold.
 
@@ -611,6 +558,10 @@ set foldlevelstart=0  " Set it to 1 tmp
 set foldcolumn=1
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
+" zO only recursively opens all folds if the cursor is on a closed fold
+" Let's re-map it to recursively open all folds, even when the current fold is open
+nnoremap zO zczA
+
 
 " autocmd FileType vim setlocal fdc=1
 " " Space to toggle folds.
@@ -619,6 +570,10 @@ autocmd FileType vim setlocal foldlevel=0
 autocmd FileType javascript,html,css,less,scss,typescript setlocal foldlevel=99
 autocmd FileType css,less,scss,json,php,go setlocal foldmethod=marker
 autocmd FileType css,less,scss,json,php,go setlocal foldmarker={,}
+autocmd FileType fugitive setlocal nofoldenable
+autocmd BufReadPost fugitive:///* setlocal nofoldenable
+
+
 " }}}
 
 " THEME SETTINGS --------------------------------
@@ -654,9 +609,9 @@ if has('unix')
 	set t_ZH=[3m
 	set t_ZR=[23m
 	" Make comments italic
-	highlight Comment cterm=italic 
+	highlight Comment cterm=italic
 	" Make Background transparent
-	highlight Normal ctermbg=none 
+	highlight Normal ctermbg=none
 endif
 
 
@@ -664,13 +619,11 @@ endif
 
 " CUSTOM FUNCTIONS ------------------------------
 " {{{
+
 if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
 	function AutoCorrectLastSpellingMistake()
 		if !&binary && &filetype != 'diff'
 			normal ms[s1z=`s
-			" echo col(".") // Current col
-			" echo col("$") // Total col
-			" after correction move to total - current from the right
 		endif
 	endfunction
 endif
@@ -690,32 +643,15 @@ if !exists("*StripDosLineEndings") " Strip windows line endings
 		:%s/$//
 	endfunction
 endif
-if !exists("*ClearCache") " Clear cahe shell
-	function ClearCache()
-		echom system("../clear_cache.sh")
-	endfunction
-endif
-if !exists("*GeneratePhpCtags") " Clear cahe shell
+if !exists("*GeneratePhpCtags") " Generate ctags for php project
 	function GeneratePhpCtags()
 		echom system("ctags -R --languages=php .")
 	endfunction
 endif
 if !exists("*Capitalise") " Capitalise the start of a word
 	function Capitalise()
-		" In a substitute command, place \U or \L before backreferences for the desired output. Everything 
-		" after \U, stopping at \E or  \e, is converted to uppercase. Similarly, everything after \L, 
-		" stopping at \E or \e, is converted to lowercase.
-		" Alternatively, use \u to uppercase only the first character of what follows, or \l to lowercase 
-		" only the first character.
-		"
-		" \< matches the start of a word
-		" . matches the first character of a word
-		" \u tells Vim to uppercase the following character in the substitution string (&)
-		" & means substitute whatever was matched on the LHS
 		:s/\<./\u&/g
 	endfunction
 endif
-" Custom Windows Settings
-if has('win32')
-	let g:ruby_host_prog = 'C:\tools\ruby25\bin\neovim-ruby-host.bat'
-endif
+
+" }}}
