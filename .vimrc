@@ -87,13 +87,19 @@ Plug 'tpope/vim-repeat'                                              " repeats t
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
 Plug 'tpope/vim-unimpaired'                                          "  Tpope's complementary pairs of mappings
+Plug 'troydm/zoomwintab.vim'                                         " Toggle between one window and multi-window
+
+" Git
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-rhubarb'                                             " Integrates fugitive's :Gbrowse with GitHub
+Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
+Plug 'junegunn/gv.vim'                                               " A git commit browser.
+
+
+" Searching
 Plug 'mileszs/ack.vim'                                               " Search tool from Vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'                                        " Shows a git diff in the 'gutter'
-Plug 'troydm/zoomwintab.vim'                                         " Toggle between one window and multi-window
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -308,6 +314,9 @@ let g:jsdoc_user_defined_tags = {
 let g:ale_sign_error = ' '
 let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#show_splits = 0  " don't show open splits in tabline when more than 1 tab
+let g:airline#extensions#tabline#show_buffers = 0 " don't show open buffers in tabline when 1 tab
+
 
 " Configure Ack, <leader>f ignore case, <leader>F include case
 nnoremap <Leader>f :Ack! -i<Space>
@@ -415,6 +424,8 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 " Toggle easymotion
 map  <Leader>w <Plug>(easymotion-w)
 nmap <Leader>W <Plug>(easymotion-b)
+let g:EasyMotion_skipfoldedline = 0 " Show motion keys on folds
+
 
 " Toggle Tagbar
 map <leader>g :Tagbar<CR>
@@ -591,7 +602,6 @@ let g:airline_theme='solarized' " Set theme
 let g:airline#extensions#whitespace#enabled = 0 " Don't show whitespace or indentation errors
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#branch#vcs_priority = ["mercurial", "git"]
 let g:airline#extensions#branch#displayed_head_limit = 10
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
 let g:airline#extensions#obsession#indicator_text = ''
