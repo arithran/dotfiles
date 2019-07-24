@@ -116,9 +116,22 @@ if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 	Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux. To save this config run :TmuxlineSnapshot .tmuxline
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+	let g:go_fmt_experimental = 1
 	let g:go_fmt_command = "goimports"
 	" let g:go_auto_type_info = 1
 	let g:go_gocode_unimported_packages = 1
+	let g:go_metalinter_command='golangci-lint'
+	let g:go_metalinter_autosave = 1
+	let g:go_list_type = "quickfix"
+	" @TODO stylecheck is a replacement from golint
+	let g:go_metalinter_enabled = [
+				\ 'govet', 'gosimple', 'staticcheck', 'unused', 'interfacer', 'unparam', 
+				\ 'deadcode', 'errcheck', 'ineffassign', 'structcheck', 'typecheck', 'varcheck', 
+				\ 'depguard', 'dupl', 'goconst', 'gocritic', 
+				\ 'gocyclo', 'gofmt', 'goimports', 'golint', 'gosec', 'maligned', 'misspell', 
+				\ 'nakedret', 'prealloc', 'scopelint', 'unconvert' 
+				\ ]
+	" let g:go_metalinter_autosave_enabled = g:go_metalinter_enabled
 	Plug 'buoto/gotests-vim', { 'do': 'go get -u github.com/cweill/gotests/...' }
 
 endif
@@ -316,6 +329,12 @@ let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0  " don't show open splits in tabline when more than 1 tab
 let g:airline#extensions#tabline#show_buffers = 0 " don't show open buffers in tabline when 1 tab
+let g:ale_linters = {
+	\		'go': ['golangci-lint']
+	\	}
+" \		'go': ['gobuild', 'gopls', 'golangci-lint']
+let g:ale_go_golangci_lint_package = 1
+let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").' --skip-files="(main.go|routes.go)"'
 
 
 " Configure Ack, <leader>f ignore case, <leader>F include case
@@ -566,7 +585,7 @@ iabbrev </ </<C-X><C-O> " auto complete tags
 set foldmethod=manual
 set foldlevelstart=0  " Set it to 1 tmp
 " set foldlevelstart=99               " start unfolded
-set foldcolumn=1
+set foldcolumn=0
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " zO only recursively opens all folds if the cursor is on a closed fold
