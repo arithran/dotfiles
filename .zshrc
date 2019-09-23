@@ -121,6 +121,9 @@ alias t="tmux attach || tmux new -s Home"
 export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
 export CDPATH=$HOME:$HOME/go/src/
 
+# Needed for 'git stat' alias
+export REVIEW_BASE=develop
+
 if [ -f ~/.zshrc_secret ]; then
 	source ~/.zshrc_secret
 fi

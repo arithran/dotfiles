@@ -86,8 +86,14 @@ Plug 'chrisbra/Recover.vim'                                          " Show diff
 Plug 'tpope/vim-repeat'                                              " repeats the last command even if its not native with [.]
 Plug 'tpope/vim-surround'                                            " Easily delete and change surroundings
 Plug 'tpope/vim-obsession'                                           " Session Management for VIM
-Plug 'tpope/vim-unimpaired'                                          "  Tpope's complementary pairs of mappings
+Plug 'tpope/vim-unimpaired'                                          " Tpope's complementary pairs of mappings
 Plug 'troydm/zoomwintab.vim'                                         " Toggle between one window and multi-window
+Plug 'janko/vim-test'                                                " Run your tests at the speed of thought
+Plug 'benmills/vimux'
+
+" Food
+Plug 'EvanQuan/vim-pizza'
+
 
 " Git
 Plug 'tpope/vim-fugitive'                                            " A Git wrapper so awesome, it should be illegal
@@ -125,7 +131,7 @@ if has('unix')
 	let g:go_list_type = "quickfix"
 	" @TODO stylecheck is a replacement from golint
 	let g:go_metalinter_enabled = [
-				\ 'govet', 'gosimple', 'staticcheck', 'unused', 'interfacer', 'unparam', 
+				\ 'govet', 'gosimple', 'staticcheck', 'interfacer', 'unparam', 
 				\ 'deadcode', 'errcheck', 'ineffassign', 'structcheck', 'typecheck', 'varcheck', 
 				\ 'depguard', 'dupl', 'goconst', 'gocritic', 
 				\ 'gocyclo', 'gofmt', 'goimports', 'golint', 'gosec', 'maligned', 'misspell', 
@@ -334,7 +340,21 @@ let g:ale_linters = {
 	\	}
 " \		'go': ['gobuild', 'gopls', 'golangci-lint']
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").' --skip-files="(main.go|routes.go)"'
+let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").''
+
+
+" Configure vim-test (via vimux)
+let test#strategy = "vimux"
+let g:VimuxHeight = "15"
+" Test the current function
+nnoremap <silent> tn :TestNearest<CR>
+" Test the current file
+nnoremap <silent> tf :TestFile<CR>
+" Close vim tmux runner opened by VimuxRunCommand
+nnoremap <silent>tq :VimuxCloseRunner<CR>
+" Zoom the runner pane (use <bind-key> z to restore runner pane)
+nnoremap <silent>tz :call VimuxZoomRunner()<CR>
+
 
 
 " Configure Ack, <leader>f ignore case, <leader>F include case
@@ -424,7 +444,6 @@ nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
 nnoremap tl  :tablast<CR>
-nnoremap tn  :tabedit<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
@@ -612,7 +631,7 @@ autocmd BufReadPost fugitive:///* setlocal nofoldenable
 syntax enable " Enable syntax highlighting
 set t_Co=256                   " Set the color of the terminal to 256 bits
 set background=dark " Set the background to dark
-let g:solarized_diffmode="high"
+let g:solarized_diffmode="normal"
 colorscheme solarized
 
 
