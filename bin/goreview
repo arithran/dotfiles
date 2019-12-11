@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Run report card
+goreportcard-cli -v
+
+# Run golang ci 
+golangci-lint run --tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits --skip-files="(main.go|routes.go)"

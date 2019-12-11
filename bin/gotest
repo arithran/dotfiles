@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Run with AWS ENVs for TDD
+AWS_PROFILE=cpe-dev1 AWS_REGION=us-west-2 go test -race -v "$@"

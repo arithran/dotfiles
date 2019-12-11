@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+go test -bench . -benchmem -memprofile mem.prof -cpuprofile cpu.prof -run 'Bench$'
