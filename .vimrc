@@ -42,10 +42,10 @@
 
 " Automatically download package manager on Unix if it doesn't exist.
 if has('unix')
-	" Vim
 	if !filereadable(expand("~/.vim/autoload/plug.vim"))
 		echo "Downloading package manager"
 		call system(expand("curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"))
+		autocmd VimEnter * PlugInstall
 	endif
 endif
 
@@ -67,7 +67,7 @@ Plug 'sheerun/vim-polyglot'                                           " A collec
 
 " Workflow & Tools
 Plug 'AndrewRadev/splitjoin.vim'                                     " Transition between multiline and single-line code
-Plug 'w0rp/ale'                                                      " Asynchronous Lint Engine
+Plug 'dense-analysis/ale'                                                      " Asynchronous Lint Engine
 Plug 'scrooloose/nerdtree'                                           " A tree explorer plugin for vim.
 Plug 'majutsushi/tagbar'                                             " Displays tags in a window, ordered by scope
 Plug 'itmammoth/doorboy.vim'                                         " Inserts matching brackets((){}[]) and quotations('`).
@@ -122,6 +122,7 @@ if has('unix')
 	Plug 'christoomey/vim-tmux-navigator'                                " Bind Tmux Keys with VIM
 	Plug 'edkolev/tmuxline.vim'                                          " Generate status line colours for tmux. To save this config run :TmuxlineSnapshot .tmuxline
 	Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+	let g:go_jump_to_error = 0
 	let g:go_fmt_experimental = 1
 	let g:go_fmt_command = "goimports"
 	" let g:go_auto_type_info = 1
@@ -336,11 +337,16 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0  " don't show open splits in tabline when more than 1 tab
 let g:airline#extensions#tabline#show_buffers = 0 " don't show open buffers in tabline when 1 tab
 let g:ale_linters = {
-	\		'go': ['golangci-lint']
+    \		'go': ['gobuild', 'gopls', 'golangci-lint']
 	\	}
+	" \		'go': ['golangci-lint']
 " \		'go': ['gobuild', 'gopls', 'golangci-lint']
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").''
+
+
+" Configure gitgutter
+let g:gitgutter_diff_base = $REVIEW_BASE
 
 
 " Configure vim-test (via vimux)
@@ -467,6 +473,33 @@ let g:EasyMotion_skipfoldedline = 0 " Show motion keys on folds
 
 " Toggle Tagbar
 map <leader>g :Tagbar<CR>
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
 
 " Very Magic Search By Default
 " :help magic
@@ -555,6 +588,7 @@ augroup custom_filetypedetect
 	autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
 	" Set custom tab behavior
+	autocmd BufNewFile,BufRead *.js setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.vue setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.proto setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
