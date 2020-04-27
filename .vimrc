@@ -28,10 +28,10 @@
 "    - npm install -g eslint eslint-plugin-vue@next
 "
 " 4. Install these tools and make sure they are executable from the CLI
-"    - git,
-"    - fzf,
-"    - ack
-"    - ctags
+"    - brew install git,
+"    - brew install fzf,
+"    - brew install the_silver_searcher
+"    - brew install ctags
 "
 " 5. If you are using a terminal make sure you install the solarized colorscheme and set the correct font
 "    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
@@ -366,6 +366,9 @@ nnoremap <silent>tz :call VimuxZoomRunner()<CR>
 " Configure Ack, <leader>f ignore case, <leader>F include case
 nnoremap <Leader>f :Ack! -i<Space>
 nnoremap <Leader>F :Ack! <Space>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Configure vim-terraform
 let g:terraform_align=1
