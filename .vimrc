@@ -50,7 +50,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'                                                    "  A collection of language packs for Vim.
 
 " Themes & Fonts
-Plug 'romainl/flattened'                                        "  Theme for nvim
+Plug 'romainl/flattened'                                                       "  Theme for nvim
 Plug 'vim-airline/vim-airline'                                                 "  Status line
 Plug 'vim-airline/vim-airline-themes'                                          "  Themes for status line, g:airline_theme
 Plug 'ryanoasis/vim-devicons'                                                  "  Adds custom icons to airline, NERDTree etc.
@@ -99,6 +99,7 @@ call plug#end()
 " GENERAL SETTINGS ------------------------------
 "
 set nocompatible               " be iMproved, required
+set hidden
 let mapleader = ","            " Set the leader key
 set colorcolumn=110            " Keep my lines 110 chars at most
 set complete=.,w,b,u,t,k       " context-sensitive completion
@@ -452,7 +453,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#displayed_head_limit = 10
 let g:airline_skip_empty_sections = 1 " Skips empty errors and warning sections if applicable
-let g:airline#extensions#obsession#indicator_text = ''
 
 let g:tmuxline_preset = {
       \'a'    : '#S',
@@ -472,6 +472,7 @@ if has('unix')
 	highlight Normal ctermbg=none
 endif
 
+" AUTO COMPLETION SETTINGS ----------------------
 " neoclide/coc.nvim
 let g:coc_global_extensions = [
 	\'coc-marketplace',
@@ -483,11 +484,7 @@ let g:coc_global_extensions = [
 	\'coc-json',
 	\]
 
-" TextEdit might fail if hidden is not set.
-set hidden
-
 " Some servers have issues with backup files, see #649.
-set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
