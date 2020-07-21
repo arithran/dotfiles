@@ -98,18 +98,15 @@ call plug#end()
 
 " GENERAL SETTINGS ------------------------------
 "
-set nocompatible               " be iMproved, required
 set hidden
 let mapleader = ","            " Set the leader key
-set colorcolumn=110            " Keep my lines 110 chars at most
-set complete=.,w,b,u,t,k       " context-sensitive completion
 set cursorline                 " adds a line for the cursor
 set gdefault                   " sets global flag by default
 set ignorecase
 set mouse=a                    " Enable mouse imput
 set nofixendofline             " Don't add End-Of-line  character at the bottom of a file
 set nopaste                    " Disable past mode by default
-set nospell                    " turn on spell checker
+set spell                      " turn on spell checker
 set number
 set pastetoggle=<f6>           " Toggle paste mode key
 set relativenumber
@@ -236,8 +233,8 @@ nnoremap <silent>tq :VimuxCloseRunner<CR>
 nnoremap <silent>tz :call VimuxZoomRunner()<CR>
 
 " mileszs/ack.vim
-nnoremap <Leader>f :Ack! -i<Space>
-nnoremap <Leader>F :Ack! <Space>
+nnoremap <Leader>s :Ack! -i<Space>
+nnoremap <Leader>S :Ack! <Space>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -375,40 +372,12 @@ xnoremap <C-l> <C-w>l
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-
-" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
-" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
-" work.
-" cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
-" cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
-
 " This is to sudo write a file if opened with read only permissions
 cnoremap sudow w !sudo tee % >/dev/null
 
 
 " LEADER MODE MAPPINGS
 " --------------------
-" <Leader><Leader> -- Open last buffer.
-nnoremap <Leader><Leader> <C-^>
-
-" <Leader>p -- Show the path of the current file (mnemonic: path; useful when
-" you have a lot of splits and the status line gets truncated).
-nnoremap <Leader>p :echo expand('%')<CR>
-
-" <Leader>pp -- Like <Leader>p, but additionally yanks the filename and sends it
-" off to Clipper.
-nnoremap <Leader>pp :let @+=expand('%')<CR> :echo expand('%')<CR>
-
-" <LocalLeader>c -- Fix (most) syntax highlighting problems in current buffer
-" (mnemonic: coloring).
-nnoremap <silent> <LocalLeader>c :syntax sync fromstart<CR>
-
-" <LocalLeader>e -- Edit file, starting in same directory as current file.
-nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
-
-"Toggle spell checker
-nmap <silent> <leader>s :setlocal spell!<CR>
-
 " Toggle commenting Requires T-comment plugin
 map <leader>c <c-_><c-_>
 
@@ -418,10 +387,6 @@ map <leader>c <c-_><c-_>
 augroup custom_filetypedetect
 	" clear this group when re-sourcing .vimrc
 	autocmd!
-
-	" Toggle spell between INSERT and NORMAL modes
-	autocmd InsertEnter * setlocal spell
-	autocmd InsertLeave * setlocal nospell
 
 	" Set Filetypes
 	autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
