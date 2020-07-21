@@ -24,7 +24,8 @@
 "    - gem install neovim,
 "    - npm install -g neovim
 "
-" 3. Install these tools and make sure they are executable from the CLI
+" 3. Install these tools and make sure they are executable from the CLI 
+"    (Example below use 'brew' which is for Mac, substitute a different command if applicable)
 "    - brew install git,
 "    - brew install fzf,
 "    - brew install the_silver_searcher
@@ -36,7 +37,7 @@
 
 " PLUGINS ---------------------------------------
 "
-" If this is a Unix style OS, automatically download package manager on first boot
+" If this is a Unix style OS, automatically download package manager and install dependencies first boot
 if has('unix')
 	if !filereadable(expand("~/.vim/autoload/plug.vim"))
 		echo "Downloading package manager"
@@ -59,7 +60,7 @@ Plug 'ryanoasis/vim-devicons'                                                  "
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'buoto/gotests-vim', { 'do': 'go get -u github.com/cweill/gotests/...' }
 
-" TDD/Unittests
+" TDD/Unit-testing
 Plug 'janko/vim-test'                                                          "  Run your tests at the speed of thought
 Plug 'benmills/vimux'
 
@@ -177,6 +178,7 @@ endif
 " PLUGIN SETTINGS -------------------------------
 "
 " fatih/vim-go
+" ------------
 let g:go_jump_to_error = 0
 let g:go_fmt_experimental = 1
 let g:go_fmt_command = "goimports"
@@ -193,6 +195,7 @@ let g:go_metalinter_enabled = [
 
 
 " ctrlpvim/ctrlp.vim
+" ------------------
 nnoremap <silent> <C-b>s :CtrlPBuffer<CR>
 nnoremap <silent> <C-b>L :b#<CR>
 " Swap Delete Buffer and Toggle By File name bindings
@@ -206,6 +209,7 @@ if executable('ag')
 endif
 
 " dense-analysis/ale
+" ------------------
 let g:ale_sign_error = ' '
 let g:ale_sign_warning = ' '
 let g:airline#extensions#ale#enabled = 1
@@ -218,9 +222,11 @@ let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").''
 
 " airblade/vim-gitgutter
+" ----------------------
 let g:gitgutter_diff_base = $REVIEW_BASE
 
 " janko/vim-test
+" --------------
 let test#strategy = "vimux"
 let g:VimuxHeight = "15"
 " Test the current function
@@ -233,6 +239,7 @@ nnoremap <silent>tq :VimuxCloseRunner<CR>
 nnoremap <silent>tz :call VimuxZoomRunner()<CR>
 
 " mileszs/ack.vim
+" ---------------
 nnoremap <Leader>s :Ack! -i<Space>
 nnoremap <Leader>S :Ack! <Space>
 if executable('ag')
@@ -240,6 +247,7 @@ if executable('ag')
 endif
 
 " scrooloose/nerdtree
+" -------------------
 let g:NERDTreeIgnore=['\.orig']                        " Ignore turds left behind by Mercurial.
 let g:NERDTreeWinSize=40                               " The default of 31 is just a little too narrow.
 let g:NERDTreeMinimalUI=1                              " Disable display of '?' text and 'Bookmarks' label.
@@ -252,11 +260,13 @@ autocmd FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
 nnoremap <silent> <leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 
 " easymotion/vim-easymotion
+" -------------------------
 map  <Leader>w <Plug>(easymotion-w)
 nmap <Leader>W <Plug>(easymotion-b)
 let g:EasyMotion_skipfoldedline = 0 " Show motion keys on folds
 
 " majutsushi/tagbar
+" -----------------
 map <leader>g :Tagbar<CR>
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
@@ -286,7 +296,10 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
-
+" tomtom/tcomment_vim
+" -------------------
+" toggle comments
+map <leader>c <c-_><c-_>
 
 " FORMATTING SETTINGS ---------------------------
 "
@@ -299,7 +312,6 @@ set smartindent                 " Do smart indenting when starting a new line
 set shiftround                  " Round indent to multiple of 'shiftwidth'
 set whichwrap=b,h,l,s,<,>,[,],~ " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
 set listchars=tab:▸\ ,eol:¬     " pretify :set list
-
 
 if has('linebreak')
 	set linebreak                       " wrap long lines at characters in 'breakat'
@@ -317,26 +329,17 @@ exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 exec 'set softtabstop='.s:tabwidth
 
-" When moving around, Maximize the current window
-" but show a minimum of 5 lines on all other windows
-" set winheight=5
-" set winminheight=5
-" set winheight=999
-
 " CUSTOM MAPPINGS -------------------------------
 "
-" NORMAL MODE MAPPINGS
-" --------------------
-" Repeat last macro if in a normal buffer.
-nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'<F23>
-
-"This is a bind to navigate windows
+" normal mode
+" -----------
+"navigate windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Navigate Tabs
+" navigate tabs
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
@@ -348,16 +351,18 @@ nnoremap td  :tabclose<CR>
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
-" Very Magic Search By Default
-" :help magic
+" very magic search by default
 nnoremap / /\v
 
-" Auto-correct the last spelling mistake
+" auto-correct the last spelling mistake
 nnoremap <leader>l :call AutoCorrectLastSpellingMistake()<CR>
 
+" '@@' repeats the last macro that was run
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'<F23>
 
-" VISUAL MODE MAPPINGS 
-" -------------------- 
+
+" visual mode
+" -----------
 " Navigate windows while in Visual mode
 xnoremap <C-h> <C-w>h
 xnoremap <C-j> <C-w>j
@@ -365,8 +370,8 @@ xnoremap <C-k> <C-w>k
 xnoremap <C-l> <C-w>l
 
 
-" COMMAND MODE MAPPINGS
-" ---------------------
+" command mode
+" ------------
 " <C-u> should  already delete the line
 " HOME and END keys
 cnoremap <C-a> <Home>
@@ -375,15 +380,7 @@ cnoremap <C-e> <End>
 " This is to sudo write a file if opened with read only permissions
 cnoremap sudow w !sudo tee % >/dev/null
 
-
-" LEADER MODE MAPPINGS
-" --------------------
-" Toggle commenting Requires T-comment plugin
-map <leader>c <c-_><c-_>
-
-
-" AUTOCMD MAPPINGS
-" ----------------
+" AUTOCMD  --------------------------------------
 augroup custom_filetypedetect
 	" clear this group when re-sourcing .vimrc
 	autocmd!
@@ -437,8 +434,45 @@ if has('unix')
 	highlight Normal ctermbg=none
 endif
 
-" AUTO COMPLETION SETTINGS ----------------------
+" CUSTOM FUNCTIONS ------------------------------
+if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
+	function AutoCorrectLastSpellingMistake()
+		if !&binary && &filetype != 'diff'
+			normal ms[s1z=`s
+		endif
+	endfunction
+endif
+if !exists("*StripTrailingWhitespace") " Strip trailing white spaces
+	function StripTrailingWhitespace()
+		if !&binary && &filetype != 'diff'
+			normal mz
+			normal Hmy
+			%s/\s\+$//c
+			normal 'yz<CR>
+			normal `z
+		endif
+	endfunction
+endif
+if !exists("*StripDosLineEndings") " Strip windows line endings
+	function StripDosLineEndings()
+		:%s/$//
+	endfunction
+endif
+if !exists("*Capitalise") " Capitalise the start of a word
+	function Capitalise()
+		:s/\<./\u&/g
+	endfunction
+endif
+
+" EXPERIMENTAL ----------------------------------
 " neoclide/coc.nvim
+" -----------------
+" I'm still testing this plugin
+"
+" This is the coc.nvim example config. I haven't had the time to look at this
+" in detail. So it's the last section in this .vimrc.
+" @link https://github.com/neoclide/coc.nvim#example-vim-configuration
+
 let g:coc_global_extensions = [
 	\'coc-marketplace',
 	\'coc-go',
@@ -586,32 +620,3 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
-" CUSTOM FUNCTIONS ------------------------------
-if !exists("*AutoCorrectLastSpellingMistake") " Automatically fix last typo
-	function AutoCorrectLastSpellingMistake()
-		if !&binary && &filetype != 'diff'
-			normal ms[s1z=`s
-		endif
-	endfunction
-endif
-if !exists("*StripTrailingWhitespace") " Strip trailing white spaces
-	function StripTrailingWhitespace()
-		if !&binary && &filetype != 'diff'
-			normal mz
-			normal Hmy
-			%s/\s\+$//c
-			normal 'yz<CR>
-			normal `z
-		endif
-	endfunction
-endif
-if !exists("*StripDosLineEndings") " Strip windows line endings
-	function StripDosLineEndings()
-		:%s/$//
-	endfunction
-endif
-if !exists("*Capitalise") " Capitalise the start of a word
-	function Capitalise()
-		:s/\<./\u&/g
-	endfunction
-endif
