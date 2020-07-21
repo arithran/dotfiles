@@ -13,25 +13,24 @@
 " INSTRUCTIONS ----------------------------------
 "
 " 1. Install these interpreters and make sure they are in your $PATH
-"    - python3,
-"    - python2,
-"    - ruby
-"    - node
-"
-" 2. Install these providers:
-"    - pip3 install neovim,
-"    - pip2 install neovim,
-"    - gem install neovim,
-"    - npm install -g neovim
-"
-" 3. Install these tools and make sure they are executable from the CLI 
-"    (Example below use 'brew' which is for Mac, substitute a different command if applicable)
+"    (examples below use 'brew' which is for Mac, substitute a different command where applicable)
+"    - brew install python3,
+"    - brew install python2,
+"    - brew install ruby
+"    - brew install node
 "    - brew install git,
 "    - brew install fzf,
 "    - brew install the_silver_searcher
 "    - brew install ctags
 "
-" 4. If you are using a terminal make sure you install the solarized colorscheme and set the correct font
+" 2. Install these neovim specific providers:
+"    (run the :checkhealth command inside neovim to verify if these were installed properly)
+"    - pip3 install neovim,
+"    - pip2 install neovim,
+"    - gem install neovim,
+"    - npm install -g neovim
+"
+" 3. If you are using a terminal make sure you install the solarized colorscheme and set the correct font
 "    - cd ~/.vim/plugged/nerd-fonts/; ./install.sh SourceCodePro
 "
 

@@ -4,6 +4,10 @@
 ![alt tag](https://user-images.githubusercontent.com/1830088/61106587-746aff00-a432-11e9-8f23-feddf323a780.png)
 
 ## Installation Instructions 
+NOTE:
+- When you open tmux for the first time, it should install the 'tmp' plugin manager and install the listed plugins in .tmux.conf (Press `prefix` + <kbd>I</kbd> to manually install the plugins)
+- When you open vim/nvim for the first time, it should install the 'plug' plugin manager and install the listed plugins in .vimrc (Run `:PlugInstall` to manually install the plugins)
+
 1) Download and Install dotfiles
 ```
 cd ~
@@ -12,14 +16,11 @@ mv dotfiles/* dotfiles/.* .
 rmdir dotfiles
 ```
 
-2) Install VIM or Neovim, Tmux, Ctags, Zsh, Ack & any Terminal (Following instructions are for the `brew` package manager on Mac. Change as appropriate for Linux distros)
-```
-brew install neovim
-brew install tmux
-brew install ctags
-brew install zsh
-brew install ack
+2) Install basic programs (Example below use 'brew' which is for Mac, substitute a different command if applicable)
+```bash
 brew cask install item2
+brew install tmux
+brew install neovim
 ```
 
 3) Install Oh-my-zsh
@@ -27,24 +28,9 @@ brew cask install item2
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-4) Install Tmux plugins
-```
-tmux
-```
- Press `prefix` + <kbd>I</kbd> (capital i, as in **I**nstall) to fetch the plugin.
+4) Follow vim specific installation instructions
+https://github.com/arithran/dotfiles/blob/master/.vimrc#L13
 
-
-5)  Install python Support for nvim
-```
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
-```
-
-6) Install vim plugins
-```
-vim
-:PlugInstall
-```
 
 
 ## Terminal font & colors
