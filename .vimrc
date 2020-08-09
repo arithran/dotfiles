@@ -218,7 +218,7 @@ let g:ale_linters = {
 	\		'go': ['golangci-lint']
 	\	}
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = "--tests=false --disable-all --enable ".join(g:go_metalinter_enabled,",").''
+let g:ale_go_golangci_lint_options = "--tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits,wsl,godot,godox,funlen,goerr113"
 
 " airblade/vim-gitgutter
 " ----------------------
