@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# go tool pprof -http=: /Users/ari/pprof/pprof.app.samples.cpu.016.pb.gz
+go tool pprof --seconds=20  http://localhost:8080/debug/pprof/profile
