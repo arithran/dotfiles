@@ -4,4 +4,4 @@
 goreportcard-cli -v
 
 # Run golang ci 
-golangci-lint run --tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits --skip-files="(main.go|routes.go)"
+golangci-lint run --tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits,wsl --skip-files="(main.go|routes.go)"
