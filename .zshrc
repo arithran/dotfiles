@@ -124,7 +124,8 @@ alias vim='nvim'
 alias p='git add -p'
 alias t="tmux attach || tmux new -s Home"
 
-export USE_LOCAL_APIKEYS=$HOME/fox/localkeys.json
+export USE_LOCAL_APIKEYS=$HOME/fox/apikeys.json
+export USE_LOCAL_PLATFORMS=$HOME/fox/platforms.json
 export CDPATH=$HOME:$HOME/go/src/
 
 # Needed for 'git stat' alias
