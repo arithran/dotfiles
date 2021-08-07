@@ -77,6 +77,8 @@ Plug 'honza/vim-snippets'                                                      "
 Plug 'tpope/vim-repeat'                                                        "  repeats the last command even if its not native with [.]
 Plug 'tpope/vim-surround'                                                      "  Easily delete and change surroundings
 Plug 'tpope/vim-unimpaired'                                                    "  Tpope's complementary pairs of mappings
+Plug 'mattn/webapi-vim'
+Plug 'mattn/vim-gist'
 
 " Tmux integration
 Plug 'christoomey/vim-tmux-navigator'                                          "  Bind Tmux Keys with VIM
@@ -218,7 +220,7 @@ let g:ale_linters = {
 	\		'go': ['golangci-lint']
 	\	}
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = "--tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits,wsl,godot,godox,funlen,goerr113"
+let g:ale_go_golangci_lint_options = "--tests=false --enable-all --disable=lll,gochecknoglobals,gochecknoinits,wsl,godot,godox,funlen,goerr113,gofumpt"
 
 " airblade/vim-gitgutter
 " ----------------------
