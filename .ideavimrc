@@ -1,0 +1,61 @@
+let mapleader=","
+set easymotion
+set surround
+set NERDTree
+set hlsearch
+set gdefault                   " sets global flag by default
+set ignorecase
+set smartcase
+set scrolloff=3                " start scrolling 3 lines before edge of viewport
+set visualbell
+set noerrorbells
+
+" easy window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <a-h> gT
+nnoremap <a-l> gt
+
+" actions
+nnoremap <leader>rr :action RenameElement<cr>
+nnoremap <leader>g :action FileStructurePopup<cr>
+nnoremap <leader>b :action Switcher<cr>
+nnoremap <Leader>c :action CommentByLineComment<CR>
+nnoremap <C-p> :action GotoFile<CR>
+
+"like coc.nvim
+nmap gd :action GotoDeclarationOnly<CR>
+nmap gf :action GotoDeclaration<CR>
+nmap gi :action GotoImplementation<CR>
+nmap gu :action GotoSuperMethod<CR>
+nmap gt :action GotoTest<CR>
+nmap <C-c> :action GotoAction<CR>
+
+
+
+" jumplists
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
+map g; <Action>(JumpToLastChange)
+map g, <Action>(JumpToNextChange)
+
+
+
+" unimpaired mappings
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+" easymotion
+nmap  <Leader>w <Plug>(easymotion-w)
+nmap <Leader>W <Plug>(easymotion-b)
+
+" nerdtree
+nnoremap <Leader>t :NERDTree<CR>
